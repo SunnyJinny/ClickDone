@@ -1,0 +1,33 @@
+@mixin text-styles ($size, $weight, $spacing) {
+  padding: 0;
+  margin: 0;
+  font-size: $size;
+  font-weight: $weight;
+  letter-spacing: $spacing;
+}
+
+.title {
+  @include text-styles($font-xl, 600, 0.08rem);  // h2
+  margin-bottom: 2rem;
+}
+.subtitle {
+  @include text-styles($font-lg, 400, 0.04rem);  // h4
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+  margin-right: 0.5rem;
+}
+.para-text { 
+  @include text-styles($font-md, 400, 0);  // 16px
+}
+.big-label { 
+  @include text-styles($font-md, 600, 0);  // 16px bold
+}
+.small-label {
+  @include text-styles($font-sm, 600, 0.04rem);  // 12px bold
+} 
+.button-label {
+  @include text-styles($font-sm, 600, 0.08rem);  // 12px bold
+} 
+.small-light {
+  @include text-styles($font-sm, 400, 0); // 12px
+} 
