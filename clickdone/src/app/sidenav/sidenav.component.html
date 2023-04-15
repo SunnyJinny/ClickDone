@@ -1,0 +1,20 @@
+<div class="navigation" [ngClass]="collapsed ? 'nav-collapsed': ''">
+  <ul>
+    <li>
+      <a class="logo-container flex flex-ai-c" (click)="toggleCollapse()">
+        <span id="logo">
+          <img src="../../assets/icons/logo-bg.svg">
+          <i class="fa-solid fa-arrow-pointer"></i>
+        </span>
+        <span class="title-light" id="logo-title" *ngIf="collapsed">Click!</span>
+      </a>
+    </li>
+    <li *ngFor="let navItem of navData">
+      <a class="flex flex-ai-c" [routerLink]="[navItem.routerlink]" 
+      routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i [class]="navItem.icon"></i>
+        <span class="title-light" *ngIf="collapsed">{{ navItem.label }}</span>
+      </a>
+    </li>
+  </ul>
+</div>

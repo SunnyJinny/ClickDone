@@ -1,0 +1,114 @@
+@import '../../styles/styles.scss';
+
+.navigation {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 5rem;
+  height: 100vh;  // 100%랑 뭐가 다른거일까.
+  background: #fff;
+  border-left: 0.7rem solid #fff;
+  transition: all 0.5s ease;
+  overflow: hidden;
+  box-shadow: 0.06rem 0 1.25rem 0 rgba(0, 0, 0, 0.5); 
+  &.nav-collapsed {
+    width: 16rem; 
+  }
+  & ul {
+    width: 100%;
+    height: calc(100% - 3.65rem);
+    & li {
+      position: relative;
+      width: 100%;
+      list-style: none;
+      transition: all 0.3s ease;
+      border-top-left-radius: 1.875rem;
+      border-bottom-left-radius: 1.875rem;
+      cursor: pointer;
+      &:not(:first-child):hover, & a.active {
+        border-top-left-radius: 1.875rem;
+        border-bottom-left-radius: 1.875rem;
+        background: $primary;
+        color: #fff;
+      }
+      &:nth-child(1) {
+        margin-top: 2.5rem;
+        margin-bottom: 2.5rem;
+      }
+      & a {
+        margin: 3rem 0;
+        position: relative;
+        text-decoration: none;
+        color: $gray;
+        font-size: 1.75rem;
+        cursor: pointer;
+        & i, & #logo {
+          font-family: 'Font Awesome 6 Free';
+          position: relative;
+          margin-right: 0.5rem;
+          min-width: 3.75rem;
+          height: 3.75rem;
+          line-height: 3.5rem;
+          text-align: center;
+          font-size: 2rem;
+        }
+        & .title {
+          position: relative;
+          padding: 0 0.5rem;
+          height: 3.75rem;
+          line-height: 3.75rem; 
+          text-align: start;
+          white-space: nowrap;
+          transition: all 0.5s ease;
+        }
+      }  
+    }
+  }
+}
+#logo {
+  & img {
+    max-width: 2.8rem;
+    height: 90%;
+    text-align: center;
+  }
+  & i {
+    position: absolute;
+    transform: rotate(-18deg);
+    font-size: 2.2rem;
+    color: $primary;
+    left: 0.7rem;
+    top: 0.45rem;
+  }
+  &-title {
+    color: $primary;
+  }
+}
+
+
+/* curve outside */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+}
