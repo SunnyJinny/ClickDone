@@ -17,8 +17,8 @@ export const navData = [
   },
   {
     routerlink: 'students',
-    icon: 'fa-solid fa-pen-to-square',
-    label: 'Documents'
+    icon: 'fa-solid fa-user-group',
+    label: 'Schülerliste'
   },
 ] 
 
