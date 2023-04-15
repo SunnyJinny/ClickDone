@@ -7,27 +7,30 @@
 }
 
 .title {
-  @include text-styles($font-xl, 600, 0.08rem);  // h2
-  margin-bottom: 2rem;
+  @include text-styles(2rem, 600, 0.08rem);  // h2
+  // margin-bottom: 2rem;  navigation에 들어가는 title에는 마진바텀을 안쓰고 싶어서 삭제. 본문에는 따로 적용하자.
+}
+.title-light {
+  @include text-styles(1.5rem, 500, 0.08rem);  // in Navigation
 }
 .subtitle {
-  @include text-styles($font-lg, 400, 0.04rem);  // h4
+  @include text-styles(1.25rem, 400, 0.04rem);  // h4
   align-items: flex-end;
   margin-bottom: 1.25rem;
   margin-right: 0.5rem;
 }
 .para-text { 
-  @include text-styles($font-md, 400, 0);  // 16px
+  @include text-styles(1rem, 400, 0);  // 16px
 }
 .big-label { 
-  @include text-styles($font-md, 600, 0);  // 16px bold
+  @include text-styles(1rem, 600, 0);  // 16px bold
 }
 .small-label {
-  @include text-styles($font-sm, 600, 0.04rem);  // 12px bold
+  @include text-styles(0.75rem, 600, 0.04rem);  // 12px bold
 } 
 .button-label {
-  @include text-styles($font-sm, 600, 0.08rem);  // 12px bold
+  @include text-styles(0.75rem, 600, 0.08rem);  // 12px bold
 } 
 .small-light {
-  @include text-styles($font-sm, 400, 0); // 12px
+  @include text-styles(0.75rem, 400, 0); // 12px
 } 

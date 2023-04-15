@@ -1,25 +1,21 @@
-
 @use '@angular/material' as mat;
-
-// @include mat.core();
-
-// $clickdone-theme: mat.define-light-theme((
-//   color: (
-//     primary: $mint,
-//     accent: $yellow,
-//     warn: $orange,
-//   )
-// ));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-// @include mat.all-component-themes($clickdone-theme);
+@include mat.core();
 
 @import "../styles/variables";
 @import "../styles/globals";
 @import "../styles/typography";
 @import "../styles/buttons";
 
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+

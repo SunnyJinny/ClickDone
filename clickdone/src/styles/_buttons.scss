@@ -7,20 +7,20 @@
 }
 
 .card-button {
-  @include button-styles(0.5rem, #1b1c1d);
-  @include text-styles($font-lg, 400, 0.04rem);
+  @include button-styles(0.5rem, $black);
+  // .subtitle classd에 추가하면 text style 적용
   width: 100%;
   height: 4.5rem;
   background-color: #fff;
   
   &:hover {
-    color: $mint;
-    outline: 0.5rem solid $ashGray;
+    color: $primary;
+    outline: 0.5rem solid $green-dark-light;
   }
 }
 
 .round-button {
-  @include button-styles(2rem, #1b1c1d);
+  @include button-styles(2rem, $black);
   padding: 0.5rem 1rem 0.5rem 0.75rem;
   
   &:hover {
