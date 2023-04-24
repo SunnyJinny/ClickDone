@@ -1,0 +1,15 @@
+@import '../../styles/styles.scss';
+
+.subtitle-wrapper {
+  margin: 2rem 0.5rem 1.25rem 0;
+  & p {
+    margin-left: 0.3rem;
+  }
+}
+.chart-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  .gantt-chart, .doughnut-chart {
+    border: 1px solid red;
+  }
+}

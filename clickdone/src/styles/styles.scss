@@ -6,15 +6,21 @@
 @import "../styles/typography";
 @import "../styles/buttons";
 
-* {
-  margin: 0;
-  padding: 0;
+html {
+  font-size: 100%;
   box-sizing: border-box;
 }
 
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  position: relative;
+  line-height: 1.3;
   font-family: 'Poppins', sans-serif;
+  position: relative;
   min-height: 100vh;
   overflow-x: hidden;
 }

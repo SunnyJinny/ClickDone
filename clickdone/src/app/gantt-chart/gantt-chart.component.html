@@ -1,0 +1,13 @@
+<div class="chart-wrapper">
+  <div class="chart-box">
+    <canvas id="schedule" baseChart
+    [data]="barChartData"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [type]="'bar'"
+    (chartClick)="chartClicked($event)"
+    (chartHover)="chartHovered($event)">
+    </canvas>
+    <input type="month" (change)="chartFilter($event)">
+  </div>
+</div>

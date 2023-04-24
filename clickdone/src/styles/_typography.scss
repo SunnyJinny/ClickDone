@@ -8,16 +8,17 @@
 
 .title {
   @include text-styles(2rem, 600, 0.08rem);  // h2
-  // margin-bottom: 2rem;  navigation에 들어가는 title에는 마진바텀을 안쓰고 싶어서 삭제. 본문에는 따로 적용하자.
 }
 .title-light {
   @include text-styles(1.5rem, 500, 0.08rem);  // in Navigation
 }
 .subtitle {
   @include text-styles(1.25rem, 400, 0.04rem);  // h4
-  align-items: flex-end;
-  margin-bottom: 1.25rem;
-  margin-right: 0.5rem;
+  line-height: 1.5rem;
+  // align-items: flex-end;
+  // margin-top: 2rem;
+  // margin-bottom: 1.25rem;
+  // margin-right: 0.5rem;
 }
 .para-text { 
   @include text-styles(1rem, 400, 0);  // 16px

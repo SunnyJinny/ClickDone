@@ -1,0 +1,13 @@
+@import '../../styles/styles.scss';
+
+.chart-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-box {
+  width: 90%;
+  padding: 1rem 0;
+  background: white;
+}
