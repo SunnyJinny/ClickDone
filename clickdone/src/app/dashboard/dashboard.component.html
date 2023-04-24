@@ -13,3 +13,15 @@
   </div>
 </div>
 <!-- Status des Bewerber  -->
+<div class="subtitle-wrapper flex flex-ai-e">
+  <h4 class="subtitle">Bewerber/innen |</h4>
+  <p> in jeden Status</p>
+</div>
+<div class="card-wrapper flex flex-jc-sb flex-ai-e">
+  <div class="card-button" id="state-card" *ngFor="let card of stateCards">
+    <a class="card" (click)="getState(card.state)">
+      <div class="card-count title">{{ card.number }}</div>
+      <div class="card-title subtitle">{{ card.state }}</div>
+    </a>
+  </div>
+</div>
