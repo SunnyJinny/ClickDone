@@ -4,6 +4,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
+
+
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DocumentsComponent } from './documents/documents.component';
@@ -12,6 +23,8 @@ import { BodyComponent } from './body/body.component';
 import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+import { ListAddEditComponent } from './list-add-edit/list-add-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -22,17 +35,27 @@ import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
     StudentenComponent,
     BodyComponent,
     GanttChartComponent,
-    DoughnutChartComponent
+    DoughnutChartComponent,
+    ListAddEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
     FontAwesomeModule,
-    NgChartsModule
+    NgChartsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatSortModule
   ],
   providers: [
-    { provide: NgChartsConfiguration, useValue: { generateColors: false }}
+    { provide: NgChartsConfiguration, useValue: { generateColors: false }},
+    // { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' } }
   ],
   bootstrap: [AppComponent]
 })

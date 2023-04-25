@@ -1,0 +1,35 @@
+@import '../../styles/styles.scss';
+
+.subtitle-wrapper {
+  gap: 2.5rem;
+}
+#container {
+  border: 1px solid red;
+  margin: 2rem 0.5rem 1.25rem 0;
+  & .button-wrapper {
+    gap: 1rem;
+    & i {
+      margin-right: 0.25rem;
+    }
+  }
+}
+.mat-mdc-header-cell {
+  font-weight: 400 !important;
+}
+.mat-mdc-row {
+  height: 4rem;
+}
+.mat-column-schule {
+  border: 1px solid red;
+  max-width: 14rem;
+}
+.mat-column-bewerbungDatum, .mat-column-rueckmeldungDatum {
+  border: 1px solid yellow;
+  max-width: 7rem;
+}
+.mat-column {
+  &-name, &-geburtsdatum, &-adresse, &-schule, &-bewerbungDatum, &-rueckmeldungDatum, &-startDatum, &-endDatum, &-status  {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}

@@ -1,1 +1,70 @@
-<p>studenten works!</p>
+<h2 class="title">Schüler/innen</h2>
+<div class="flex flex-jc-sb flex-ai-c" id="container">
+  <div class="subtitle-wrapper flex flex-ai-e">
+    <h4 class="subtitle">Bewerber/inner</h4>
+    <h4 class="subtitle">Praktikanten/innen</h4>
+  </div>
+  <div class="button-wrapper flex flex-ai-e">
+    <button class="text-button" (click)="goForm()"><i class="fa-solid fa-plus"></i>Hinzufügen</button>
+    <button class="text-button"><i class="fa-solid fa-arrow-down"></i>Herunterladen</button>
+  </div>
+</div>
+<!-- Schüler/innen Liste -->
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <!-- Geburtsdatum Column -->
+    <ng-container matColumnDef="geburtsdatum">
+      <th mat-header-cell *matHeaderCellDef> Geburtsdatum </th>
+      <td mat-cell *matCellDef="let element"> {{element.geburtsdatum}} </td>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="adresse">
+      <th mat-header-cell *matHeaderCellDef> Adresse </th>
+      <td mat-cell *matCellDef="let element"> {{element.adresse}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="schule">
+      <th mat-header-cell *matHeaderCellDef> Schule </th>
+      <td mat-cell *matCellDef="let element"> {{element.schule}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="bewerbungDatum">
+      <th mat-header-cell *matHeaderCellDef> Datum der Bewerbung </th>
+      <td mat-cell *matCellDef="let element"> {{element.bewerbungDatum}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="rueckmeldungDatum">
+      <th mat-header-cell *matHeaderCellDef> Datum der Rückmeldung </th>
+      <td mat-cell *matCellDef="let element"> {{element.rueckmeldungDatum}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="startDatum">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Startdatum </th>
+      <td mat-cell *matCellDef="let element"> {{element.startDatum}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="endDatum">
+      <th mat-header-cell *matHeaderCellDef> Enddatum </th>
+      <td mat-cell *matCellDef="let element"> {{element.endDatum}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
