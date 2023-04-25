@@ -1,0 +1,70 @@
+<h2 class="title">Schüler/innen</h2>
+<div class="flex flex-jc-sb flex-ai-c" id="container">
+  <div class="subtitle-wrapper flex flex-ai-e">
+    <h4 class="subtitle">Neuen Schüler hinzufügen</h4>
+  </div>
+  <div class="button-wrapper flex flex-ai-e">
+    <div class="text-button"><i class="fa-solid fa-check"></i>Speichern</div>
+  </div>
+</div>
+
+<form class="form-wrapper">
+  <div class="form-field">
+    <mat-form-field appearance="outline">
+      <mat-label>Adress</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Schule</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Geschlecht</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Datum der Bewerbung</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Datum der Rückmeldung</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Betreuer/in</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Startdatum</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Enddatum</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>-</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Bewerbungsstatus</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <div class="checkbox-wrapper flex flex-jc-sb">
+      <mat-checkbox>Motivationsschreiben</mat-checkbox>
+      <mat-checkbox>Lebenslauf</mat-checkbox>
+      <mat-checkbox>Zeugnis</mat-checkbox>
+    </div>
+    <mat-form-field>
+      <mat-label>Notiz</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Bewertung</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+  </div>
+  
+</form>

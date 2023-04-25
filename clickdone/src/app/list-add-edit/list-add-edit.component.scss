@@ -1,0 +1,32 @@
+@import '../../styles/styles.scss';
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field, .mat-mdc-form-field-input-control {
+  height: 100% !important;
+}
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -1.25rem !important;
+  padding: 0;
+}
+
+#container {
+  border: 1px solid red;
+  margin: 2rem 0.5rem 1.25rem 0;
+  & .button-wrapper {
+    gap: 1rem;
+    & i {
+      margin-right: 0.25rem;
+    }
+  }
+}
+.form-field {
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 2rem;
+  &:nth-child(11) {
+    grid-column: 2 / 4;
+  }
+  &:nth-child(12), &:nth-child(13) {
+    grid-column: 1 / 4;
+  }
+}
