@@ -13,6 +13,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+import { TextFieldModule } from '@angular/cdk/text-field';
+
 
 
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -51,7 +54,9 @@ import { ListAddEditComponent } from './list-add-edit/list-add-edit.component';
     MatNativeDateModule,
     MatIconModule,
     MatCheckboxModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule,
+    TextFieldModule
   ],
   providers: [
     { provide: NgChartsConfiguration, useValue: { generateColors: false }},

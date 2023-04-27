@@ -18,7 +18,18 @@
     outline: 0.5rem solid $green-dark-light;
   }
 }
+.text-button {
+  @include button-styles(2rem, $black);
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+}
+.color-button {
+  @include button-styles(2rem, $accent);
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  background-color: $accent;
+  color: #fff;
+}
 
+// 이거 지워도 되는지 확인
 .round-button {
   @include button-styles(2rem, $black);
   padding: 0.5rem 1rem 0.5rem 0.75rem;

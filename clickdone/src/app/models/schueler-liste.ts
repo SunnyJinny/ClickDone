@@ -1,4 +1,4 @@
-type State = 'Fehlende Unterlagen' | 'Zusage' | 'Absage' | 'Im Bewerbungsprozess' | 'Im Praktikum' | 'Platz angenommen' | 'Frei' | 'Abgeschlossen' ;
+export type State = 'Fehlende Unterlagen' | 'Zusage' | 'Absage' | 'Im Bewerbungsprozess' | 'Im Praktikum' | 'Platz angenommen' | 'Frei' | 'Abgeschlossen' ;
 
 export interface Schueler {
   name: string;

@@ -1,10 +1,22 @@
 @import '../../styles/styles.scss';
 
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+::ng-deep .mat-mdc-form-field-infix {
+  text-align: center;
+}
+::ng-deep .mat-mdc-text-field-wrapper > .mdc-line-ripple::before {
+  display: none;
+}
+
+#list-section {
+  border: 1px solid red;
+}
 .subtitle-wrapper {
   gap: 2.5rem;
 }
 #container {
-  border: 1px solid red;
   margin: 2rem 0.5rem 1.25rem 0;
   & .button-wrapper {
     gap: 1rem;
@@ -13,11 +25,19 @@
     }
   }
 }
-.mat-mdc-header-cell {
-  font-weight: 400 !important;
+// liste
+.table-container {
+  max-height: 50rem;  // todo: table height 수정
+  overflow-y: scroll;
 }
 .mat-mdc-row {
   height: 4rem;
+}
+.mat-mdc-header-row {
+  background-color: #fff;
+}
+.mat-mdc-header-cell {
+  font-weight: 400 !important;
 }
 .mat-column-schule {
   border: 1px solid red;
@@ -33,3 +53,7 @@
     text-align: center;
   }
 }
+.mat-mdc-select-placeholder { 
+  text-align: center;
+}
+
