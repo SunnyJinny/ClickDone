@@ -4,7 +4,7 @@
     <h4 class="subtitle">Neuen Schüler hinzufügen</h4>
   </div>
   <div class="button-wrapper flex flex-ai-e">
-    <div class="text-button"><i class="fa-solid fa-check"></i>Speichern</div>
+    <div class="color-button"><i class="fa-solid fa-check"></i>Speichern</div>
   </div>
 </div>
 
@@ -30,7 +30,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Datum der Rückmeldung</mat-label>
-      <input matInput>
+      <input matInput matNativeControl="date">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Betreuer/in</mat-label>
@@ -50,20 +50,31 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Bewerbungsstatus</mat-label>
-      <input matInput>
+      <mat-select required>
+        <mat-option value="option">Fehlenden Unterlagen</mat-option>
+        <mat-option value="option">Zusage</mat-option>
+        <mat-option value="option">Absage</mat-option>
+        <mat-option value="option">Im Bewerbungsprozess</mat-option>
+      </mat-select>
     </mat-form-field>
-    <div class="checkbox-wrapper flex flex-jc-sb">
+    <div class="checkbox-wrapper flex flex-ai-c">
       <mat-checkbox>Motivationsschreiben</mat-checkbox>
       <mat-checkbox>Lebenslauf</mat-checkbox>
       <mat-checkbox>Zeugnis</mat-checkbox>
     </div>
-    <mat-form-field>
+    <mat-form-field id="forText" appearance="outline" floatLabel="always">
       <mat-label>Notiz</mat-label>
-      <input matInput>
+      <textarea matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="10"></textarea>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field id="forText" appearance="outline" floatLabel="always">
       <mat-label>Bewertung</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+      <textarea matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="10"></textarea>
     </mat-form-field>
   </div>
   

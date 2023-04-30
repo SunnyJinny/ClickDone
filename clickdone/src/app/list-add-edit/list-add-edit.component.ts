@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { Component, NgZone, ViewChild } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-add-edit',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-add-edit.component.scss']
 })
 export class ListAddEditComponent {
+
+  constructor(private _ngZone: NgZone) {}
+
+  @ViewChild('autosize')
+  autosize!: CdkTextareaAutosize;
 
 }
