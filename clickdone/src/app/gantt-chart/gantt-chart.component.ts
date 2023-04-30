@@ -12,29 +12,40 @@ Chart.register(...registerables);
 })
 export class GanttChartComponent implements OnInit  {
   
-  public barChartData: ChartData<'bar', {x: string[], y: string, name: string}[]> = {
+  public chart: any = [];
+  
+  public barChartData: ChartData<'bar', {x: any[], y: string}[]> = {
     datasets: [{
       data: [
-        {x: ['2023-04-25', '2023-04-29'], y: 'task 1', name: 'Tom Jones'}, 
-        {x: ['2023-04-25', '2023-04-29'], y: 'task 2', name: 'Heidrum Kapscher'},
-        {x: ['2023-04-24', '2023-04-30'], y: 'task 3', name: 'Robert Klam'},  // completed
-        {x: ['2023-04-24', '2023-04-30'], y: 'task 4', name: 'Hubert Klammer'},  // completed
-        {x: ['2023-04-25', '2023-04-29'], y: 'task 5', name: 'Lala li'},  // completed
-        {x: ['2023-06-05', '2023-06-09'], y: 'task 1', name: 'Max Miller'}, // delayed
-        {x: ['2023-06-05', '2023-06-09'], y: 'task 2', name: 'Iron Neuer'}, // delayed
-        {x: ['2023-06-06', '2023-06-16'], y: 'task 3', name: 'Tommy Stein'}, // pending
-        {x: ['2023-06-06', '2023-06-16'], y: 'task 4', name: 'Bella Suder'} // pending
+        // {x: ['2023-04-25', '2023-04-29'], y: 'task 1', name: 'Tom Jones'}, 
+        // {x: ['2023-04-25', '2023-04-29'], y: 'task 2', name: 'Heidrum Kapscher'},
+        // {x: ['2023-04-24', '2023-04-30'], y: 'task 3', name: 'Robert Klam'},  // completed
+        // {x: ['2023-04-24', '2023-04-30'], y: 'task 4', name: 'Hubert Klammer'},  // completed
+        // {x: ['2023-04-25', '2023-04-29'], y: 'task 5', name: 'Lala li'},  // completed
+        // {x: ['2023-06-05', '2023-06-09'], y: 'task 1', name: 'Max Miller'}, // delayed
+        // {x: ['2023-06-05', '2023-06-09'], y: 'task 2', name: 'Iron Neuer'}, // delayed
+        // {x: ['2023-06-06', '2023-06-16'], y: 'task 3', name: 'Tommy Stein'}, // pending
+        // {x: ['2023-06-06', '2023-06-16'], y: 'task 4', name: 'Bella Suder'} // pending
 
-        // {x: [new Date('2023-04-19'), new Date('2023-04-24')], y: 'Tom Jones'}, 
-        // {x: [new Date('2023-04-19'), new Date('2023-04-24')], y: 'Heidrum Kapscher'},
-        // {x: [new Date('2023-04-18'), new Date('2023-04-28')], y: 'Robert Klam'},  // completed
-        // {x: [new Date('2023-04-18'), new Date('2023-04-28')], y: 'Hubert Klammer'},  // completed
-        // {x: [new Date('2023-04-19'), new Date('2023-04-27')], y: 'Lala li'},  // completed
-        // {x: [new Date('2023-06-05'), new Date('2023-06-09')], y: 'Max Miller'}, // delayed
-        // {x: [new Date('2023-06-05'), new Date('2023-06-09')], y: 'Iron Neuer'}, // delayed
-        // {x: [new Date('2023-06-06'), new Date('2023-06-16')], y: 'Tommy Stein'}, // pending
-        // {x: [new Date('2023-06-06'), new Date('2023-06-16')], y: 'Bella Suder'} // pending
+        { x: [ Date.parse('2023-05-01'), Date.parse('2023-05-5')], y: 'Tom Jones'}, 
+        { x: [ Date.parse('2023-05-01'), Date.parse('2023-05-5')], y: 'Heidrum Kapscher'},
+        { x: [ Date.parse('2023-05-02'), Date.parse('2023-05-12')], y: 'Robert Klam'},  // completed
+        { x: [ Date.parse('2023-05-02'), Date.parse('2023-05-12')], y: 'Hubert Klammer'},  // completed
+        { x: [ Date.parse('2023-05-01'), Date.parse('2023-05-5')], y: 'Lala li'},  // completed
+        { x: [ Date.parse('2023-06-05'), Date.parse('2023-06-9')], y: 'Max Miller'}, // delayed
+        { x: [ Date.parse('2023-06-05'), Date.parse('2023-06-9')], y: 'Iron Neuer'}, // delayed
+        { x: [ Date.parse('2023-06-06'), Date.parse('2023-06-16')], y: 'Tommy Stein'}, // pending
+        { x: [ Date.parse('2023-06-06'), Date.parse('2023-06-16')], y: 'Bella Suder'}, // pending
   
+        // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Tom Jones'}, 
+        // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Heidrum Kapscher'},
+        // { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Robert Klam'},  // completed
+        // { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Hubert Klammer'},  // completed
+        // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Lala li'},  // completed
+        // { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Max Miller'}, // delayed
+        // { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Iron Neuer'}, // delayed
+        // { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Tommy Stein'}, // pending
+        // { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Bella Suder'} // pending
       ],
       backgroundColor: [
         'rgba(28, 192, 154, 1)',
@@ -53,6 +64,14 @@ export class GanttChartComponent implements OnInit  {
     }],
   };
 
+  today = new Date();
+  afterOneWeek = new Date(new Date().setDate(new Date().getDate() + 7));
+  afterOneMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
+  afterOneYear = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+  maxWeek: number = this.afterOneWeek.valueOf();
+  maxMonth: number = this.afterOneMonth.valueOf();
+  maxYear: number = this.afterOneYear.valueOf();
+  
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
     animation: false,  // 애니메이션 생략
@@ -60,8 +79,8 @@ export class GanttChartComponent implements OnInit  {
     scales: {
       x: {
         position: 'top',
-        min: new Date().valueOf(),  // 시작점을 오늘
-        max: new Date('2023-04-31').valueOf(), // 오늘로 부터 2주를 보고 싶다. 
+        min: new Date().valueOf(),
+        max: this.maxWeek,
         type: 'time',
         time: {
           unit: 'day',
@@ -92,16 +111,41 @@ export class GanttChartComponent implements OnInit  {
     DataLabelsPlugin
   ];
   
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  // @ViewChild(BaseChartDirective) _chart: BaseChartDirective | undefined;
   
-  constructor() {
-    
-  }
+  constructor() { }
   
   ngOnInit(): void {
-    // this.RenderChart();
+    this.chart = new Chart('schedule', {
+      type: 'bar',
+      data: this.barChartData,
+      options: this.barChartOptions,
+      plugins: this.barChartPlugins,
+    })
   }
-    
+  
+  public timeFrame(period: string): void {
+    console.log(period);
+    if(period === 'week') {
+      if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
+        this.barChartOptions.scales['x'].max = this.maxWeek;
+        console.log(this.afterOneWeek);
+        this.chart.update();
+      }
+    } else if(period === 'month') {
+      if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
+        this.barChartOptions.scales['x'].max = this.maxMonth;
+        console.log(this.afterOneMonth);
+        this.chart.update();
+      }
+    } else if(period === 'year') {
+      if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
+        this.barChartOptions.scales['x'].max = this.maxYear;
+        console.log(this.afterOneYear);
+        this.chart.update();
+      }
+    }
+  }
   public chartClicked({ event, active }: { event?: ChartEvent | undefined, active?: {}[] | undefined }): void {
     // console.log(event, active);
     console.log(this.chart?.options?.scales?.['x']?.max);
