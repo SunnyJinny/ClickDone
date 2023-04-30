@@ -9,9 +9,9 @@
 ::ng-deep .mat-mdc-text-field-wrapper > .mdc-line-ripple::before {
   display: none;
 }
-
-#list-section {
-  border: 1px solid red;
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+  opacity: 0.54 !important;
+  transform: translateY(0px) !important;
 }
 .subtitle-wrapper {
   gap: 2.5rem;
@@ -25,7 +25,8 @@
     }
   }
 }
-// liste
+
+// list
 .table-container {
   max-height: 50rem;  // todo: table height 수정
   overflow-y: scroll;
@@ -40,11 +41,9 @@
   font-weight: 400 !important;
 }
 .mat-column-schule {
-  border: 1px solid red;
   max-width: 14rem;
 }
 .mat-column-bewerbungDatum, .mat-column-rueckmeldungDatum {
-  border: 1px solid yellow;
   max-width: 7rem;
 }
 .mat-column {
@@ -56,4 +55,13 @@
 .mat-mdc-select-placeholder { 
   text-align: center;
 }
-
+.mat-mdc-row.mdc-data-table__row:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 12px 3px rgba(245, 245, 245, 0.5);
+  border-radius: 32px !important;  // 이건 안먹혀
+  cursor: pointer;
+  & .mat-mdc-cell.mdc-data-table__cell{
+    font-size: 0.9rem;
+  }
+  
+}

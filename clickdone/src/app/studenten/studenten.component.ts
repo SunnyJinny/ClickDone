@@ -29,4 +29,8 @@ export class StudentenComponent {
   goForm() {
     this.router.navigate(['list-add']);
   }
+  
+  clicktest() {
+    console.log('test ok');
+  }
 }
