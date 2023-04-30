@@ -1,0 +1,133 @@
+@import '../../../styles/styles.scss';
+
+:host {
+  margin-top: 1.25rem;
+  user-select: none;
+  display: grid;
+  grid-template-rows: 5rem 1fr;
+  grid-row-gap: 6.25rem;
+  grid-template-columns: min-content;
+  
+  .step-progress {
+    margin-top: 7.5rem;
+    padding: 1rem 1rem 3.75rem 0;
+    box-shadow: 0 1rem 1.25rem rgba(0,0,0, 0.1);
+    border-radius: 1rem;
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+    align-self: center;
+  }
+  .step-content {
+    margin-top: 2.5rem;
+    position: relative;
+    align-self: start;
+    grid-row: 2 / -1;
+    grid-column: 1 / -1;
+  }
+}
+.container {
+  display: inline-flex;
+  padding: 1.875rem;
+  position: relative;
+  
+  svg#checkbox {
+    width: 3rem;
+    height: 3rem;
+    stroke: $primary;
+    stroke-width: 6;
+    
+    .circle {
+      stroke-dasharray: 320;
+      stroke-dashoffset: 320;
+      fill: #d2d2d2;
+      transition: stroke-dashoffset 0.5s, fill 0.5s 0.3s cubic-bezier(0.45, 0, 0.55, 1);
+    } 
+    .check {
+      stroke-dasharray: 70;
+      stroke-dashoffset: 70;
+      stroke: #fff;
+      fill: none;
+      transition: all 0.5s 0.5s cubic-bezier(0.45, 0, 0.55, 1);
+    }
+  }
+}
+.check-box {
+  position: relative;
+  .info {
+    position: absolute;
+    bottom: -3.75rem;
+    display: grid;
+    grid-template-columns: max-content;
+    span.progress-info {
+     text-transform: capitalize;
+     font-size: 0.75rem;
+     display: inline-block;
+     margin-left: 0.25rem;
+     padding: 0.125rem 0.625rem;
+     transform: translateY(0.375rem);
+     font-weight: 500;
+     color: currentColor;
+     background-color: #eee;
+     border-radius: 1.25rem;
+     transition: background-color 0.1s ease-in-out;
+    }
+    span.progress-info.in-progress {
+      background-color: #234dc2;
+      color: #fff;
+    }
+    span.progress-info.completed {
+      background-color: #23c274;
+      color: #fff;
+    }
+    span.step {
+      margin-left: 0.625rem;
+      text-transform: uppercase;
+      color: #777;
+    }
+  }
+}
+.progress-line {
+  width: 8.75rem;
+  margin: 0 0.625rem;
+  height: 0.25rem;
+  overflow: hidden;
+  display: inline-block;
+  background-color: #d2d2d2;
+  border-radius: 0.625rem;
+  
+  .progress-percent {
+    height: inherit;
+    width: 0%;
+    transition: all 0.5s 0.5s cubic-bezier(0.45, 0, 0.55, 1);
+  }
+}
+.progress-line.active {
+  .progress-percent {
+    background-color: #234dc2;
+    width: 50%;
+  }
+}
+.progress-line.complete {
+  .progress-percent {
+    background-color: #23c274;
+    width: 100%;
+  }
+}
+.check-box.active {
+  svg#checkbox {
+    .circle {
+      fill: #234dc2;
+    }
+  }
+}
+.check-box.complete {
+  svg#checkbox {
+    .circle {
+      stroke-dashoffset: 0;
+      fill: #23c274;
+    }
+    .check {
+      stroke-dashoffset: 0;
+    }
+  }
+}

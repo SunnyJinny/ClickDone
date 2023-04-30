@@ -25,6 +25,9 @@ import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { ListAddEditComponent } from './list-add-edit/list-add-edit.component';
+import { ProgressStepComponent } from './documents/progress/progress-step/progress-step.component';
+import { ProgressStepDirective } from './documents/progress/progress-step.directive';
+import { ProgressComponent } from './documents/progress/progress.component';
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import { ListAddEditComponent } from './list-add-edit/list-add-edit.component';
     BodyComponent,
     GanttChartComponent,
     DoughnutChartComponent,
-    ListAddEditComponent
+    ListAddEditComponent,
+    ProgressStepComponent,
+    ProgressStepDirective,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
