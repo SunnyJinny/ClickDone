@@ -20,7 +20,10 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Geschlecht</mat-label>
-      <input matInput>
+      <mat-select>
+        <mat-option value="male">männlich</mat-option>
+        <mat-option value="female">weiblich</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Datum der Bewerbung</mat-label>
@@ -50,11 +53,15 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Bewerbungsstatus</mat-label>
-      <mat-select required>
-        <mat-option value="option">Fehlenden Unterlagen</mat-option>
-        <mat-option value="option">Zusage</mat-option>
-        <mat-option value="option">Absage</mat-option>
-        <mat-option value="option">Im Bewerbungsprozess</mat-option>
+      <mat-select>
+        <mat-option value="insufficient">Fehlenden Unterlagen</mat-option>
+        <mat-option value="pass">Zusage</mat-option>
+        <mat-option value="fail">Absage</mat-option>
+        <mat-option value="proceeding">Im Bewerbungsprozess</mat-option>
+        <mat-option value="ongoing">Im Praktikum</mat-option>
+        <mat-option value="upcoming">Platz angenommen</mat-option>
+        <mat-option value="free">Frei</mat-option>
+        <mat-option value="finished">Abgeschlossen</mat-option>
       </mat-select>
     </mat-form-field>
     <div class="checkbox-wrapper flex flex-ai-c">
