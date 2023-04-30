@@ -13,6 +13,46 @@ Chart.register(...registerables);
 export class GanttChartComponent implements OnInit  {
   
   public chart: any = [];
+  // todayLine plugin block
+  TodayLine = {
+    id: 'TodayLine',
+    afterDatasetsDraw(chart: any) {
+      const { ctx, data, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+      ctx.save();
+      // line for today
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#F15D23';
+      // ctx.setLineDash([6, 6]);  // 색 6px, 투명 6px
+      ctx.moveTo(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))), top);
+      ctx.lineTo(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))), bottom);
+      ctx.stroke();
+      ctx.restore();
+      // arrow for today
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#F15D23';
+      ctx.fillStyle = '#F15D23';        
+      ctx.moveTo(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))), top + 3);
+      ctx.lineTo(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) - 6, top - 6);
+      ctx.lineTo(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) + 6, top - 6);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+      ctx.restore();
+      // text backgound white
+      ctx.beginPath();
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) - 20 , top - 30, 40, 20);
+      ctx.restore();
+      // text for today
+      ctx.font = 'bold 14px sans-serif';
+      ctx.fillStyle = '#000';
+      ctx.textAlign = 'center';
+      ctx.fillText('heute', x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) , top - 14);
+      ctx.restore();
+    }
+  }
   
   public barChartData: ChartData<'bar', {x: any[], y: string}[]> = {
     datasets: [{
@@ -27,15 +67,15 @@ export class GanttChartComponent implements OnInit  {
         // {x: ['2023-06-06', '2023-06-16'], y: 'task 3', name: 'Tommy Stein'}, // pending
         // {x: ['2023-06-06', '2023-06-16'], y: 'task 4', name: 'Bella Suder'} // pending
 
-        { x: [ Date.parse('2023-05-01'), Date.parse('2023-05-5')], y: 'Tom Jones'}, 
-        { x: [ Date.parse('2023-05-01'), Date.parse('2023-05-5')], y: 'Heidrum Kapscher'},
-        { x: [ Date.parse('2023-05-02'), Date.parse('2023-05-12')], y: 'Robert Klam'},  // completed
-        { x: [ Date.parse('2023-05-02'), Date.parse('2023-05-12')], y: 'Hubert Klammer'},  // completed
-        { x: [ Date.parse('2023-05-01'), Date.parse('2023-05-5')], y: 'Lala li'},  // completed
-        { x: [ Date.parse('2023-06-05'), Date.parse('2023-06-9')], y: 'Max Miller'}, // delayed
-        { x: [ Date.parse('2023-06-05'), Date.parse('2023-06-9')], y: 'Iron Neuer'}, // delayed
-        { x: [ Date.parse('2023-06-06'), Date.parse('2023-06-16')], y: 'Tommy Stein'}, // pending
-        { x: [ Date.parse('2023-06-06'), Date.parse('2023-06-16')], y: 'Bella Suder'}, // pending
+        { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Tom Jones'}, 
+        { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Heidrum Kapscher'},
+        { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Robert Klam'},  // completed
+        { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Hubert Klammer'},  // completed
+        { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Lala li'},  // completed
+        { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Max Miller'}, // delayed
+        { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Iron Neuer'}, // delayed
+        { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Tommy Stein'}, // pending
+        { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Bella Suder'}, // pending
   
         // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Tom Jones'}, 
         // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Heidrum Kapscher'},
@@ -59,15 +99,15 @@ export class GanttChartComponent implements OnInit  {
         'rgba(196, 239, 229, 1)',
       ],
       barPercentage: 0.8,    // 막대 두께 (%)
-      borderRadius: Number.MAX_VALUE,  // 막대 둥금
+      borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
     }],
   };
 
-  today = new Date();
-  afterOneWeek = new Date(new Date().setDate(new Date().getDate() + 7));
-  afterOneMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
-  afterOneYear = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+  today = new Date(new Date().setHours(0,0,0,0));
+  afterOneWeek = new Date(new Date(new Date().setHours(0,0,0,0)).setDate(new Date(new Date().setHours(0,0,0,0)).getDate() + 7));
+  afterOneMonth = new Date(new Date(new Date().setHours(0,0,0,0)).setMonth(new Date(new Date().setHours(0,0,0,0)).getMonth() + 1));
+  afterOneYear = new Date(new Date(new Date().setHours(0,0,0,0)).setFullYear(new Date(new Date().setHours(0,0,0,0)).getFullYear() + 1))
   maxWeek: number = this.afterOneWeek.valueOf();
   maxMonth: number = this.afterOneMonth.valueOf();
   maxYear: number = this.afterOneYear.valueOf();
@@ -79,7 +119,7 @@ export class GanttChartComponent implements OnInit  {
     scales: {
       x: {
         position: 'top',
-        min: new Date().valueOf(),
+        min: new Date(new Date().setHours(0,0,0,0)).valueOf(),
         max: this.maxWeek,
         type: 'time',
         time: {
@@ -108,7 +148,8 @@ export class GanttChartComponent implements OnInit  {
   
   public barChartLegend = false;
   public barChartPlugins = [
-    DataLabelsPlugin
+    DataLabelsPlugin,
+    this.TodayLine,
   ];
   
   // @ViewChild(BaseChartDirective) _chart: BaseChartDirective | undefined;
@@ -116,6 +157,7 @@ export class GanttChartComponent implements OnInit  {
   constructor() { }
   
   ngOnInit(): void {
+    
     this.chart = new Chart('schedule', {
       type: 'bar',
       data: this.barChartData,
@@ -155,7 +197,6 @@ export class GanttChartComponent implements OnInit  {
   //   console.log(e);
   }
 
-  //@HostListener('click')
   public chartFilter(date: any) {
     // console.log(this.chart?.datasets);
     

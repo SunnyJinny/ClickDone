@@ -7,7 +7,14 @@
   justify-content: center;
 }
 .chart-box {
-  width: 90%;
-  padding: 1rem 0;
+  width: 100%;
+  padding: 1rem 2rem;
   background: white;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  & button {
+    margin-left: 1rem;
+  }
 }
