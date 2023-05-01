@@ -27,13 +27,15 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Datum der Bewerbung</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput [matDatepicker]="picker1">
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Datum der Rückmeldung</mat-label>
-      <input matInput matNativeControl="date">
+      <input matInput [matDatepicker]="picker2">
+      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Betreuer/in</mat-label>
@@ -41,11 +43,15 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Startdatum</mat-label>
-      <input matInput>
+      <input matInput [matDatepicker]="picker3">
+      <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Enddatum</mat-label>
-      <input matInput>
+      <input matInput [matDatepicker]="picker4">
+      <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+      <mat-datepicker #picker4></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>-</mat-label>
