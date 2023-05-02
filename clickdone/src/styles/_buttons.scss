@@ -12,7 +12,6 @@
   width: 100%;
   height: 4.5rem;
   background-color: #fff;
-  
   &:hover {
     color: $primary;
     outline: 0.5rem solid $green-dark-light;
@@ -28,7 +27,14 @@
   background-color: $accent;
   color: #fff;
 }
-
+.small-button {
+  @include button-styles(2rem, $accent);
+  padding: 0.5rem 1rem;
+  &:hover {
+    background-color: $accent;
+    color: #fff;
+  }
+}
 // 이거 지워도 되는지 확인
 .round-button {
   @include button-styles(2rem, $black);

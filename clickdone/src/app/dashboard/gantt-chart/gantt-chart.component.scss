@@ -1,4 +1,4 @@
-@import '../../styles/styles.scss';
+@import '../../../styles/styles.scss';
 
 .chart-wrapper {
   width: 100%;
@@ -8,8 +8,10 @@
 }
 .chart-box {
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 1rem 0;
   background: white;
+  // box-shadow: 0 1rem 1.25rem rgba(0,0,0, 0.1);
+  // border-radius: 1rem;
 }
 .button-wrapper {
   display: flex;

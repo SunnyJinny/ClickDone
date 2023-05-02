@@ -1,40 +1,47 @@
-export const data = {
-  datasets: [{
-    label: 'Praktika',
-    data: [
-      {x: [new Date('2023-04-19'), new Date('2023-04-24')], y: 'Tom Jones', name: 'Tom Jones', status: 2},
-      {x: [new Date('2023-04-19'), new Date('2023-04-24')], y: 'Heidrum Kapscher', name: 'Heidrum Kapscher', status: 2}, // completed
-      {x: [new Date('2023-04-18'), new Date('2023-04-28')], y: 'Robert Klam', name: 'Robert Klam', status: 2},  // completed
-      {x: [new Date('2023-04-18'), new Date('2023-04-28')], y: 'Hubert Klammer', name: 'Hubert Klammer', status: 2},  // completed
-      {x: [new Date('2023-04-19'), new Date('2023-04-27')], y: 'Lala li', name: 'Lala li', status: 2},  // completed
-      {x: [new Date('2023-06-05'), new Date('2023-06-09')], y: 'Max Miller', name: 'Max Miller', status: 0}, // delayed
-      {x: [new Date('2023-06-05'), new Date('2023-06-09')], y: 'Iron Neuer', name: 'Iron Neuer', status: 0}, // delayed
-      {x: [new Date('2023-06-06'), new Date('2023-06-16')], y: 'Tommy Stein', name: 'Tommy Stein', status: 1}, // pending
-      {x: [new Date('2023-06-06'), new Date('2023-06-16')], y: 'Bella Suder', name: 'Bella Suder', status: 1} // pending
-    ],
-    backgroundColor: [
-      'rgba(28, 192, 154, 1)', 
-      'rgba(28, 192, 154, 1)',
-      'rgba(28, 192, 154, 1)',
-      'rgba(28, 192, 154, 1)',
-      'rgba(28, 192, 154, 1)',
-      'rgba(196, 239, 229, 1)',
-      'rgba(196, 239, 229, 1)',
-      'rgba(196, 239, 229, 1)',
-      'rgba(196, 239, 229, 1)'
-    ],
-    // borderColor: [
-    //   'rgba(255, 26, 104, 1)',
-    //   'rgba(54, 162, 235, 1)',
-    //   'rgba(255, 206, 86, 1)',
-    //   'rgba(75, 192, 192, 1)',
-    //   'rgba(153, 102, 255, 1)',
-    //   'rgba(255, 159, 64, 1)',
-    //   'rgba(0, 0, 0, 1)'
-    // ],
-    // borderWidth: 1,     // 막대 border 
-    barPercentage: 0.7,    // 막대 두께 (%)
-    borderRadius: Number.MAX_VALUE,  // 막대 둥금
-    borderSkipped: false,
-  }]
-};
+export const Datalabels: string[] = [
+  'Tom Jones',
+  'Heidrum Kapscher',
+  'Robert Klam',
+  'Hubert Klammer',
+  'Lala li',
+  'Max Miller',
+  'Iron Neuer',
+  'Tommy Stein',
+  'Bella Suder'
+]
+
+export const data1 = [
+  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Tom Jones'}, 
+  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Heidrum Kapscher'},
+  { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Robert Klam'},  // completed
+  { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Hubert Klammer'},  // completed
+  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Lala li'},  // completed
+  { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Max Miller'}, // delayed
+  { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Iron Neuer'}, // delayed
+  { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Tommy Stein'}, // pending
+  { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Bella Suder'}, // pending
+]
+
+export const date2 = [
+  { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Tom Jones'}, 
+  { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Heidrum Kapscher'},
+  { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Robert Klam'},  // completed
+  { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Hubert Klammer'},  // completed
+  { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Lala li'},  // completed
+  { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Max Miller'}, // delayed
+  { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Iron Neuer'}, // delayed
+  { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Tommy Stein'}, // pending
+  { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Bella Suder'} // pending
+]
+
+export const date3 = [
+  {x: ['2023-04-25', '2023-04-29'], y: 'task 1', name: 'Tom Jones'}, 
+  {x: ['2023-04-25', '2023-04-29'], y: 'task 2', name: 'Heidrum Kapscher'},
+  {x: ['2023-04-24', '2023-04-30'], y: 'task 3', name: 'Robert Klam'},  // completed
+  {x: ['2023-04-24', '2023-04-30'], y: 'task 4', name: 'Hubert Klammer'},  // completed
+  {x: ['2023-04-25', '2023-04-29'], y: 'task 5', name: 'Lala li'},  // completed
+  {x: ['2023-06-05', '2023-06-09'], y: 'task 1', name: 'Max Miller'}, // delayed
+  {x: ['2023-06-05', '2023-06-09'], y: 'task 2', name: 'Iron Neuer'}, // delayed
+  {x: ['2023-06-06', '2023-06-16'], y: 'task 3', name: 'Tommy Stein'}, // pending
+  {x: ['2023-06-06', '2023-06-16'], y: 'task 4', name: 'Bella Suder'} // pending
+]

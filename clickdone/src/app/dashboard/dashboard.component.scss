@@ -9,9 +9,11 @@
 .chart-wrapper {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  column-gap: 2rem;
   margin-bottom: 3rem;
   .gantt-chart, .doughnut-chart {
-    border: 1px solid red;
+    // box-shadow: 0 1rem 1.25rem rgba(0,0,0, 0.1);
+    // border-radius: 1rem;
   }
 }
 .card-wrapper {

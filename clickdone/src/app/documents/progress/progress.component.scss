@@ -1,7 +1,6 @@
 @import '../../../styles/styles.scss';
 
 :host {
-  margin-top: 1.25rem;
   user-select: none;
   display: grid;
   grid-template-rows: 5rem 1fr;
@@ -9,15 +8,18 @@
   grid-template-columns: min-content;
   
   .step-progress {
-    margin-top: 7.5rem;
+    border: 1px solid red;
+    margin-top: 1.5rem;
     padding: 1rem 1rem 3.75rem 0;
-    box-shadow: 0 1rem 1.25rem rgba(0,0,0, 0.1);
-    border-radius: 1rem;
+    width: 100%;
+    // box-shadow: 0 1rem 1.25rem rgba(0,0,0, 0.1);
+    // border-radius: 1rem;
     grid-row: 1 / 2;
     grid-column: 1 / -1;
     align-self: center;
   }
   .step-content {
+    border: 1px solid blue;
     margin-top: 2.5rem;
     position: relative;
     align-self: start;
@@ -72,8 +74,9 @@
      transition: background-color 0.1s ease-in-out;
     }
     span.progress-info.in-progress {
-      background-color: #234dc2;
-      color: #fff;
+      border-color: $primary;
+      // background-color: #234dc2;
+      color: $primary;
     }
     span.progress-info.completed {
       background-color: #23c274;
@@ -103,7 +106,7 @@
 }
 .progress-line.active {
   .progress-percent {
-    background-color: #234dc2;
+    background-color: $primary;
     width: 50%;
   }
 }
@@ -116,7 +119,8 @@
 .check-box.active {
   svg#checkbox {
     .circle {
-      fill: #234dc2;
+      border: $primary;
+      // fill: #234dc2;
     }
   }
 }

@@ -4,11 +4,10 @@
     (chartClick)="chartClicked($event)"
     (chartHover)="chartHovered($event)"></canvas>
     <br>
-    
     <div class="button-wrapper">
-      <button (click)="timeFrame('week')">Week</button>
-      <button (click)="timeFrame('month')">Month</button>
-      <button (click)="timeFrame('year')">Year</button>
+      <button class="small-button" (click)="timeFrame('week')">Week</button>
+      <button class="small-button" (click)="timeFrame('month')">Month</button>
+      <button class="small-button" (click)="timeFrame('year')">Year</button>
     </div>
   </div>
 </div>

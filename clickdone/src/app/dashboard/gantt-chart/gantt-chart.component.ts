@@ -2,7 +2,9 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData, ChartEvent, ChartType, registerables } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { Context } from 'chartjs-plugin-datalabels';
 import 'chartjs-adapter-date-fns';
+import { data1, Datalabels } from 'src/app/models/schedule';
 Chart.register(...registerables);
 
 @Component({
@@ -11,6 +13,8 @@ Chart.register(...registerables);
   styleUrls: ['./gantt-chart.component.scss']
 })
 export class GanttChartComponent implements OnInit  {
+  
+  data = data1;
   
   public chart: any = [];
   // todayLine plugin block
@@ -21,7 +25,7 @@ export class GanttChartComponent implements OnInit  {
       ctx.save();
       // line for today
       ctx.beginPath();
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1;
       ctx.strokeStyle = '#F15D23';
       // ctx.setLineDash([6, 6]);  // 색 6px, 투명 6px
       ctx.moveTo(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))), top);
@@ -54,39 +58,10 @@ export class GanttChartComponent implements OnInit  {
     }
   }
   
+  
   public barChartData: ChartData<'bar', {x: any[], y: string}[]> = {
     datasets: [{
-      data: [
-        // {x: ['2023-04-25', '2023-04-29'], y: 'task 1', name: 'Tom Jones'}, 
-        // {x: ['2023-04-25', '2023-04-29'], y: 'task 2', name: 'Heidrum Kapscher'},
-        // {x: ['2023-04-24', '2023-04-30'], y: 'task 3', name: 'Robert Klam'},  // completed
-        // {x: ['2023-04-24', '2023-04-30'], y: 'task 4', name: 'Hubert Klammer'},  // completed
-        // {x: ['2023-04-25', '2023-04-29'], y: 'task 5', name: 'Lala li'},  // completed
-        // {x: ['2023-06-05', '2023-06-09'], y: 'task 1', name: 'Max Miller'}, // delayed
-        // {x: ['2023-06-05', '2023-06-09'], y: 'task 2', name: 'Iron Neuer'}, // delayed
-        // {x: ['2023-06-06', '2023-06-16'], y: 'task 3', name: 'Tommy Stein'}, // pending
-        // {x: ['2023-06-06', '2023-06-16'], y: 'task 4', name: 'Bella Suder'} // pending
-
-        { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Tom Jones'}, 
-        { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Heidrum Kapscher'},
-        { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Robert Klam'},  // completed
-        { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Hubert Klammer'},  // completed
-        { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Lala li'},  // completed
-        { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Max Miller'}, // delayed
-        { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Iron Neuer'}, // delayed
-        { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Tommy Stein'}, // pending
-        { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Bella Suder'}, // pending
-  
-        // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Tom Jones'}, 
-        // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Heidrum Kapscher'},
-        // { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Robert Klam'},  // completed
-        // { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Hubert Klammer'},  // completed
-        // { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Lala li'},  // completed
-        // { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Max Miller'}, // delayed
-        // { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Iron Neuer'}, // delayed
-        // { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Tommy Stein'}, // pending
-        // { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Bella Suder'} // pending
-      ],
+      data: this.data,
       backgroundColor: [
         'rgba(28, 192, 154, 1)',
         'rgba(28, 192, 154, 1)',
@@ -135,10 +110,35 @@ export class GanttChartComponent implements OnInit  {
     },
     plugins: {
       datalabels: {
-        display: false, // show inner bar Text
+        display: true, // show inner bar Text
+        clamp: true,
+        anchor: 'start',
+        align: 'end',
+        offset: 20,
+        color: '#1b1c1d',
+        font: {
+          family: "'Poppins', sans-serif",
+          size: 18,
+          //weight: 'bold',
+        },
+        formatter: function(value, ctx: Context) {
+          if (typeof ctx.dataset.data[ctx.dataIndex] === 'object') {
+            const data = ctx.dataset.data[ctx.dataIndex];
+            if (!data || typeof data === 'number' || Array.isArray(data)) {
+              return null;
+            } else if ('y' in data) {
+              return data.y;
+            } else {
+              return null;
+            }
+          } else {
+            return null;
+          }
+        },
+        
       },
       tooltip: {
-        enabled: false // bar hover -> show text
+        enabled: false, // bar hover -> show text
       },
       legend: {
         display: false,
@@ -157,7 +157,6 @@ export class GanttChartComponent implements OnInit  {
   constructor() { }
   
   ngOnInit(): void {
-    
     this.chart = new Chart('schedule', {
       type: 'bar',
       data: this.barChartData,
@@ -171,21 +170,27 @@ export class GanttChartComponent implements OnInit  {
     if(period === 'week') {
       if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxWeek;
-        console.log(this.afterOneWeek);
+        if (this.barChartOptions?.plugins?.datalabels?.display ) {
+          this.barChartOptions.plugins.datalabels.display = true;
+        }
         this.chart.update();
       }
     } else if(period === 'month') {
       if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxMonth;
-        console.log(this.afterOneMonth);
+        if (this.barChartOptions?.plugins?.datalabels?.display ) {
+          this.barChartOptions.plugins.datalabels.display = true;
+        }
         this.chart.update();
       }
     } else if(period === 'year') {
       if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxYear;
-        console.log(this.afterOneYear);
-        this.chart.update();
+        if (this.barChartOptions?.plugins?.datalabels?.display ) {
+          this.barChartOptions.plugins.datalabels.display = false;
+        }
       }
+      this.chart.update();
     }
   }
   public chartClicked({ event, active }: { event?: ChartEvent | undefined, active?: {}[] | undefined }): void {

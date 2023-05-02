@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
 import { ProgressHelperService } from './progress-helper.service';
 import { ProgressStepComponent } from './progress-step/progress-step.component';
-import { Status, UiHelper } from './uiHelper';
+import { Status, Step, UiHelper } from './uiHelper';
 
 @Component({
   selector: 'app-progress',
@@ -11,6 +11,7 @@ import { Status, UiHelper } from './uiHelper';
 export class ProgressComponent extends UiHelper implements OnInit, AfterContentInit{
   
   itemLength!: number;
+  // steps: string[] = ['Text Type', 'Studenten', 'Option', 'Fertiges Document', 'Erledigt'];
   
   @Input() public set selectedIndex(value: number) {
     this.activeIndex = value || 0;

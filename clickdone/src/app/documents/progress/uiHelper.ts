@@ -4,7 +4,13 @@ import { ProgressHelperService } from "./progress-helper.service";
   ACTIVE = 'active',
   COMPLETE = 'complete'
  }
- 
+ export enum Step {
+  TEXT_TYPE,
+  STUDENT,
+  OPTION,
+  FERTIG,
+  ERLEDIGT
+ }
  export enum Status {
   PENDING = 'pending',
   IN_PROGRESS = 'in progress',
@@ -14,7 +20,7 @@ import { ProgressHelperService } from "./progress-helper.service";
  export class UiHelper {
   public itemProgressList: { 
     stepIndex: number; 
-    status: string
+    status: string;
   }[] = [];
   public activeIndex = 0;
   
