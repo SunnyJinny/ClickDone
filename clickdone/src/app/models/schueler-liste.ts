@@ -1,18 +1,25 @@
 export type State = 'Fehlende Unterlagen' | 'Zusage' | 'Absage' | 'Im Bewerbungsprozess' | 'Im Praktikum' | 'Platz angenommen' | 'Frei' | 'Abgeschlossen' ;
 
-export interface Schueler {
+export interface Student {
   name: string;
   geburtsdatum: string;
+  geschlecht?: string;
   adresse: string;
   schule: string;
+  betreuer?: string;
   bewerbungDatum: string;
   rueckmeldungDatum: string;
   startDatum: string;
   endDatum: string;
   status: State;
+  motivation?: boolean;
+  lebenslauf?: boolean;
+  zeugnis?: boolean;
+  notiz?: string;
+  bewertung?: string;
 }
 
-export const SchuelerListe: Schueler[] = [
+export const SchuelerListe: Student[] = [
   {
     name: 'Isabell König', 
     geburtsdatum: new Date(2008, 12, 27).toLocaleDateString('de'), 

@@ -37,10 +37,14 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 3.5rem) auto;
   gap: 1.5rem 2rem;
-  & mat-form-field:nth-child(12) {
+  & mat-form-field {
+    width: 100%;
+    height: 100%;
+  }
+  & mat-form-field:nth-child(15) {
     grid-column: 1 / 4;
   }
-  & mat-form-field:nth-child(13) {
+  & mat-form-field:nth-child(16) {
     grid-column: 1 / 4;
   }
   & .checkbox-wrapper {

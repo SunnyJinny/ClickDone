@@ -73,6 +73,9 @@
 }
 
 @media only screen and (max-width: 1728px) {
+  #container {
+    margin-top: 1rem;
+  }
   .mat-column {
     &-name, &-geburtsdatum, &-adresse, &-schule, &-bewerbungDatum, &-rueckmeldungDatum, &-startDatum, &-endDatum, &-status  {
       font-size: 0.75rem;

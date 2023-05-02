@@ -19,7 +19,7 @@ import { ProgressHelperService } from "./progress-helper.service";
  
  export class UiHelper {
   public itemProgressList: { 
-    stepIndex: number; 
+    stepIndex: number;
     status: string;
   }[] = [];
   public activeIndex = 0;

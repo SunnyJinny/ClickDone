@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchuelerListe } from '../models/schueler-liste';
-import { State } from '../models/state';
+import { Student  } from '../models/schueler-liste';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-studenten',
   templateUrl: './studenten.component.html',
   styleUrls: ['./studenten.component.scss']
 })
-export class StudentenComponent {
+export class StudentenComponent implements OnInit{
 
   displayedColumns: string[] = ['name', 'geburtsdatum', 'adresse', 'schule', 'bewerbungDatum', 'rueckmeldungDatum', 'startDatum', 'endDatum', 'status' ]
-  dataSource = SchuelerListe;  
+  dataSource!: MatTableDataSource<Student>;
+  
   options = [
     { value: 'fehlendeUnterlagen', viewValue: 'Fehlende Unterlagen' },
     { value: 'zusage', viewValue: 'Zusage' },
@@ -21,16 +24,31 @@ export class StudentenComponent {
     { value: 'platz', viewValue: 'Platz angenommen' },
     { value: 'frei', viewValue: 'Frei' },
     { value: 'abgeschlossen', viewValue: 'Abgeschlossen' }
+  ]
 
-    ]
-
-  constructor( private router: Router ) {}
-
-  goForm() {
-    this.router.navigate(['list-add']);
-  }
+  @ViewChild(MatSort) sort!: MatSort;
   
-  clicktest() {
-    console.log('test ok');
+  constructor( private router: Router, private _studentservice: StudentService ) {
+  }
+
+  ngOnInit(): void {
+    this.getStudentAll();
+  }
+  goAddPage() {
+    this.router.navigate(['list-add']);
+  } 
+  goEditPage(data: any) {
+    this.router.navigate(['/student', data], { skipLocationChange: true });
+  }
+  getStudentAll() {
+    this._studentservice.getStudentAll().subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.sort = this.sort;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 }

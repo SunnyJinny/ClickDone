@@ -6,7 +6,7 @@
       <h4 class="subtitle">Praktikanten/innen</h4>
     </div>
     <div class="button-wrapper flex flex-ai-e">
-      <button class="text-button" (click)="goForm()"><i class="fa-solid fa-plus"></i>Hinzufügen</button>
+      <button class="text-button" (click)="goAddPage()"><i class="fa-solid fa-plus"></i>Hinzufügen</button>
       <button class="text-button"><i class="fa-solid fa-arrow-down"></i>Herunterladen</button>
     </div>
   </div>
@@ -22,7 +22,7 @@
     <!-- Geburtsdatum Column -->
     <ng-container matColumnDef="geburtsdatum">
       <th mat-header-cell *matHeaderCellDef> Geburtsdatum </th>
-      <td mat-cell *matCellDef="let element"> {{element.geburtsdatum}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.geburtsdatum | date }} </td>
     </ng-container>
     <!-- Weight Column -->
     <ng-container matColumnDef="adresse">
@@ -39,25 +39,25 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="bewerbungDatum">
       <th mat-header-cell *matHeaderCellDef> Datum der Bewerbung </th>
-      <td mat-cell *matCellDef="let element"> {{element.bewerbungDatum}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.bewerbungDatum | date }} </td>
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="rueckmeldungDatum">
       <th mat-header-cell *matHeaderCellDef> Datum der Rückmeldung </th>
-      <td mat-cell *matCellDef="let element"> {{element.rueckmeldungDatum}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.rueckmeldungDatum | date }} </td>
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="startDatum">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Startdatum </th>
-      <td mat-cell *matCellDef="let element"> {{element.startDatum}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.startDatum | date }} </td>
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="endDatum">
       <th mat-header-cell *matHeaderCellDef> Enddatum </th>
-      <td mat-cell *matCellDef="let element"> {{element.endDatum}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.endDatum | date }} </td>
     </ng-container>
   
     <!-- Symbol Column -->
@@ -79,6 +79,6 @@
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clicktest()"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goEditPage(row.id)"></tr>
   </table>
 </div>

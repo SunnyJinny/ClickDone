@@ -1,0 +1,191 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "student": [
+    {
+      "name": "Isabell König",
+      "geburtsdatum": "2008-12-26T23:00:00.000Z",
+      "geschlecht": "female",
+      "adresse": "Melatenerstraße 20",
+      "schule": "Couven-Gymnasium",
+      "betreuer": "Svenja",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-01T22:00:00.000Z",
+      "endDatum": "2023-10-05T22:00:00.000Z",
+      "status": "Fehlende Unterlagen",
+      "motivation": true,
+      "lebenslauf": false,
+      "zeugnis": true,
+      "notiz": "",
+      "bewertung": "",
+      "id": 1
+    },
+    {
+      "name": "Anna Schulz",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Melatenerstraße 2",
+      "schule": "Couven-Gymnasium",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-01T22:00:00.000Z",
+      "endDatum": "2023-10-05T22:00:00.000Z",
+      "status": "Fehlende Unterlagen",
+      "motivation": false,
+      "lebenslauf": true,
+      "zeugnis": true,
+      "id": 2,
+      "geschlecht": "female",
+      "betreuer": "Svenja",
+      "notiz": "",
+      "bewertung": ""
+    },
+    {
+      "name": "Markus Anger",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Melatenerstraße 10",
+      "schule": "Gemeinschafthauptschule Drimborn",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-01T22:00:00.000Z",
+      "endDatum": "2023-10-05T22:00:00.000Z",
+      "status": "Fehlende Unterlagen",
+      "motivation": false,
+      "lebenslauf": false,
+      "zeugnis": true,
+      "id": 3,
+      "geschlecht": "female",
+      "betreuer": "Svenja",
+      "notiz": "",
+      "bewertung": ""
+    },
+    {
+      "name": "Rudolf Moser",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Helmertweg 1",
+      "schule": "Städt. Gemeinschaftshauptschule",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-02T22:00:00.000Z",
+      "endDatum": "2023-10-05T22:00:00.000Z",
+      "status": "Fehlende Unterlagen",
+      "motivation": true,
+      "lebenslauf": false,
+      "zeugnis": false,
+      "id": 4,
+      "geschlecht": "female",
+      "betreuer": "Svenja",
+      "notiz": "",
+      "bewertung": ""
+    },
+    {
+      "name": "Felix Bauer",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Claßenstraße 11",
+      "schule": "Couven-Gymnasium",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-03T22:00:00.000Z",
+      "endDatum": "2023-10-05T22:00:00.000Z",
+      "status": "Fehlende Unterlagen",
+      "motivation": true,
+      "lebenslauf": false,
+      "zeugnis": false,
+      "id": 5
+    },
+    {
+      "name": "Florian Heigl",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Templergraben 61",
+      "schule": "Couven-Gymnasium",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-02T22:00:00.000Z",
+      "endDatum": "2023-10-05T22:00:00.000Z",
+      "status": "Zusage",
+      "id": 6
+    },
+    {
+      "name": "Heiko Moser",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Kopernikusstraße 16",
+      "schule": "St. Leonhard Gymnasium",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-01T22:00:00.000Z",
+      "endDatum": "2023-10-12T22:00:00.000Z",
+      "status": "Zusage",
+      "id": 7
+    },
+    {
+      "name": "Hans Fuchs",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Claßenstraße 11",
+      "schule": "St. Leonhard Gymnasium",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-02T22:00:00.000Z",
+      "endDatum": "2023-10-12T22:00:00.000Z",
+      "status": "Zusage",
+      "id": 8
+    },
+    {
+      "name": "Jonas Muller",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Ahornstraße 55",
+      "schule": "St. Leonhard Gymnasium",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-01T22:00:00.000Z",
+      "endDatum": "2023-10-12T22:00:00.000Z",
+      "status": "Zusage",
+      "id": 9
+    },
+    {
+      "name": "Dietz Tobias",
+      "geburtsdatum": "2008-12-27T23:00:00.000Z",
+      "adresse": "Theaterpl. 5",
+      "schule": "Gemeinschafthauptschule Drimborn",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-03T22:00:00.000Z",
+      "endDatum": "2023-10-12T22:00:00.000Z",
+      "status": "Zusage",
+      "id": 10
+    },
+    {
+      "name": "Isabell König",
+      "geburtsdatum": "2008-12-26T23:00:00.000Z",
+      "geschlecht": "male",
+      "adresse": "Melatenerstraße 20",
+      "schule": "Couven-Gymnasium",
+      "betreuer": "Svenja",
+      "bewerbungDatum": "2023-02-16T23:00:00.000Z",
+      "rueckmeldungDatum": "2023-03-19T23:00:00.000Z",
+      "startDatum": "2023-10-01T22:00:00.000Z",
+      "endDatum": "2023-10-05T22:00:00.000Z",
+      "status": "Fehlende Unterlagen",
+      "motivation": true,
+      "lebenslauf": false,
+      "zeugnis": true,
+      "notiz": "",
+      "bewertung": "",
+      "id": 11
+    }
+  ]
+}

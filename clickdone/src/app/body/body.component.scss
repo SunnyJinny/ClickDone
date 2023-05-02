@@ -8,14 +8,28 @@
   top: 0;
   transition: all 0.5s ease;
   background: #fff;
-  
   &-trimmed {
     width: calc(100% - 20rem);
     margin-left: 20rem;
   }
-
   &-md {
     width: calc(100% - 10rem);
     margin-left: 10rem;
+  }
+}
+
+@media only screen and (max-width: 1728px) {
+  .body {
+    width: calc(100% - 5rem);
+    margin-left: 5rem;
+    padding: 3rem 5rem 3rem 3rem;    
+    &-trimmed {
+      width: calc(100% - 15rem);
+      margin-left: 15rem;
+    }
+    &-md {
+      width: calc(100% - 5rem);
+      margin-left: 5rem;
+    }
   }
 }

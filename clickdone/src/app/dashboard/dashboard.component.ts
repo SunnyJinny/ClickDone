@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { State } from '../models/state';
+import { Router } from '@angular/router';
+import { State } from '../models/schueler-liste';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,26 +9,14 @@ import { State } from '../models/state';
 })
 export class DashboardComponent {
 
-  stateCards: State[] = [
-    {
-      number: 5,
-      state: 'Zusage',  
-    },
-    {
-      number: 3,
-      state: 'Im Warteposition',  
-    },
-    {
-      number: 5,
-      state: 'Fehlende Unterlagen',  
-    },
-    {
-      number: 5,
-      state: 'Absage',  
-    }
-  ]
-  
+  stateCards: State[] = ['Zusage', 'Im Bewerbungsprozess', 'Fehlende Unterlagen', 'Absage'];
+  constructor( private router: Router ){
+    
+  }
   getState(state: string) {
     console.log(state);
+  }
+  goForm() {
+    this.router.navigate(['list-add']);
   }
 }

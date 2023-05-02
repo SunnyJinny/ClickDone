@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,6 +50,7 @@ import { ProgressComponent } from './documents/progress/progress.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     NoopAnimationsModule,
     FontAwesomeModule,
@@ -61,7 +64,8 @@ import { ProgressComponent } from './documents/progress/progress.component';
     MatCheckboxModule,
     MatSortModule,
     MatSelectModule,
-    TextFieldModule
+    TextFieldModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: NgChartsConfiguration, useValue: { generateColors: false }},

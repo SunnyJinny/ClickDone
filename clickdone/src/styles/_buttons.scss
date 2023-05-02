@@ -20,6 +20,7 @@
 .text-button {
   @include button-styles(2rem, $black);
   padding: 0.5rem 1rem 0.5rem 0.75rem;
+  height: fit-content;
 }
 .color-button {
   @include button-styles(2rem, $accent);

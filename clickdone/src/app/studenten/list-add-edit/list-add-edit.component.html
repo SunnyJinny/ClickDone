@@ -1,94 +1,101 @@
 <h2 class="title">Schüler/innen</h2>
-<div class="flex flex-jc-sb flex-ai-c" id="container">
-  <div class="subtitle-wrapper flex flex-ai-e">
-    <h4 class="subtitle">Neuen Schüler hinzufügen</h4>
+<form class="form-wrapper" [formGroup]="listForm" (ngSubmit)="onFormSubmit()">
+  <div class="flex flex-jc-sb flex-ai-c" id="container">
+    <div class="subtitle-wrapper flex flex-ai-e">
+      <h4 class="subtitle" *ngIf="isNew">Neue Liste hinzufügen</h4>
+      <h4 class="subtitle" *ngIf="!isNew">Informationen</h4>
+    </div>
+    <div class="button-wrapper flex flex-ai-e">
+      <button class="color-button" type="submit"><i class="fa-solid fa-check"></i>Speichern</button>
+    </div>
   </div>
-  <div class="button-wrapper flex flex-ai-e">
-    <div class="color-button"><i class="fa-solid fa-check"></i>Speichern</div>
-  </div>
-</div>
 
-<form class="form-wrapper">
   <div class="form-field">
     <mat-form-field appearance="outline">
-      <mat-label>Adress</mat-label>
-      <input matInput>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Schule</mat-label>
-      <input matInput>
+      <mat-label>Geburtsdatum</mat-label>
+      <input matInput [matDatepicker]="geburtsdatum" formControlName="geburtsdatum">
+      <mat-datepicker-toggle matIconSuffix [for]="geburtsdatum"></mat-datepicker-toggle>
+      <mat-datepicker #geburtsdatum></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Geschlecht</mat-label>
-      <mat-select>
+      <mat-select formControlName="geschlecht">
         <mat-option value="male">männlich</mat-option>
         <mat-option value="female">weiblich</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
+      <mat-label>Schule</mat-label>
+      <input matInput type="text" formControlName="schule">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Adress</mat-label>
+      <input matInput type="text" formControlName="adresse">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Betreuer/in</mat-label>
+      <input matInput type="text" formControlName="betreuer">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Datum der Bewerbung</mat-label>
-      <input matInput [matDatepicker]="picker1">
+      <input matInput [matDatepicker]="picker1" formControlName="bewerbungDatum">
       <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Datum der Rückmeldung</mat-label>
-      <input matInput [matDatepicker]="picker2">
+      <input matInput [matDatepicker]="picker2" formControlName="rueckmeldungDatum">
       <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Betreuer/in</mat-label>
-      <input matInput>
+      <mat-label>-</mat-label>
+      <input matInput disabled>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Startdatum</mat-label>
-      <input matInput [matDatepicker]="picker3">
+      <input matInput [matDatepicker]="picker3" formControlName="startDatum">
       <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
       <mat-datepicker #picker3></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Enddatum</mat-label>
-      <input matInput [matDatepicker]="picker4">
+      <input matInput [matDatepicker]="picker4" formControlName="endDatum">
       <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
       <mat-datepicker #picker4></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>-</mat-label>
-      <input matInput>
+      <input matInput disabled>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Bewerbungsstatus</mat-label>
-      <mat-select>
-        <mat-option value="insufficient">Fehlenden Unterlagen</mat-option>
-        <mat-option value="pass">Zusage</mat-option>
-        <mat-option value="fail">Absage</mat-option>
-        <mat-option value="proceeding">Im Bewerbungsprozess</mat-option>
-        <mat-option value="ongoing">Im Praktikum</mat-option>
-        <mat-option value="upcoming">Platz angenommen</mat-option>
-        <mat-option value="free">Frei</mat-option>
-        <mat-option value="finished">Abgeschlossen</mat-option>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let option of status" [value]="option">{{ option }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="checkbox-wrapper flex flex-ai-c">
-      <mat-checkbox>Motivationsschreiben</mat-checkbox>
-      <mat-checkbox>Lebenslauf</mat-checkbox>
-      <mat-checkbox>Zeugnis</mat-checkbox>
+    <div class="checkbox-wrapper flex flex-jc-sb flex-ai-c">
+      <mat-checkbox formControlName="motivation">Motivationsschreiben</mat-checkbox>
+      <mat-checkbox formControlName="lebenslauf">Lebenslauf</mat-checkbox>
+      <mat-checkbox formControlName="zeugnis">Zeugnis</mat-checkbox>
     </div>
     <mat-form-field id="forText" appearance="outline" floatLabel="always">
       <mat-label>Notiz</mat-label>
-      <textarea matInput
+      <textarea matInput formControlName="notiz"
             cdkTextareaAutosize
             cdkAutosizeMinRows="2"
             cdkAutosizeMaxRows="10"></textarea>
     </mat-form-field>
     <mat-form-field id="forText" appearance="outline" floatLabel="always">
       <mat-label>Bewertung</mat-label>
-      <textarea matInput
+      <textarea matInput formControlName="bewertung"
             cdkTextareaAutosize
             cdkAutosizeMinRows="2"
             cdkAutosizeMaxRows="10"></textarea>
     </mat-form-field>
   </div>
-  
 </form>
