@@ -1,22 +1,24 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartData, ChartEvent, ChartType, registerables } from 'chart.js';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Chart, ChartConfiguration, ChartData, ChartEvent, registerables } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { Context } from 'chartjs-plugin-datalabels';
 import 'chartjs-adapter-date-fns';
-import { data1, Datalabels } from 'src/app/models/schedule';
-Chart.register(...registerables);
+import { data1 } from 'src/app/models/schedule';
+import { Route, Router } from '@angular/router';
+import differenceInCalendarWeeksWithOptions from 'date-fns/esm/fp/differenceInCalendarWeeksWithOptions/index.js';
 
 @Component({
   selector: 'app-gantt-chart',
   templateUrl: './gantt-chart.component.html',
   styleUrls: ['./gantt-chart.component.scss']
 })
+
 export class GanttChartComponent implements OnInit  {
   
   data = data1;
+  chart: any = [];
   
-  public chart: any = [];
   // todayLine plugin block
   TodayLine = {
     id: 'TodayLine',
@@ -57,7 +59,6 @@ export class GanttChartComponent implements OnInit  {
       ctx.restore();
     }
   }
-  
   
   public barChartData: ChartData<'bar', {x: any[], y: string}[]> = {
     datasets: [{
@@ -108,6 +109,7 @@ export class GanttChartComponent implements OnInit  {
         display: false, 
       }
     },
+    events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
     plugins: {
       datalabels: {
         display: true, // show inner bar Text
@@ -138,12 +140,48 @@ export class GanttChartComponent implements OnInit  {
         
       },
       tooltip: {
-        enabled: false, // bar hover -> show text
+        enabled: true, // bar hover -> show text
+        displayColors: true,
+        backgroundColor: '#fff',
+        titleColor: '#FABE2A',
+        titleFont: {
+          family: "'Poppins', sans-serif",
+          weight: 'normal',
+          lineHeight: 1.3
+        },
+        titleMarginBottom: 0,
+        xAlign: 'center',
+        // yAlign: 'top',    // 추가 인포가 bar 오른쪽 위로 고정한다. 
+        footerMarginTop: 0,
+        borderColor: '#1CC09A',
+        borderWidth: 1,
+        callbacks: {
+          label: (ctx) => {
+            return '';
+          },
+          title: (ctx) => {
+            const startDate = new Date((ctx[0] as any).raw.x[0]);
+            const endDate = new Date((ctx[0] as any).raw.x[1]);
+            const formattedStartDate = startDate.toLocaleString("de-DE", {
+              // year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              // hour12: true
+            });
+            const formattedEndDate = endDate.toLocaleString("de-DE", {
+              // year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            });
+            // return [`Praktikum Zeitraum: ${formattedStartDate} - ${formattedEndDate}`];
+            return [(ctx[0] as any).raw.y , `Praktikum Zeitraum: ${formattedStartDate} - ${formattedEndDate}`];
+          }
+        }
       },
       legend: {
         display: false,
       }
-    }
+    },
   };
   
   public barChartLegend = false;
@@ -152,10 +190,10 @@ export class GanttChartComponent implements OnInit  {
     this.TodayLine,
   ];
   
-  // @ViewChild(BaseChartDirective) _chart: BaseChartDirective | undefined;
-  
-  constructor() { }
-  
+  constructor( private router: Router) { 
+    Chart.register(...registerables);
+  }
+
   ngOnInit(): void {
     this.chart = new Chart('schedule', {
       type: 'bar',
@@ -166,45 +204,43 @@ export class GanttChartComponent implements OnInit  {
   }
   
   public timeFrame(period: string): void {
-    console.log(period);
     if(period === 'week') {
-      if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
+      if (this.barChartOptions?.scales?.['x'] !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxWeek;
-        if (this.barChartOptions?.plugins?.datalabels?.display ) {
+        if (this.barChartOptions?.plugins?.datalabels?.display == false ) {
           this.barChartOptions.plugins.datalabels.display = true;
         }
-        this.chart.update();
-      }
+      }        
+      this.chart.update();
     } else if(period === 'month') {
-      if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
+      if (this.barChartOptions?.scales?.['x'] !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxMonth;
-        if (this.barChartOptions?.plugins?.datalabels?.display ) {
+        if (this.barChartOptions?.plugins?.datalabels?.display == false ) {
           this.barChartOptions.plugins.datalabels.display = true;
-        }
-        this.chart.update();
+        }  
       }
+    this.chart.update();
     } else if(period === 'year') {
-      if (this.barChartOptions?.scales?.['x']?.min !== undefined) {
+      if (this.barChartOptions?.scales?.['x'] !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxYear;
         if (this.barChartOptions?.plugins?.datalabels?.display ) {
           this.barChartOptions.plugins.datalabels.display = false;
-        }
+        }  
       }
       this.chart.update();
+      
     }
   }
-  public chartClicked({ event, active }: { event?: ChartEvent | undefined, active?: {}[] | undefined }): void {
-    // console.log(event, active);
-    console.log(this.chart?.options?.scales?.['x']?.max);
-  }
-  
-  public chartHovered(e: any): void {
-  //   console.log(e);
+  public clickHandler(click: MouseEvent): void {
+    const points = this.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+    if(points.length) {
+      const firstPoint = points[0];
+      const value = this.chart.data.datasets[0].data[firstPoint.index];
+      this.router.navigate(['/students']);
+    }
   }
 
   public chartFilter(date: any) {
-    // console.log(this.chart?.datasets);
-    
     console.log(date.srcElement.value);
     const year = date.srcElement.value.substring(0, 4);
     const month = date.srcElement.value.substring(5, 7);

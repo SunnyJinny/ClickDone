@@ -1,8 +1,7 @@
 <div class="chart-wrapper">
   <div class="chart-box">
     <canvas id="schedule" baseChart
-    (chartClick)="chartClicked($event)"
-    (chartHover)="chartHovered($event)"></canvas>
+    (click)="clickHandler($event)">{{ chart }}</canvas>
     <br>
     <div class="button-wrapper">
       <button class="small-button" (click)="timeFrame('week')">Week</button>

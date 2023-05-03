@@ -11,15 +11,15 @@ export const Datalabels: string[] = [
 ]
 
 export const data1 = [
-  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Tom Jones'}, 
-  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Heidrum Kapscher'},
-  { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Robert Klam'},  // completed
-  { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Hubert Klammer'},  // completed
-  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-5 00:00:00')], y: 'Lala li'},  // completed
-  { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Max Miller'}, // delayed
-  { x: [ Date.parse('2023-06-05 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Iron Neuer'}, // delayed
-  { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Tommy Stein'}, // pending
-  { x: [ Date.parse('2023-06-06 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Bella Suder'}, // pending
+  { x: [ Date.parse('2023-05-02 00:00:00'), Date.parse('2023-05-7 00:00:00')], y: 'Tom Jones'}, 
+  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-7 00:00:00')], y: 'Heidrum Kapscher'},
+  { x: [ Date.parse('2023-05-03 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Robert Klam'},  // completed
+  { x: [ Date.parse('2023-05-03 00:00:00'), Date.parse('2023-05-12 00:00:00')], y: 'Hubert Klammer'},  // completed
+  { x: [ Date.parse('2023-05-01 00:00:00'), Date.parse('2023-05-7 00:00:00')], y: 'Lala li'},  // completed
+  { x: [ Date.parse('2023-06-01 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Max Miller'}, // delayed
+  { x: [ Date.parse('2023-06-02 00:00:00'), Date.parse('2023-06-9 00:00:00')], y: 'Iron Neuer'}, // delayed
+  { x: [ Date.parse('2023-06-02 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Tommy Stein'}, // pending
+  { x: [ Date.parse('2023-06-01 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Bella Suder'}, // pending
 ]
 
 export const date2 = [
