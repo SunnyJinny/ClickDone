@@ -4,7 +4,7 @@
   user-select: none;
   display: grid;
   grid-template-rows: 5rem 1fr;
-  grid-row-gap: 6.25rem;
+  grid-row-gap: 4rem;
   grid-template-columns: min-content;
   
   .step-progress {
@@ -20,7 +20,7 @@
   }
   .step-content {
     border: 1px solid blue;
-    margin-top: 2.5rem;
+    // margin-top: 2.5rem;
     position: relative;
     align-self: start;
     grid-row: 2 / -1;

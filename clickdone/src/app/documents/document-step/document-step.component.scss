@@ -1,16 +1,5 @@
-@import '../../styles/styles.scss';
+@import '../../../styles/styles.scss';
 
-.subtitle-wrapper {
-  margin: 2rem 0.5rem 1.25rem 0;
-  & p {
-    margin-left: 0.3rem;
-  }
-}
-.button-wrapper {
-  border: 1px solid red;
-  width: calc(100% - 2rem);
-  column-gap: 1.5rem;
-}
 .form-wrapper {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -50,7 +39,7 @@
   &-label {
     position: absolute;
     left: 1rem;
-    top: 0.85rem;
+    top: 0.9rem;
     padding: 0 0.5rem;
     
     color: #1b1c1d;
@@ -64,4 +53,11 @@
   top: -0.5rem;
   font-size: 0.75rem;
   left: 0.8rem;
+}
+.button-wrapper {
+  border: 1px solid red;
+  width: calc(100% - 2rem);
+  column-gap: 1.5rem;
+  position: absolute;
+  bottom: 0;
 }

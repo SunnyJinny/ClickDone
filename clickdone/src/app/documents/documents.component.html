@@ -4,28 +4,68 @@
   <p> für Zusage an Student</p>
 </div>
 <app-progress>
+  <!-- test -->
   <app-progress-step>
-    <h1>Text Type</h1>
-    <button progressStepNext>next</button>
+    <app-document-step
+      [stepTitle]="'Auswählen den Texttyp'"
+      [inputLabel1]="'Schüler/in'"
+      [inputLabel2]="'Startdatum'"
+      [inputLabel3]="'Enddatum'"
+      [inputLabel4]="'Betreff hinzufügen'"
+      [inputLabel5]="'content'">
+    </app-document-step>
   </app-progress-step>
+  <!-- step 1 -->
   <app-progress-step>
-    <h1>Studenten</h1>
-    <button progressStepPrev>previous</button>
-    <button progressStepNext>next</button>
+    <h4 class="subtitle">Auswählen den Texttyp</h4>
+    <div class="button-wrapper flex flex-jc-sb mt-1 mb-1">
+      <button class="card-button subtitle" (click)="setTextType('zusage')">Zusage E-Mail</button>
+      <button class="card-button subtitle" (click)="setTextType('absage')">Absage E-Mail</button>
+      <button class="card-button subtitle" (click)="setTextType('zeitplan')">Zeitplan E-Mail</button>
+      <button class="card-button subtitle" (click)="setTextType('zeugnis')">Zeugnis</button>
+    </div>
+    <div class="button-wrapper flex flex-jc-fe">
+      <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+    </div>
   </app-progress-step>
+  <!-- step 2 -->  
   <app-progress-step>
-    <h1>(Zusatz)</h1>
-    <button progressStepPrev>previous</button>
-    <button progressStepNext>next</button>
+    <app-document-step
+      [stepTitle]="'Auswählen einen Schüler/in'"
+      [inputLabel1]="'email'"
+      [inputLabel2]="'startdatum'"
+      [inputLabel3]="'enddatum'"
+      [inputLabel4]="'title'"
+      [inputLabel5]="'content'">
+    </app-document-step>
   </app-progress-step>
+  <!-- step 3 -->
   <app-progress-step>
-    <h1>Fertiges Document</h1>
-    <button progressStepPrev>previous</button>
-    <button progressStepNext>next</button>
+    <app-document-step
+      [stepTitle]="'(optionale) hinzufügen den Zusatz'"
+      [inputLabel1]="'email'"
+      [inputLabel2]="'startdatum'"
+      [inputLabel3]="'enddatum'"
+      [inputLabel4]="'title'"
+      [inputLabel5]="'content'">
+    </app-document-step>
   </app-progress-step>
+  <!-- step 4 -->
   <app-progress-step>
-    <h1>Erledigt</h1>
-    <button progressStepPrev>previous</button>
-    <button progressStepNext>next</button>
+    <app-document-step
+      [stepTitle]="'Überprüfen den fertigen Text'"
+      [inputLabel1]="'email'"
+      [inputLabel2]="'startdatum'"
+      [inputLabel3]="'enddatum'"
+      [inputLabel4]="'title'"
+      [inputLabel5]="'content'">
+    </app-document-step>
+  </app-progress-step>
+  <!-- step 5 -->
+  <app-progress-step>
+    <h4 class="subtitle">E-Mail erfolgreich gesendet.</h4>
+    <div class="button-wrapper flex flex-jc-sb">
+      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>ZÜRUCK AM ANFANG</button>
+    </div>
   </app-progress-step>
 </app-progress>

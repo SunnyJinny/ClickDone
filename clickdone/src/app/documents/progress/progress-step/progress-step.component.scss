@@ -2,7 +2,7 @@
 
 :host.activeStep {
   display: inline-block;
-  padding: 0.625rem;
+  padding: 1rem;
   visibility: visible;
   opacity: 1;
   position: absolute;
@@ -17,6 +17,6 @@
 :host:not(.activeStep) {
   visibility: hidden;
   padding: 0.625rem;
-  transform: translateY(-0.5rem);
+  // transform: translateY(-0.5rem);
   opacity: 0;
 }

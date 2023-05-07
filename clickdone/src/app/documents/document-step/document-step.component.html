@@ -1,0 +1,30 @@
+<h4 class="subtitle">{{ purpose }}</h4>
+<section class="form-wrapper">
+  <div class="form">
+    <input type="text" id="email" list="selectStudent" class="form-input" placeholder=" " (change)="onStudentChange($event)">
+    <datalist id="selectStudent">
+      <option *ngFor="let student of students" [value]="student.name">{{ student.name }}</option>
+    </datalist>
+    <label for="email" class="form-label big-label">Schüler/in</label>  
+  </div>
+  <div class="form">
+    <input id="startDatum" class="form-input" placeholder=" " [(ngModel)]="startDatum">
+    <label for="startDatum" class="form-label big-label">Startdatum</label>
+  </div>
+  <div class="form">
+    <input id="endDatum" class="form-input" placeholder=" " [(ngModel)]="endDatum">
+    <label for="endDatum" class="form-label big-label">Enddatum</label>
+  </div>
+  <div class="form">
+    <input type="text" id="title" class="form-input" placeholder=" " [(ngModel)]="title">
+    <label for="title" class="form-label para-text">Betreff hinzufügen</label>
+  </div>
+  <div class="form">
+    <input type="text" id="content" class="form-input" placeholder=" " [(ngModel)]="content">
+    <label for="content" class="form-label big-label">{{ content }}</label>
+  </div>
+</section>
+<div class="button-wrapper flex flex-jc-sb">
+  <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+  <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+</div>

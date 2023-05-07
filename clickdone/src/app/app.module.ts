@@ -5,7 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,6 +30,7 @@ import { ListAddEditComponent } from './studenten/list-add-edit/list-add-edit.co
 import { ProgressStepComponent } from './documents/progress/progress-step/progress-step.component';
 import { ProgressStepDirective } from './documents/progress/progress-step.directive';
 import { ProgressComponent } from './documents/progress/progress.component';
+import { DocumentStepComponent } from './documents/document-step/document-step.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ProgressComponent } from './documents/progress/progress.component';
     ListAddEditComponent,
     ProgressStepComponent,
     ProgressStepDirective,
-    ProgressComponent
+    ProgressComponent,
+    DocumentStepComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { ProgressComponent } from './documents/progress/progress.component';
     MatSortModule,
     MatSelectModule,
     TextFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     { provide: NgChartsConfiguration, useValue: { generateColors: false }},
