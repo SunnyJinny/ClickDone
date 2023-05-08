@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'documents', component: DocumentsComponent},
   {path: 'students', component: StudentenComponent},
   {path: 'student/:id', component: ListAddEditComponent},
-  {path: 'list-add', component: ListAddEditComponent},
+  {path: 'student-add', component: ListAddEditComponent},
   
 ];
 
