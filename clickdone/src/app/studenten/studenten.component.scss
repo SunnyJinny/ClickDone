@@ -17,7 +17,7 @@
   transform: translateY(0px) !important;
 }
 .subtitle-wrapper {
-  gap: 2.5rem;
+  gap: 3rem;
 }
 #container {
   margin: 2rem 0.5rem 1.25rem 0;
@@ -27,6 +27,34 @@
       margin-right: 0.25rem;
     }
   }
+}
+.filterSelect {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    bottom: -2px;
+    left: 0;
+    background-color: $warning;
+    opacity: 0.3;
+    visibility: hidden;
+    transform: scaleX(0);
+    transform-origin: bottom center;
+    transition: transform 0.25s ease-out;
+  }
+  &:hover, &.selected {
+    transform: scale(1.25);
+    transform-origin: bottom left;
+  }
+  &:hover::before, &.selected:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+  
 }
 
 // list

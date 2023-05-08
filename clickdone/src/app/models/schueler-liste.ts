@@ -6,12 +6,13 @@ export interface Student {
   geschlecht?: string;
   adresse: string;
   schule: string;
+  email?: string;
   betreuer?: string;
   bewerbungDatum: string;
   rueckmeldungDatum: string;
   startDatum: string;
   endDatum: string;
-  status: State;
+  status: string;
   motivation?: boolean;
   lebenslauf?: boolean;
   zeugnis?: boolean;

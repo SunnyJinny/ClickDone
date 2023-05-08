@@ -1,27 +1,46 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
+  
+  private studentUrl = "http://localhost:8080/student";
  
   constructor( private _http: HttpClient) { }
   
   addStudent(data: any): Observable<any> {
-    return this._http.post('http://localhost:3000/student', data);
+    return this._http.post(this.studentUrl, data);
   }
   getStudentAll(): Observable<any> {
-    return this._http.get('http://localhost:3000/student');
+    return this._http.get(`${this.studentUrl}/list`);
   }
-  getStudent(_id: any): Observable<any> {
-    return this._http.get(`http://localhost:3000/student/${_id}`);
+  getStudent(_id: string): Observable<any> {
+    return this._http.get(`${this.studentUrl}/${_id}`);
   }
   updateStudent(_id: any, data: any): Observable<any> {
-    return this._http.put(`http://localhost:3000/student/${_id}`, data);
+    return this._http.put(`${this.studentUrl}/${_id}`, data);
   }
   deleteStudent(_id: number): Observable<any> {
-    return this._http.delete(`http://localhost:3000/student/${_id}`);
+    return this._http.delete(`${this.studentUrl}/${_id}`);
+  }
+  // filterByState(filterItem: string[]): Observable<any> {
+  //   console.log(filterItem);
+  //   return this.getStudentAll().pipe(map(items => { 
+  //     items.filter((item: { status: string}) => 
+  //     {
+  //       console.log(item.status);
+  //       filterItem.includes(item.status);
+  //     })
+  //   }));
+  // }
+  
+  filterByState(filterItem: string[]): Observable<any[]> {
+    console.log(filterItem);
+    return this.getStudentAll().pipe(map(items =>  
+      items.filter((item: { status: string}) => filterItem.includes(item.status))
+    ));
   }
 }

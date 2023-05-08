@@ -2,8 +2,8 @@
   <h2 class="title">Schüler/innen</h2>
   <div class="flex flex-jc-sb flex-ai-c" id="container">
     <div class="subtitle-wrapper flex flex-ai-e">
-      <h4 class="subtitle">Bewerber/inner</h4>
-      <h4 class="subtitle">Praktikanten/innen</h4>
+      <h4 class="para-text filterSelect" [ngClass]="selected === 'bewerber' ? 'selected': ''" (click)="filterByStatus('bewerber')">Bewerber/inner</h4>
+      <h4 class="para-text filterSelect" [ngClass]="selected === 'praktikant' ? 'selected': ''" (click)="filterByStatus('praktikant')">Praktikanten/innen</h4>
     </div>
     <div class="button-wrapper flex flex-ai-e">
       <button class="text-button" (click)="goAddPage()"><i class="fa-solid fa-plus"></i>Hinzufügen</button>
@@ -79,6 +79,6 @@
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goEditPage(row.id)"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goEditPage(row._id)"></tr>
   </table>
 </div>

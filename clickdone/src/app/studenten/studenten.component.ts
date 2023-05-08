@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Student  } from '../models/schueler-liste';
 import { StudentService } from '../services/student.service';
 
@@ -13,8 +14,7 @@ import { StudentService } from '../services/student.service';
 export class StudentenComponent implements OnInit{
 
   displayedColumns: string[] = ['name', 'geburtsdatum', 'adresse', 'schule', 'bewerbungDatum', 'rueckmeldungDatum', 'startDatum', 'endDatum', 'status' ]
-  dataSource!: MatTableDataSource<Student>;
-  
+  dataSource!: MatTableDataSource<Student[]>;
   options = [
     { value: 'fehlendeUnterlagen', viewValue: 'Fehlende Unterlagen' },
     { value: 'zusage', viewValue: 'Zusage' },
@@ -25,20 +25,24 @@ export class StudentenComponent implements OnInit{
     { value: 'frei', viewValue: 'Frei' },
     { value: 'abgeschlossen', viewValue: 'Abgeschlossen' }
   ]
-
+  status!: string[];
+  selected: string = 'bewerber';
+  
   @ViewChild(MatSort) sort!: MatSort;
   
   constructor( private router: Router, private _studentservice: StudentService ) {
   }
 
   ngOnInit(): void {
-    this.getStudentAll();
+    this.filterByStatus('bewerber');
   }
+  
   goAddPage() {
-    this.router.navigate(['list-add']);
+    this.router.navigate(['student-add']);
   } 
-  goEditPage(data: any) {
-    this.router.navigate(['/student', data], { skipLocationChange: true });
+  goEditPage(id: string) {
+    console.log(id);
+    this.router.navigate(['/student', id], { skipLocationChange: true });
   }
   getStudentAll() {
     this._studentservice.getStudentAll().subscribe({
@@ -48,6 +52,21 @@ export class StudentenComponent implements OnInit{
       },
       error: (err) => {
         console.log(err);
+      }
+    })
+  }
+  filterByStatus(filter: string) {
+    if(filter === 'bewerber') {
+      this.selected = 'bewerber';
+      this.status = ['Fehlende Unterlagen', 'Zusage', 'Absage', 'Im Bewertungsprozess'];
+    } else if(filter === 'praktikant') {
+      this.selected = 'praktikant';
+      this.status = ['Im Praktikum', 'Platz angenommen', 'Frei', 'Abgeschlossen'];
+    } 
+    this._studentservice.filterByState(this.status).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.dataSource = new MatTableDataSource(data);
       }
     })
   }
