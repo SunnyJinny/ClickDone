@@ -7,7 +7,7 @@ import { map, Observable } from 'rxjs';
 })
 export class StudentService {
   
-  private studentUrl = "http://localhost:8080/student";
+  private studentUrl = "http://localhost:3000/student";
  
   constructor( private _http: HttpClient) { }
   
@@ -38,9 +38,9 @@ export class StudentService {
   // }
   
   filterByState(filterItem: string[]): Observable<any[]> {
-    console.log(filterItem);
     return this.getStudentAll().pipe(map(items =>  
-      items.filter((item: { status: string}) => filterItem.includes(item.status))
+      items.filter((item: { status: string }) => filterItem.includes(item.status))
     ));
   }
+
 }

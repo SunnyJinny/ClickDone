@@ -6,7 +6,7 @@ import { connectDB } from './controllers/database.js'
 import studentRouter from './routes/student.router.js';
 
 const app = express();
-const port = 8080;
+const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,9 +18,9 @@ app.use(morgan('tiny'));
 
 app.use('/student', studentRouter);
 
-// app.use((req, res, next) => {
-//   res.sendStatus(404);
-// });
+app.use((req, res, next) => {
+  res.sendStatus(404);
+});
 
 app.use((error, req, res, next) => {
   console.error(error);

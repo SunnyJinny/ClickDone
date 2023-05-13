@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { TextTemplate } from '../models/document';
+import { Student } from '../models/schueler-liste';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-documents',
@@ -6,28 +9,19 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent {
-  textData: any;
+  textType!: string;
+  studentsList!: any[];
+  curStudent!: Student;
+  
+  constructor( private _studentService: StudentService) {}
   
   setTextType(type: string) {
-    this.loadData(type);
-  }
-  loadData(type: string) {
-    switch (type) {
-      case 'zusage':
-        this.textData = 'This is data 1';
-        break;
-      case 'absage':
-        this.textData = 'This is data 2';
-        break;
-      case 'zeitplan':
-        this.textData = 'This is data 3';
-        break;
-      case 'zeugnis':
-        this.textData = 'This is data 3';
-        break;
-      default:
-        this.textData = '';
-        break;
-    }
+    this._studentService.filterByState([type]).subscribe({
+      next: (data) => {
+        this.textType = type,
+        this.studentsList = data
+      },
+      error: (err) => console.log(err)
+    })
   }
 }

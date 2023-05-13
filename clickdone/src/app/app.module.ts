@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -17,7 +15,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { QuillModule } from 'ngx-quill';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DocumentsComponent } from './documents/documents.component';
@@ -31,6 +32,7 @@ import { ProgressStepComponent } from './documents/progress/progress-step/progre
 import { ProgressStepDirective } from './documents/progress/progress-step.directive';
 import { ProgressComponent } from './documents/progress/progress.component';
 import { DocumentStepComponent } from './documents/document-step/document-step.component';
+import { DocumentTemplateComponent } from './documents/document-step/document-template/document-template.component';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { DocumentStepComponent } from './documents/document-step/document-step.c
     ProgressStepComponent,
     ProgressStepDirective,
     ProgressComponent,
-    DocumentStepComponent
+    DocumentStepComponent,
+    DocumentTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -68,11 +71,11 @@ import { DocumentStepComponent } from './documents/document-step/document-step.c
     MatSelectModule,
     TextFieldModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    QuillModule.forRoot()
   ],
   providers: [
     { provide: NgChartsConfiguration, useValue: { generateColors: false }},
-    // { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' } }
   ],
   bootstrap: [AppComponent]
 })

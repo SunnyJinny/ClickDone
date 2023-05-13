@@ -1,5 +1,7 @@
 @use '@angular/material' as mat;
 @include mat.core();
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
 
 @import "../styles/variables";
 @import "../styles/globals";
@@ -25,3 +27,6 @@ body {
   overflow-x: hidden;
 }
 
+quill-editor {
+  display: block;
+}
