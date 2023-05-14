@@ -1,6 +1,8 @@
-import { Component, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { TextTemplate } from 'src/app/models/document';
+import { ContentChange, QuillEditorComponent } from 'ngx-quill';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { ABSAGE_TEMPLATE, TextTemplate, ZUSAGE_TEMPLATE } from 'src/app/models/document';
 import { Student } from 'src/app/models/schueler-liste';
 import { StudentService } from 'src/app/services/student.service';
 import { TemplateService } from 'src/app/services/template.service';
@@ -20,24 +22,42 @@ export class DocumentStepComponent implements OnInit{
   selectedStudent!: Student;
   textType!: string;
   curInfo: TextTemplate = new TextTemplate();
-  // content!: any; 
-  // template!: string;
-  // template: string = `<p>Praktikumszeugnis für <em><strong></strong>${ this.curInfo.name }<strong></strong></em></p><p><em><strong>${ this.curInfo.name }</strong></em>, geboren am <em>Geburtsdatum</em> hat vom <em><strong>${ this.curInfo.startDatum }</strong></em> bis <em><strong>${ this.curInfo.endDatum }</strong></em> <em>sein/ihr</em> Schülerpraktikum in hybrider Form in der Fachgruppe Informatik der RWTH Aachen, ...</p>`;
-  // form: FormGroup = this._fb.group({
-  //   template: new FormControl('')
-  // });
-  
-    
+  form: FormGroup;
+  @ViewChild('template', { static: true }) template!: QuillEditorComponent
+
   constructor( 
     private _studentService: StudentService, 
     private _templateService: TemplateService,
     private _fb: FormBuilder ) {
+      this.form = this._fb.group({
+        template: '',
+      })
     }
   
   ngOnInit() {
     this.curInfo = this._templateService.getTemplate();
+    this.form.controls['template'].valueChanges
+      .pipe(
+        debounceTime(400), distinctUntilChanged()
+      )
+      .subscribe((data) => {
+        // tslint:disable-next-line:no-console
+        this.curInfo.content = data;
+        console.log(this.curInfo.content);
+    })
   }
-  
+  ngAfterViewInit() {
+    if(this.template) {
+      this.template.onContentChanged
+        .pipe(
+          debounceTime(400),
+          distinctUntilChanged()
+        )
+        .subscribe((data: ContentChange) => {
+          // tslint:disable-next-line:no-console
+          console.log('view child + directly subscription', data)
+    })}
+  }  
   @HostListener('change')
   ngOnChanges(changes: SimpleChange) {
     if(this.studentsList) {
@@ -45,34 +65,39 @@ export class DocumentStepComponent implements OnInit{
     }
     if(this.stepType) {
       this.curInfo.type = this.stepType;
+      switch (this.curInfo.type) {
+        case 'Zusage':
+          this.curInfo.content = ZUSAGE_TEMPLATE('Schüler/in', 'Start Datum', 'End Datum', 'Betreuer/in');
+          break;
+        case 'Absage':
+          this.curInfo.content = ABSAGE_TEMPLATE('Schüler/in', 'Start Datum', 'End Datum', 'Betreuer/in');
+          break;
+      }   
+      this._templateService.setTemplate(this.curInfo);
     }
   }
   onStudentChange(selected: any) {
     this.selectedStudent = this.students?.find(student => student.name === selected.target.value);
-    if (this.selectedStudent) {
+    if (this.selectedStudent || this.curInfo.title) {
       this.curInfo.startDatum = this.selectedStudent.startDatum.split('T')[0];
       this.curInfo.endDatum = this.selectedStudent.endDatum.split('T')[0];
       this.curInfo.name = this.selectedStudent.name;
       this.curInfo.email = this.selectedStudent.email;
       this.curInfo.betreuer = this.selectedStudent.betreuer;
+      if(this.curInfo.type === 'Zusage') {
+        this.curInfo.content = ZUSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);        
+      } else if (this.curInfo.type === 'Absage') {
+        this.curInfo.content = ABSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);        
+      }
+      this.form.get('template')?.patchValue(this.curInfo.content);
       this._templateService.setTemplate(this.curInfo);
-      // console.log(this.curInfo);
+      console.log(this._templateService.getTemplate());
     } else {
       this.curInfo.startDatum = '';
       this.curInfo.endDatum = '';
     }
-  }
-  // contentToText(event: any) {
-  //   this.template = event;
-  //   this.form.patchValue({
-  //     template: this.template
-  //   });
-  //   console.log(this.form.value.template);
-  // }
-  
-  extraction() {
-    if(this.stepIndex === 4) {
-      
-    }
+    // this.curInfo.content = this.form.controls['template'].value;
+    // this._templateService.setTemplate(this.curInfo);
+    // console.log(this._templateService.getTemplate().content);
   }
 }

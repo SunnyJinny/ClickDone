@@ -1,5 +1,5 @@
 <div [ngSwitch]="templateInfo.type">
-  <div id="pass" *ngSwitchCase="'Zusage'">
+  <div id="content" *ngSwitchCase="'Zusage'">
     <p>Hallo <em><strong>{{ templateInfo.name || 'Scüler/in' }}</strong></em>,</p>
     <p>vielen Dank für deine Bewerbung und dein Interesse an einem Praktikum bei uns.</p>
     <p>Hiermit möchte ich dir eine Zusage für dein Praktikum vom <em><strong>{{ templateInfo.startDatum || 'Start Datum' }}</strong></em> bis zum <em><strong>{{ templateInfo.endDatum || 'End Datum' }}</strong></em> erteilen.</p>
@@ -41,17 +41,21 @@
   </div>
 </div>
 
+<!-- <form [formGroup]="form">
+  <quill-editor format="html" theme="bubble"
+    formControlName="content">
+  </quill-editor>
+</form> -->
+ 
+<!-- <quill-editor format="html" theme="bubble" [(ngModel)]="content"></quill-editor> -->
 
-<!-- <div>
-  <div class="ql-container ql-bubble" style="border-width: 0;">
-    <div style="width: 100%" class="ql-editor" [innerHTML]="byPassHTML(form.get('template')?.value)"></div>
-  </div>
+<!-- <div class="ql-container ql-bubble" style="border-width: 0;">
+  <div style="width: 100%" class="ql-editor" [innerHTML]="content"></div>
 </div> -->
-
 
 <!-- <div class="button-wrapper flex flex-jc-sb">
   <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
-  <button progressStepNext class="square-color-button" (click)="sendTemplate($event)">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+  <button progressStepNext class="square-color-button" (click)="patchValue()">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
 </div> -->
 
 <!-- <form [formGroup]="form">

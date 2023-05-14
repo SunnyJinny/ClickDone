@@ -24,16 +24,12 @@
     <label for="title" class="form-label para-text">Betreff hinzufügen</label>
   </div>
   <div class="form">
-    <app-document-template
-      [templateInfo]="curInfo">
-      <!-- (Content)="contentToText($event)" -->
-    </app-document-template>
-    <!-- <form [formGroup]="form">
-      <quill-editor *ngIf="stepIndex===3" format="html" theme="bubble" formControlName="template"></quill-editor>
-    </form> -->
+    <form [formGroup]="form">
+      <quill-editor format="html" theme="bubble" [(ngModel)]="curInfo.content" [ngModelOptions]="{standalone: true}"></quill-editor>
+    </form>
   </div>
 </section>
 <div class="button-wrapper flex flex-jc-sb">
   <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
-  <button progressStepNext class="square-color-button" (click)="extraction()">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+  <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
 </div>
