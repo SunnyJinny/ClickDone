@@ -14,3 +14,8 @@ export const config = {
     host: required('DB_HOST'),
   }
 }
+
+export const googleConfig = {
+  user: required('USERNAME'),
+  pass: required('PASSWORD')
+}
