@@ -1,5 +1,5 @@
 {
-  "name": "database",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -54,6 +54,7 @@
     "mquery": "^5.0.0",
     "ms": "^2.0.0",
     "negotiator": "^0.6.3",
+    "nodemailer": "^6.9.2",
     "nodemon": "^2.0.22",
     "object-assign": "^4.1.1",
     "object-inspect": "^1.12.3",

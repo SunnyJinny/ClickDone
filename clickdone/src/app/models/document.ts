@@ -1,7 +1,7 @@
 export class TextTemplate {
   type!: string;
   name!: string;
-  email?: string;
+  email!: string;
   startDatum!: string;
   endDatum!: string;
   betreuer!: string;

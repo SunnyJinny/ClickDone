@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { connectDB } from './controllers/database.js'
 import studentRouter from './routes/student.router.js';
+import emailRouter from './routes/email.router.js'
 
 const app = express();
 const port = 3000;
@@ -17,6 +18,7 @@ app.use(cors({
 app.use(morgan('tiny'));
 
 app.use('/student', studentRouter);
+app.use('/send-email', emailRouter)
 
 app.use((req, res, next) => {
   res.sendStatus(404);

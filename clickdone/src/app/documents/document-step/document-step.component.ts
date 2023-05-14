@@ -4,6 +4,7 @@ import { ContentChange, QuillEditorComponent } from 'ngx-quill';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ABSAGE_TEMPLATE, TextTemplate, ZUSAGE_TEMPLATE } from 'src/app/models/document';
 import { Student } from 'src/app/models/schueler-liste';
+import { EmailService } from 'src/app/services/email.service';
 import { StudentService } from 'src/app/services/student.service';
 import { TemplateService } from 'src/app/services/template.service';
 
@@ -17,17 +18,18 @@ export class DocumentStepComponent implements OnInit{
   @Input() stepType!: string;
   @Input() stepIndex!: number;
   @Input() studentsList!: any[];
-
   students!: any[];
   selectedStudent!: Student;
   textType!: string;
   curInfo: TextTemplate = new TextTemplate();
+  isDisabled: boolean = true;
   form: FormGroup;
   @ViewChild('template', { static: true }) template!: QuillEditorComponent
 
   constructor( 
     private _studentService: StudentService, 
     private _templateService: TemplateService,
+    private _emailService: EmailService,
     private _fb: FormBuilder ) {
       this.form = this._fb.group({
         template: '',
@@ -43,8 +45,10 @@ export class DocumentStepComponent implements OnInit{
       .subscribe((data) => {
         // tslint:disable-next-line:no-console
         this.curInfo.content = data;
-        console.log(this.curInfo.content);
+        // console.log(this.curInfo.content);
     })
+    console.log(this.stepIndex);
+
   }
   ngAfterViewInit() {
     if(this.template) {
@@ -58,6 +62,7 @@ export class DocumentStepComponent implements OnInit{
           console.log('view child + directly subscription', data)
     })}
   }  
+  
   @HostListener('change')
   ngOnChanges(changes: SimpleChange) {
     if(this.studentsList) {
@@ -91,7 +96,7 @@ export class DocumentStepComponent implements OnInit{
       }
       this.form.get('template')?.patchValue(this.curInfo.content);
       this._templateService.setTemplate(this.curInfo);
-      console.log(this._templateService.getTemplate());
+      //console.log(this._templateService.getTemplate());
     } else {
       this.curInfo.startDatum = '';
       this.curInfo.endDatum = '';
@@ -99,5 +104,23 @@ export class DocumentStepComponent implements OnInit{
     // this.curInfo.content = this.form.controls['template'].value;
     // this._templateService.setTemplate(this.curInfo);
     // console.log(this._templateService.getTemplate().content);
+  }
+  stepFunction() {
+    if(this.stepIndex === 4) {
+      const recipient = this.curInfo.email;
+      const subject = this.curInfo.title;
+      const text = this.curInfo.content;
+      console.log(recipient, subject, text);
+      // this._emailService.sendEmail(recipient, subject, text);
+      
+      this._emailService.sendEmail(recipient, subject, text).subscribe({
+        next: response => {
+          console.log('Email sent successfully!');
+        },
+        error:error => {
+          console.log('Error sending email:', error);
+        }
+      });
+    }
   }
 }

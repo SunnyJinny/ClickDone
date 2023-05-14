@@ -7,29 +7,30 @@
       </datalist>
       <label for="email" class="form-label big-label">Schüler/in</label>
     </div>
-    <div class="form"  *ngIf="curInfo.name">
-      <input id="email" class="form-input" placeholder=" " [(ngModel)]="curInfo.name" >
+    <div class="form"  *ngIf="curInfo.name" [ngClass]="stepIndex !== 2 ? {'disabled': isDisabled} : ''">
+      <input id="email" class="form-input" [disabled]="isDisabled" placeholder=" " [(ngModel)]="curInfo.name" >
       <label for="email" class="form-label big-label">Schüler/in</label>
     </div>
-  <div class="form">
-    <input id="startDatum" class="form-input" placeholder=" " [(ngModel)]="curInfo.startDatum" >
+  <div class="form" [ngClass]="stepIndex !== 2 ? {'disabled': isDisabled} : ''">
+    <input id="startDatum" class="form-input" [disabled]="isDisabled" placeholder=" " [(ngModel)]="curInfo.startDatum" >
     <label for="startDatum" class="form-label big-label">Startdatum</label>
   </div>
-  <div class="form">
-    <input id="endDatum" class="form-input" placeholder=" " [(ngModel)]="curInfo.endDatum">
+  <div class="form" [ngClass]="stepIndex !== 2 ? {'disabled': isDisabled} : ''">
+    <input id="endDatum" class="form-input" [disabled]="isDisabled" placeholder=" " [(ngModel)]="curInfo.endDatum">
     <label for="endDatum" class="form-label big-label">Enddatum</label>
   </div>
-  <div class="form">
+  <div class="form" [ngClass]="stepIndex !== 3 ? {'disabled': isDisabled} : {'disabled': !isDisabled}">
     <input type="text" id="title" class="form-input" placeholder=" " [(ngModel)]="curInfo.title">
     <label for="title" class="form-label para-text">Betreff hinzufügen</label>
   </div>
-  <div class="form">
+  <div class="form" [ngClass]="stepIndex === 3 ? '' : {'disabled': isDisabled}">
     <form [formGroup]="form">
-      <quill-editor format="html" theme="bubble" [(ngModel)]="curInfo.content" [ngModelOptions]="{standalone: true}"></quill-editor>
+      <quill-editor format="html" theme="bubble" [ngClass]="stepIndex === 3 ? 'required' : ''"
+        [(ngModel)]="curInfo.content" [ngModelOptions]="{standalone: true}"></quill-editor>
     </form>
   </div>
 </section>
-<div class="button-wrapper flex flex-jc-sb">
+<!-- <div class="button-wrapper flex flex-jc-sb">
   <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
-  <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
-</div>
+  <button progressStepNext class="square-color-button" (click)="stepFunction()">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+</div> -->

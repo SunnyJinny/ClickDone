@@ -16,6 +16,10 @@
       <button class="card-button subtitle" (click)="setTextType('Zeitplan')" progressStepNext>Zeitplan E-Mail</button>
       <button class="card-button subtitle" (click)="setTextType('Zeugnis')" progressStepNext>Zeugnis</button>
     </div>
+    <div class="button-wrapper flex flex-jc-sb">
+      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+      <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+    </div>    
   </app-progress-step>
   <!-- step 2 -->  
   <app-progress-step>
@@ -26,13 +30,21 @@
       [studentsList]="studentsList"
       (selectedStudent)="curStudent">
     </app-document-step>
+    <div class="button-wrapper flex flex-jc-sb">
+      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+      <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+    </div>    
   </app-progress-step>
   <!-- step 3 -->
   <app-progress-step>
     <app-document-step
-      [stepTitle]="'(optionale) hinzufügen den Zusatz'"
+      [stepTitle]="'Hinzufügen Betreff und den Zusatz in content'"
       [stepIndex]="3">
     </app-document-step>
+    <div class="button-wrapper flex flex-jc-sb">
+      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+      <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+    </div>    
   </app-progress-step>
   <!-- step 4 -->
   <app-progress-step>
@@ -40,6 +52,10 @@
       [stepTitle]="'Überprüfen den fertigen Text'"
       [stepIndex]="4">
     </app-document-step>
+    <div class="button-wrapper flex flex-jc-sb">
+      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+      <button progressStepNext class="square-color-button" (click)="stepFunction()">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+    </div>    
   </app-progress-step>
   <!-- step 5 -->
   <app-progress-step>

@@ -3,10 +3,10 @@ export type State = 'Fehlende Unterlagen' | 'Zusage' | 'Absage' | 'Im Bewerbungs
 export interface Student {
   name: string;
   geburtsdatum: string;
-  geschlecht?: string;
+  geschlecht: string;
   adresse: string;
   schule: string;
-  email?: string;
+  email: string;
   betreuer: string;
   bewerbungDatum: string;
   rueckmeldungDatum: string;

@@ -7,9 +7,9 @@
   }
 }
 .button-wrapper {
-  border: 1px solid red;
-  width: calc(100% - 2rem);
+  width: 100%;
   column-gap: 1.5rem;
+  margin-top: 1rem;
 }
 .form-wrapper {
   display: grid;
