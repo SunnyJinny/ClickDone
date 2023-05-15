@@ -6,7 +6,10 @@ import { Context } from 'chartjs-plugin-datalabels';
 import 'chartjs-adapter-date-fns';
 import { data1 } from 'src/app/models/schedule';
 import { Route, Router } from '@angular/router';
-import differenceInCalendarWeeksWithOptions from 'date-fns/esm/fp/differenceInCalendarWeeksWithOptions/index.js';
+import { Student } from 'src/app/models/schueler-liste';
+import { StudentService } from 'src/app/services/student.service';
+import { map } from 'rxjs';
+import { TransitionCheckState } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-gantt-chart',
@@ -16,6 +19,9 @@ import differenceInCalendarWeeksWithOptions from 'date-fns/esm/fp/differenceInCa
 
 export class GanttChartComponent implements OnInit  {
   
+  originData: {x: string[]; y: string}[] = [];
+  filteredData: {x: string[]; y: string}[] = [];
+  
   data = data1;
   chart: any = [];
   
@@ -23,7 +29,8 @@ export class GanttChartComponent implements OnInit  {
   TodayLine = {
     id: 'TodayLine',
     afterDatasetsDraw(chart: any) {
-      const { ctx, data, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+      // TODO: data 변경
+      const { ctx, chartData, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
       ctx.save();
       // line for today
       ctx.beginPath();
@@ -60,19 +67,13 @@ export class GanttChartComponent implements OnInit  {
     }
   }
   
-  public barChartData: ChartData<'bar', {x: any[], y: string}[]> = {
+  public barChartData: ChartData<'bar', {x: string[], y: string}[]> = {
     datasets: [{
-      data: this.data,
+      // TODO: data 변경
+      data: this.filteredData,
       backgroundColor: [
         'rgba(28, 192, 154, 1)',
-        'rgba(28, 192, 154, 1)',
-        'rgba(28, 192, 154, 1)',
-        'rgba(28, 192, 154, 1)',
-        'rgba(28, 192, 154, 1)',
-        'rgba(196, 239, 229, 1)',
-        'rgba(196, 239, 229, 1)',
-        'rgba(196, 239, 229, 1)',
-        'rgba(196, 239, 229, 1)',
+        // 'rgba(196, 239, 229, 1)',
       ],
       barPercentage: 0.8,    // 막대 두께 (%)
       borderRadius: Number.MAX_VALUE,
@@ -190,11 +191,54 @@ export class GanttChartComponent implements OnInit  {
     this.TodayLine,
   ];
   
-  constructor( private router: Router) { 
+  constructor( 
+    private router: Router, 
+    private _studentService: StudentService ) { 
     Chart.register(...registerables);
   }
 
+  // getChangeData() {
+  //   this._studentService.getStudentAll().subscribe({
+  //     next: res => res.map((student:Student) => {
+  //       this.originData.push({'x': [student.startDatum, student.endDatum], 'y': student.name });
+  //     })
+  //   })
+  // }
+  // filterByData(originData: any[], startDatum: Date, endDatum: Date) {   
+  //   this.chartData = originData.filter(obj => {
+  //     const objStartDatum = new Date(obj.x[0]);
+  //     const objEndDatum = new Date(obj.x[1]);
+  //     console.log(objStartDatum);
+  //     objStartDatum >= startDatum;
+  //     //(objStartDatum >= startDatum && objStartDatum <= endDatum ) || (objEndDatum <= endDatum && objEndDatum >= startDatum);
+  //   });
+  //   return this.chartData;
+  // }
+  getDataAndFilter(startDatum: Date, endDatum: Date) {
+    this._studentService.getStudentAll().subscribe({
+      next: res => {
+        this.filteredData = res.map((student: Student) => {
+          const objStartDatum = new Date(student.startDatum);
+          const objEndDatum = new Date(student.endDatum);
+          return { 'x': [objStartDatum, objEndDatum], 'y': student.name };
+        }).filter((obj: { x: any[]; }) => {
+          console.log(obj.x[1]);
+          const objStartDatum = obj.x[0];
+          const objEndDatum = obj.x[1];
+          return objEndDatum >= startDatum;
+        });
+      }
+    });
+    return this.filteredData;
+  }
+  
   ngOnInit(): void {
+    
+    // this.getChangeData();
+    // this.filterByData(this.originData, this.today, this.afterOneWeek);
+    this.getDataAndFilter(this.today, this.afterOneWeek);
+    console.log(this.filteredData);
+    
     this.chart = new Chart('schedule', {
       type: 'bar',
       data: this.barChartData,

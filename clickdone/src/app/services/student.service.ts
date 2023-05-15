@@ -26,21 +26,9 @@ export class StudentService {
   deleteStudent(_id: number): Observable<any> {
     return this._http.delete(`${this.studentUrl}/${_id}`);
   }
-  // filterByState(filterItem: string[]): Observable<any> {
-  //   console.log(filterItem);
-  //   return this.getStudentAll().pipe(map(items => { 
-  //     items.filter((item: { status: string}) => 
-  //     {
-  //       console.log(item.status);
-  //       filterItem.includes(item.status);
-  //     })
-  //   }));
-  // }
-  
   filterByState(filterItem: string[]): Observable<any[]> {
     return this.getStudentAll().pipe(map(items =>  
       items.filter((item: { status: string }) => filterItem.includes(item.status))
     ));
   }
-
 }

@@ -20,21 +20,7 @@ export class DocumentTemplateComponent {
   constructor() {}
     
   ngOnInit() {
-    // console.log(this.templateInfo);
-    // if(this.templateInfo.type === 'zusage') {
-    //   const temp = document.getElementById('content');
-    //   const html = temp?.innerHTML;
-    //   this.Content.emit(html);
-    // }
+
   }
-  
-  
-  // ngAfterViewInit() {
-  //   if(this.content) {
-  //     this.content.nativeElement.subscribe((data: ContentChange) => {
-  //       console.log(data);
-  //     })
-  //   }
-  // }
   
 }
