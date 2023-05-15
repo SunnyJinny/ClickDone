@@ -1,14 +1,5 @@
-export const Datalabels: string[] = [
-  'Tom Jones',
-  'Heidrum Kapscher',
-  'Robert Klam',
-  'Hubert Klammer',
-  'Lala li',
-  'Max Miller',
-  'Iron Neuer',
-  'Tommy Stein',
-  'Bella Suder'
-]
+import { StudentService } from "../services/student.service";
+
 
 export const data1 = [
   { x: [ Date.parse('2023-05-08 00:00:00'), Date.parse('2023-05-15 00:00:00')], y: 'Tom Jones'}, 

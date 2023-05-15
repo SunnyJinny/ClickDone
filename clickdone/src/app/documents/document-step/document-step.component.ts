@@ -4,8 +4,6 @@ import { ContentChange, QuillEditorComponent } from 'ngx-quill';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { TextTemplate, ABSAGE_TEMPLATE, ZUSAGE_TEMPLATE, ZEITPLAN_TEMPLATE, ZEUGNIS_TEMPLATE } from 'src/app/models/document';
 import { Student } from 'src/app/models/schueler-liste';
-import { EmailService } from 'src/app/services/email.service';
-import { StudentService } from 'src/app/services/student.service';
 import { TemplateService } from 'src/app/services/template.service';
 
 @Component({
