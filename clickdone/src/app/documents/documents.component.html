@@ -13,8 +13,8 @@
     <div class="button-wrapper flex flex-jc-sb mt-1 mb-1">
       <button class="card-button subtitle" (click)="setTextType('Zusage')" progressStepNext>Zusage E-Mail</button>
       <button class="card-button subtitle" (click)="setTextType('Absage')" progressStepNext>Absage E-Mail</button>
-      <button class="card-button subtitle" (click)="setTextType('Zeitplan')" progressStepNext>Zeitplan E-Mail</button>
-      <button class="card-button subtitle" (click)="setTextType('Zeugnis')" progressStepNext>Zeugnis</button>
+      <button class="card-button subtitle" (click)="setTextType('Platz angenommen')" progressStepNext>Zeitplan E-Mail</button>
+      <button class="card-button subtitle" (click)="setTextType('Im Praktikum')" progressStepNext>Zeugnis</button>
     </div>
     <div class="button-wrapper flex flex-jc-sb">
       <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
@@ -61,7 +61,7 @@
   <app-progress-step>
     <h4 class="subtitle">E-Mail erfolgreich gesendet.</h4>
     <div class="button-wrapper flex flex-jc-sb">
-      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>ZÜRUCK AM ANFANG</button>
+      <button progressStepPrev class="square-basic-button" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i>ZÜRUCK AM ANFANG</button>
     </div>
   </app-progress-step>
 </app-progress>

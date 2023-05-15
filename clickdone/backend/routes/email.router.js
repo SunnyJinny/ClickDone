@@ -6,11 +6,6 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   const { recipient, subject, text } = req.body;
-  // const email = req.body.email;
-  // const title = req.body.title;
-  // const message = req.body.message;
-  
-  // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -18,14 +13,12 @@ router.post('/', (req, res) => {
       pass: config.pass
     }
   });
-  // Define the email options
   const mailOptions = {
     from: 'clickdone.rwth@gmail.com',
     to: recipient,
     subject: subject,
     html: text
   };
-  // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log(error);

@@ -4,6 +4,8 @@ import { Student } from '../models/schueler-liste';
 import { EmailService } from '../services/email.service';
 import { StudentService } from '../services/student.service';
 import { TemplateService } from '../services/template.service';
+import jsPDF from 'jspdf';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-documents',
@@ -18,7 +20,8 @@ export class DocumentsComponent {
   constructor( 
     private _studentService: StudentService,
     private _templateService: TemplateService,
-    private _emailService: EmailService
+    private _emailService: EmailService,
+    private router: Router
   ) {}
   
   setTextType(type: string) {
@@ -31,21 +34,38 @@ export class DocumentsComponent {
     })
   }
   
-  stepFunction() {
+  async stepFunction() {
     let curInfo: TextTemplate = new TextTemplate();
-    curInfo = this._templateService.getTemplate()
-    const recipient = curInfo.email;
-    const subject = curInfo.title;
-    const text = curInfo.content;
-    console.log(recipient, subject, text);
-    
-    this._emailService.sendEmail(recipient, subject, text).subscribe({
-      next: response => {
-        console.log('Email sent successfully!');
-      },
-      error:error => {
-        console.log('Error sending email:', error);
-      }
-    });
+    curInfo = this._templateService.getTemplate();
+    if(curInfo.type==='Im Praktikum') {
+      
+      const tempText = curInfo.content.replace(/<\/?[^>]+(>|$)/g, "");
+      let pdf = new jsPDF("p", "mm", "A4");
+      
+      pdf.setLineHeightFactor(2).setFontSize(12).text(tempText, 30, 35, {
+        maxWidth: 150
+      })
+
+      pdf.save('sample.pdf');
+     
+    } else {
+      const recipient = curInfo.email;
+      const subject = curInfo.title;
+      const text = curInfo.content;
+      console.log(recipient, subject, text);
+      
+      this._emailService.sendEmail(recipient, subject, text).subscribe({
+        next: response => {
+          console.log('Email sent successfully!');
+        },
+        error:error => {
+          console.log('Error sending email:', error);
+        }
+      });
+    }
+  }
+  
+  goBack() {
+    this.router.navigate(['/students']);
   }
 }

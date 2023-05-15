@@ -17,22 +17,5 @@ export class EmailService {
       text: text
     };
     return this._http.post(this.emailUrl, data);
-    
-    // // Define the email options
-    // const mailOptions = {
-    //   from: 'clickdone.rwth@gmail.com', // Sender address
-    //   to: recipient, // Recipient address
-    //   subject: subject, // Subject line
-    //   text: text // Plain text body
-    // };
-
-    // // Send the email
-    // this.transporter.sendMail(mailOptions, function(error, info) {
-    //   if (error) {
-    //     console.log(error);
-    //   } else {
-    //     console.log('Email sent: ' + info.response);
-    //   }
-    // });
   }
 }

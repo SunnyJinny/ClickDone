@@ -10,8 +10,8 @@ export class TextTemplate {
 }
 
 export const ZUSAGE_TEMPLATE = ( name: string, startDatum: string, endDatum: string, betreuer: string ) => `<p>Hallo <em><strong>${ name }</strong></em>,</p>
-<p>vielen Dank für deine Bewerbung und dein Interesse an einem Praktikum bei uns.</p>
-<p>Hiermit möchte ich dir eine Zusage für dein Praktikum vom <em><strong>${ startDatum }</strong></em> bis zum <em><strong>${ endDatum }</strong></em> erteilen.</p>
+<p style="line-height: 1.5;>vielen Dank für deine Bewerbung und dein Interesse an einem Praktikum bei uns.</p>
+<p style="white-space: nowrap;">Hiermit möchte ich dir eine Zusage für dein Praktikum vom <em><strong>${ startDatum }</strong></em> bis zum <em><strong>${ endDatum }</strong></em> erteilen.</p>
 <p>Ich möchte mich auch noch kurz vorstellen: <em><strong>${ betreuer }</strong></em></p>          
 <span>
   Ein Praktikum bei uns ist sehr abwechslungsreich und du wirst viele verschiedene Einblicke erhalten können. Unsere Praktika finden in Hybrider Form statt. Unter https://www.informatik.rwth-aachen.de/cms/informatik/Studium/Infos-fuer-Schuelerinnen-und-Schueler/~nmbv/Schulpraktikum/ kannst du mehr darüber erfahren, was dich in dem Praktikum erwartet. 
