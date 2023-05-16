@@ -14,12 +14,12 @@
     (click)="stateClick($event)">{{ barChart }}</canvas>
     <div class="input-wrapper" [ngSwitch]="button">
       <div *ngSwitchCase="'default'">
-        <button id="updateChart" (click)="updateChart()">Update</button>
+        <button class="edit-item" id="updateChart" (click)="updateChart()">Update</button>
       </div>
       <div *ngSwitchCase="'edit'">
-        <input type="number" id="value1" [(ngModel)]="editCountProcess" placeholder="Im Prozess">
-        <input type="number" id="value2" [(ngModel)]="editCountFree" placeholder="Freie Praktikum">
-        <button id="updateChart" (click)="updateChart()">Update</button>
+        <input class="edit-text" type="number" id="value1" [(ngModel)]="editCountProcess" placeholder="Im Prozess">
+        <input class="edit-text" type="number" id="value2" [(ngModel)]="editCountFree" placeholder="Freie Praktikum">
+        <button class="edit-item" id="updateChart" (click)="updateChart()">Update</button>
       </div>
     </div>
   </div>

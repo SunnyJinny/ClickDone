@@ -222,7 +222,7 @@ export class ChartComponent implements OnInit  {
   ];
   
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-    cutout: 82,
+    cutout: '50%',
     rotation: 315,
     plugins: {
       legend: {
@@ -361,8 +361,16 @@ export class ChartComponent implements OnInit  {
 
   // DOUGHNUT FUNCTION
   public stateClick(click: MouseEvent): void {
-    console.log(this.doughnutChart);
+    const points = this.doughnutChart.getElementsAtEvent(click);
+    console.log(points);
+    if(points.length) {
+      const firstPoint = points[0];
+      const value = this.doughnutChart.data;
+      console.log(value);
+    }
+    // this.router.navigate(['/students'], { queryParams : { status : filterItem }});
   }
+  
   public updateChart() {
     if (this.button === 'default') {
       this.button = 'edit';

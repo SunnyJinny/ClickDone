@@ -30,6 +30,24 @@
     padding: 0;
   }
 }
+.edit-item {
+  font-size: 0.5rem;
+  width: 4rem;
+  height: 1.5rem;
+  background: none;
+  border-width: 0.0625rem;
+  border-radius: 5rem;
+  cursor: pointer;
+}
+.edit-text {
+  font-size: 0.3rem;
+  width: 6rem;
+  height: 1.5rem;
+  padding-left: 0.5rem;
+  border-width: 0.0625rem;
+  border-radius: 2rem;
+  margin-right: 0.5rem;
+}
 
 @media only screen and (max-width: 1728px) {
 
