@@ -3,7 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Student  } from '../models/schueler-liste';
+import { Student  } from '../models/student';
 import { StudentService } from '../services/student.service';
 
 @Component({
@@ -42,7 +42,8 @@ export class StudentenComponent implements OnInit{
   } 
   goEditPage(id: string) {
     console.log(id);
-    this.router.navigate(['/student', id], { skipLocationChange: true });
+    this.router.navigate(['/student', id]);
+    // this.router.navigate(['/student', id], { skipLocationChange: true });
   }
   getStudentAll() {
     this._studentservice.getStudentAll().subscribe({

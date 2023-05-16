@@ -1,0 +1,35 @@
+@import '../../../styles/styles.scss';
+
+.chart-wrapper {
+  position: inherit;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 2rem;
+  & .gantt-chart, & .doughnut-chart {
+    width: 100%;
+    height: 100%;
+    background: white;
+    box-shadow: 0 1rem 1.25rem rgba(0,0,0, 0.1);
+    border-radius: 1rem;
+  }
+  & .gantt-chart {
+    padding: 1rem 2rem;
+    .button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      & button {
+        margin-left: 1rem;
+      }
+    }
+  }
+  & .doughnut-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 1728px) {
+
+}

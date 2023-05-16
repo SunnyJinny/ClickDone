@@ -24,8 +24,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { StudentenComponent } from './studenten/studenten.component';
 import { BodyComponent } from './body/body.component';
-import { GanttChartComponent } from './dashboard/gantt-chart/gantt-chart.component';
-import { DoughnutChartComponent } from './dashboard/doughnut-chart/doughnut-chart.component';
+import { ChartComponent } from './dashboard/chart/chart.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { ListAddEditComponent } from './studenten/list-add-edit/list-add-edit.component';
 import { ProgressStepComponent } from './documents/progress/progress-step/progress-step.component';
@@ -43,8 +42,7 @@ import { DocumentTemplateComponent } from './documents/document-step/document-te
     DocumentsComponent,
     StudentenComponent,
     BodyComponent,
-    GanttChartComponent,
-    DoughnutChartComponent,
+    ChartComponent,
     ListAddEditComponent,
     ProgressStepComponent,
     ProgressStepDirective,

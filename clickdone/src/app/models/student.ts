@@ -1,6 +1,7 @@
 export type State = 'Fehlende Unterlagen' | 'Zusage' | 'Absage' | 'Im Bewerbungsprozess' | 'Im Praktikum' | 'Platz angenommen' | 'Frei' | 'Abgeschlossen' ;
 
 export interface Student {
+  _id: string;
   name: string;
   geburtsdatum: string;
   geschlecht: string;
@@ -22,7 +23,8 @@ export interface Student {
 
 export interface StudentChart {
   x: Date[],
-  y: string;
+  y: string,
+  id: string
 }
 
 // export const SchuelerListe: Student[] = [

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { count, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +31,7 @@ export class StudentService {
       items.filter((item: { status: string }) => filterItem.includes(item.status))
     ));
   }
+  // countByState(filterItem: string): Observable<number> {
+  //   return this.filterByState([filterItem]).pipe(count());
+  // }
 }

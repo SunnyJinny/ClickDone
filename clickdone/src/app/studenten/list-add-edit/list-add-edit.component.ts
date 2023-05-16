@@ -2,7 +2,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { State } from 'src/app/models/schueler-liste';
+import { State } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
 
 @Component({
@@ -49,6 +49,9 @@ export class ListAddEditComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.listForm.value._id = params['id'];
+    });
     console.log(this.listForm);
     if(this.listForm.value._id === "") {
       this.isNew = true;

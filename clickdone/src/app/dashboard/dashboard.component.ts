@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { State } from '../models/schueler-liste';
+import { State } from '../models/student';
 
 @Component({
   selector: 'app-dashboard',
