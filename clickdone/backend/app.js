@@ -2,9 +2,10 @@ import express from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 import morgan from 'morgan';
-import { connectDB } from './controllers/database.js'
+import { connectDB } from './controllers/database.js';
 import studentRouter from './routes/student.router.js';
-import emailRouter from './routes/email.router.js'
+import emailRouter from './routes/email.router.js';
+import counterRouter from './routes/counter.router.js';
 
 const app = express();
 const port = 3000;
@@ -18,7 +19,9 @@ app.use(cors({
 app.use(morgan('tiny'));
 
 app.use('/student', studentRouter);
-app.use('/send-email', emailRouter)
+app.use('/send-email', emailRouter);
+app.use('/counter', counterRouter);
+
 
 app.use((req, res, next) => {
   res.sendStatus(404);

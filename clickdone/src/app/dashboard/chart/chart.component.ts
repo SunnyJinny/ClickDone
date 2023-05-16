@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, SimpleChange } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData, registerables } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { Context } from 'chartjs-plugin-datalabels';
@@ -7,6 +7,7 @@ import { Route, Router } from '@angular/router';
 import { Student, StudentChart } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
 import { count, firstValueFrom, map, Observable } from 'rxjs';
+import { CounterService } from 'src/app/services/counter.service';
 
 @Component({
   selector: 'app-chart',
@@ -27,6 +28,7 @@ export class ChartComponent implements OnInit  {
   countFree: number = 0;
   editCountProcess!: number;
   editCountFree!: number;
+  countId: string = '64640107c7a36032a367336a';
   
   //data = data2;
   barChart: any = [];
@@ -240,10 +242,20 @@ export class ChartComponent implements OnInit  {
   
   constructor( 
     private router: Router, 
-    private _studentService: StudentService ) { 
+    private _studentService: StudentService,
+    private _counterService: CounterService ) { 
     Chart.register(...registerables);
   }
 
+  async counterPre() {
+    this._counterService.getCounter(this.countId).subscribe({
+      next: async res => {
+        this.countProcess = await res.improzess;
+        this.countFree = await res.freiepraktika;
+        console.log(this.countProcess, this.countFree);
+      }
+    })
+  }
   async getChangeData() {
     const res = await firstValueFrom(this._studentService.getStudentAll());
     this.originData = [];
@@ -268,7 +280,7 @@ export class ChartComponent implements OnInit  {
       return (objStartDatum >= startDatum && objStartDatum <= endDatum ) || (objEndDatum <= endDatum && objEndDatum >= startDatum);
     });
   }
-
+  
   async counterByState() {
     const ongoingResPromise = firstValueFrom(this._studentService.filterByState(['Im Praktikum']));
     const comingResPromise = firstValueFrom(this._studentService.filterByState(['Platz angenommen']));
@@ -278,7 +290,7 @@ export class ChartComponent implements OnInit  {
     this.countComing = comingRes?.length ?? 0;
   }
 
-  async drawChart(): Promise<void> { 
+  async drawChart(): Promise<void> {  
     this.barChartData.datasets[0].data = this.filteredByWeek;
     this.barChart = new Chart('schedule', {
       type: 'bar',
@@ -286,7 +298,7 @@ export class ChartComponent implements OnInit  {
       options: this.barChartOptions,
       plugins: this.barChartPlugins,
     })
-    this.doughnutChartData.datasets[0].data = [this.countOngoing, this.countComing, 4, 4];
+    this.doughnutChartData.datasets[0].data = [this.countOngoing, this.countComing, this.countProcess, this.countFree];
     this.doughnutChart = new Chart('state', {
       type: 'doughnut',
       data: this.doughnutChartData,
@@ -296,6 +308,7 @@ export class ChartComponent implements OnInit  {
   }  
 
   async ngOnInit(): Promise<void> {
+    await this.counterPre();
     await this.getChangeData();
     await this.counterByState();
     await this.drawChart();
@@ -334,7 +347,6 @@ export class ChartComponent implements OnInit  {
       }
       this.barChartData.datasets[0].data = this.filteredByYear;
       this.barChart.update();
-      
     }
   }
   public scheduleClick(click: MouseEvent): void {
@@ -346,33 +358,21 @@ export class ChartComponent implements OnInit  {
       this.router.navigate(['/student', value.id]);
     }
   }
-  
-  // public chartFilter(date: any) {
-  //   console.log(date.srcElement.value);
-  //   const year = date.srcElement.value.substring(0, 4);
-  //   const month = date.srcElement.value.substring(5, 7);
-  //   console.log(year, month);
-  //   const lastDay = (y: any, m: any) => {
-  //     return new Date(y, m, 0).getDate();
-  //   }
-  //   const startDate = `${year}-${month}-01`;
-  //   const endDate = `${year}-${month}-${lastDay(year, month)}`;
-  //   console.log(startDate, endDate);
-  // }
-  
+
   // DOUGHNUT FUNCTION
   public stateClick(click: MouseEvent): void {
     console.log(this.doughnutChart);
   }
-  @HostListener('click', ['$event.target'])
-  updateChart() {
-    // TODO: 이걸 받으면 어디 저장해야하지?
-    // 처음에는 edit 버튼으로 edit 상태가 되면 update 버튼으로
+  public updateChart() {
     if (this.button === 'default') {
       this.button = 'edit';
     } else if (this.button === 'edit') {
       this.button = 'default';
+      this._counterService.updateCounter(this.countId, this.editCountProcess, this.editCountFree).subscribe({
+        next: res => console.log('update')
+      });
+      this.doughnutChartData.datasets[0].data = [this.countOngoing, this.countComing, this.editCountProcess, this.editCountFree];
+      this.doughnutChart.update();
     }
   }
-  
 }
