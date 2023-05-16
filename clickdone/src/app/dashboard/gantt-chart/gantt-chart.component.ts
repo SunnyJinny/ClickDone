@@ -4,11 +4,11 @@ import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { Context } from 'chartjs-plugin-datalabels';
 import 'chartjs-adapter-date-fns';
-import { data1 } from 'src/app/models/schedule';
+import { data1, data2 } from 'src/app/models/schedule';
 import { Route, Router } from '@angular/router';
-import { Student } from 'src/app/models/schueler-liste';
+import { Student, StudentChart } from 'src/app/models/schueler-liste';
 import { StudentService } from 'src/app/services/student.service';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { TransitionCheckState } from '@angular/material/checkbox';
 
 @Component({
@@ -19,18 +19,19 @@ import { TransitionCheckState } from '@angular/material/checkbox';
 
 export class GanttChartComponent implements OnInit  {
   
-  originData: {x: string[]; y: string}[] = [];
-  filteredData: {x: string[]; y: string}[] = [];
+  originData!: StudentChart[];
+  filteredByWeek: StudentChart[] = [];
+  filteredByMonth: StudentChart[] = [];
+  filteredByYear: StudentChart[] = [];
   
-  data = data1;
+  //data = data2;
   chart: any = [];
   
   // todayLine plugin block
   TodayLine = {
     id: 'TodayLine',
     afterDatasetsDraw(chart: any) {
-      // TODO: data 변경
-      const { ctx, chartData, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+      const { ctx, data, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
       ctx.save();
       // line for today
       ctx.beginPath();
@@ -67,10 +68,10 @@ export class GanttChartComponent implements OnInit  {
     }
   }
   
-  public barChartData: ChartData<'bar', {x: string[], y: string}[]> = {
+  public barChartData: ChartData<'bar', {x: Date[], y: string}[]> = {
     datasets: [{
       // TODO: data 변경
-      data: this.filteredData,
+      data: this.filteredByWeek,
       backgroundColor: [
         'rgba(28, 192, 154, 1)',
         // 'rgba(196, 239, 229, 1)',
@@ -197,47 +198,34 @@ export class GanttChartComponent implements OnInit  {
     Chart.register(...registerables);
   }
 
-  // getChangeData() {
-  //   this._studentService.getStudentAll().subscribe({
-  //     next: res => res.map((student:Student) => {
-  //       this.originData.push({'x': [student.startDatum, student.endDatum], 'y': student.name });
-  //     })
-  //   })
-  // }
-  // filterByData(originData: any[], startDatum: Date, endDatum: Date) {   
-  //   this.chartData = originData.filter(obj => {
-  //     const objStartDatum = new Date(obj.x[0]);
-  //     const objEndDatum = new Date(obj.x[1]);
-  //     console.log(objStartDatum);
-  //     objStartDatum >= startDatum;
-  //     //(objStartDatum >= startDatum && objStartDatum <= endDatum ) || (objEndDatum <= endDatum && objEndDatum >= startDatum);
-  //   });
-  //   return this.chartData;
-  // }
-  getDataAndFilter(startDatum: Date, endDatum: Date) {
-    this._studentService.getStudentAll().subscribe({
-      next: res => {
-        this.filteredData = res.map((student: Student) => {
-          const objStartDatum = new Date(student.startDatum);
-          const objEndDatum = new Date(student.endDatum);
-          return { 'x': [objStartDatum, objEndDatum], 'y': student.name };
-        }).filter((obj: { x: any[]; }) => {
-          console.log(obj.x[1]);
-          const objStartDatum = obj.x[0];
-          const objEndDatum = obj.x[1];
-          return objEndDatum >= startDatum;
-        });
+  async getChangeData() {
+    const res = await firstValueFrom(this._studentService.getStudentAll());
+    this.originData = [];
+    res.map((student:Student) => {
+        this.originData.push({'x': [new Date(student.startDatum), new Date(student.endDatum)], 'y': student.name });
+      })
+    this.filteredByWeek = await this.filterByDate(this.originData, this.today, this.afterOneWeek);
+    this.filteredByMonth = await this.filterByDate(this.originData, this.today, this.afterOneMonth);
+    this.filteredByYear = await this.filterByDate(this.originData, this.today, this.afterOneYear);
+    if (this.chart && this.chart.config && this.chart.config.data && this.chart.config.data.dataset) {
+      const dataset = this.chart.config.data.dataset;
+      if (dataset.length > 0) {
+        dataset[0].data = this.filteredByWeek;
       }
-    });
-    return this.filteredData;
+    }
   }
   
-  ngOnInit(): void {
+  async filterByDate(originData: StudentChart[], startDatum: Date, endDatum: Date) {   
+    return originData.filter(obj => {
+      const objStartDatum = obj.x[0];
+      const objEndDatum = obj.x[1];
+      return (objStartDatum >= startDatum && objStartDatum <= endDatum ) || (objEndDatum <= endDatum && objEndDatum >= startDatum);
+    });
+  }
+  
+  async drawChart(): Promise<void> { 
     
-    // this.getChangeData();
-    // this.filterByData(this.originData, this.today, this.afterOneWeek);
-    this.getDataAndFilter(this.today, this.afterOneWeek);
-    console.log(this.filteredData);
+    this.barChartData.datasets[0].data = this.filteredByWeek;
     
     this.chart = new Chart('schedule', {
       type: 'bar',
@@ -245,6 +233,11 @@ export class GanttChartComponent implements OnInit  {
       options: this.barChartOptions,
       plugins: this.barChartPlugins,
     })
+  }  
+
+async ngOnInit(): Promise<void> {
+    await this.getChangeData();
+    await this.drawChart();
   }
   
   public timeFrame(period: string): void {
@@ -254,8 +247,11 @@ export class GanttChartComponent implements OnInit  {
         if (this.barChartOptions?.plugins?.datalabels?.display == false ) {
           this.barChartOptions.plugins.datalabels.display = true;
         }
-      }        
-      this.chart.update();
+      }
+      if (this.chart && this.chart.config && this.chart.config.data && this.chart.config.data.datasets && this.chart.config.data.datasets.length > 0) {
+        this.chart.config.data.datasets[0].data = this.filteredByWeek;
+        this.chart.update();
+      }
     } else if(period === 'month') {
       if (this.barChartOptions?.scales?.['x'] !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxMonth;
@@ -263,7 +259,10 @@ export class GanttChartComponent implements OnInit  {
           this.barChartOptions.plugins.datalabels.display = true;
         }  
       }
-    this.chart.update();
+      if (this.barChartData.datasets && this.barChartData.datasets.length > 0) {
+        this.barChartData.datasets[0].data = this.filteredByMonth;
+        this.chart.update();
+      }
     } else if(period === 'year') {
       if (this.barChartOptions?.scales?.['x'] !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxYear;
@@ -271,6 +270,7 @@ export class GanttChartComponent implements OnInit  {
           this.barChartOptions.plugins.datalabels.display = false;
         }  
       }
+      this.barChartData.datasets[0].data = this.filteredByYear;
       this.chart.update();
       
     }

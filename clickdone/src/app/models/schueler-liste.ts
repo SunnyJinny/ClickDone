@@ -20,6 +20,11 @@ export interface Student {
   bewertung?: string;
 }
 
+export interface StudentChart {
+  x: Date[],
+  y: string;
+}
+
 // export const SchuelerListe: Student[] = [
 //   {
 //     name: 'Isabell König', 

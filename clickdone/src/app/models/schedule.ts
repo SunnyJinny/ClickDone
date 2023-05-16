@@ -13,16 +13,16 @@ export const data1 = [
   { x: [ Date.parse('2023-06-01 00:00:00'), Date.parse('2023-06-16 00:00:00')], y: 'Bella Suder'}, // pending
 ]
 
-export const date2 = [
-  { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Tom Jones'}, 
-  { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Heidrum Kapscher'},
-  { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Robert Klam'},  // completed
-  { x: [new Date(2023, 5, 2), new Date(2023, 5, 12)], y: 'Hubert Klammer'},  // completed
-  { x: [new Date(2023, 5, 1), new Date(2023, 5, 5)], y: 'Lala li'},  // completed
-  { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Max Miller'}, // delayed
-  { x: [new Date(2023, 6, 5), new Date(2023, 6, 9)], y: 'Iron Neuer'}, // delayed
-  { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Tommy Stein'}, // pending
-  { x: [new Date(2023, 6, 6), new Date(2023, 6, 16)], y: 'Bella Suder'} // pending
+export const data2 = [
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Tom Jones'}, 
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Heidrum Kapscher'},
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Robert Klam'},  // completed
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Hubert Klammer'},  // completed
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Lala li'},  // completed
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Max Miller'}, // delayed
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Iron Neuer'}, // delayed
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Tommy Stein'}, // pending
+  { x: [new Date('2023-05-15 00:00:00'), new Date('2023-05-26 00:00:00')], y: 'Bella Suder'} // pending
 ]
 
 export const date3 = [
