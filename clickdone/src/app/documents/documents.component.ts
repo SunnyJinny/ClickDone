@@ -55,10 +55,12 @@ export class DocumentsComponent {
       console.log(recipient, subject, text);
       
       this._emailService.sendEmail(recipient, subject, text).subscribe({
-        next: response => {
+        next: () => {
+          alert('Email sent successfully!');
           console.log('Email sent successfully!');
         },
         error:error => {
+          alert('Sorry, Sending email Failed')
           console.log('Error sending email:', error);
         }
       });

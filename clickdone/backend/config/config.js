@@ -15,7 +15,7 @@ export const config = {
   }
 }
 
-export const googleConfig = {
+export const nodemailerConfig = {
   user: required('USERNAME'),
   pass: required('PASSWORD')
 }
