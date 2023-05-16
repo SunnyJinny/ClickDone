@@ -52,15 +52,14 @@ export class ListAddEditComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.listForm.value._id = params['id'];
     });
-    console.log(this.listForm);
-    if(this.listForm.value._id === "") {
-      this.isNew = true;
-      console.log(this.isNew);
-    } else {
-      this.isNew = false;
-      console.log(this.isNew);
-      const id = this.route.snapshot.params['id'];
-      this.getStudent(id);
+    switch (this.listForm.value._id) {
+      case undefined:
+        this.isNew = true;
+        break;
+      default:
+        this.isNew = false;
+        const id = this.route.snapshot.params['id'];
+        this.getStudent(id);  
     }
   }
 

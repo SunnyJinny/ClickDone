@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Student  } from '../models/student';
 import { StudentService } from '../services/student.service';
-import { map } from 'rxjs/operators';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-studenten',
@@ -15,15 +17,17 @@ export class StudentenComponent implements OnInit{
 
   displayedColumns: string[] = ['name', 'geburtsdatum', 'adresse', 'schule', 'bewerbungDatum', 'rueckmeldungDatum', 'startDatum', 'endDatum', 'status' ]
   dataSource!: MatTableDataSource<Student[]>;
-  options = [
-    { value: 'fehlendeUnterlagen', viewValue: 'Fehlende Unterlagen' },
-    { value: 'zusage', viewValue: 'Zusage' },
-    { value: 'absage', viewValue: 'Absage' },
-    { value: 'bewerbungsprozess', viewValue: 'Im Bewerbungsprozess' },
-    { value: 'praktikum', viewValue: 'Im Praktikum' },
-    { value: 'platz', viewValue: 'Platz angenommen' },
-    { value: 'frei', viewValue: 'Frei' },
-    { value: 'abgeschlossen', viewValue: 'Abgeschlossen' }
+  boptions = [
+    { value: 'Fehlende Unterlagen', viewValue: 'Fehlende Unterlagen' },
+    { value: 'Zusage', viewValue: 'Zusage' },
+    { value: 'Absage', viewValue: 'Absage' },
+    { value: 'Im Bewerbungsprozess', viewValue: 'Im Bewerbungsprozess' },
+  ]
+  poptions = [  
+    { value: 'Im Praktikum', viewValue: 'Im Praktikum' },
+    { value: 'Platz angenommen', viewValue: 'Platz angenommen' },
+    { value: 'Frei', viewValue: 'Frei' },
+    { value: 'Abgeschlossen', viewValue: 'Abgeschlossen' }
   ]
   status!: string[];
   selected: string = 'bewerber';
@@ -103,5 +107,16 @@ export class StudentenComponent implements OnInit{
         this.dataSource = new MatTableDataSource(data);
       }
     })
+  }
+  goExtract() {
+    let all: any;
+    this._studentservice.getStudentAll().subscribe({
+      next: res => {
+        all = res;
+      }
+    })
+    const pdf = new jsPDF("p", "mm", "a4");
+    autoTable(pdf, {html: '#student-table'});
+    pdf.save('table.pdf');
   }
 }

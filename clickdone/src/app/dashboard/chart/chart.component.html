@@ -12,10 +12,15 @@
   <div class="doughnut-chart">
     <canvas id="state" baseChart
     (click)="stateClick($event)">{{ barChart }}</canvas>
-    <div class="input-wrapper">
-      <input type="number" id="value1" [(ngModel)]="editCountProcess">
-      <input type="number" id="value2" [(ngModel)]="editCountFree">
-      <button id="updateChart">Update</button>
+    <div class="input-wrapper" [ngSwitch]="button">
+      <div *ngSwitchCase="'default'">
+        <input type="number" id="value1" [(ngModel)]="editCountProcess">
+        <input type="number" id="value2" [(ngModel)]="editCountFree">
+        <button id="updateChart">Update</button>
+      </div>
+      <div *ngSwitchCase="'edit'">
+        <button id="updateChart">Update</button>
+      </div>
     </div>
   </div>
 </div>

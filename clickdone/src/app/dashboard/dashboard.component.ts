@@ -18,6 +18,6 @@ export class DashboardComponent {
     this.router.navigate(['/students'], { queryParams : { status : filterItem }});
   }
   goForm() {
-    this.router.navigate(['list-add']);
+    this.router.navigate(['/student-add']);
   }
 }

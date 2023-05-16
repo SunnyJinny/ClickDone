@@ -7,13 +7,13 @@
     </div>
     <div class="button-wrapper flex flex-ai-e">
       <button class="text-button" (click)="goAddPage()"><i class="fa-solid fa-plus"></i>Hinzufügen</button>
-      <button class="text-button"><i class="fa-solid fa-arrow-down"></i>Herunterladen</button>
+      <button class="text-button" (click)="goExtract()"><i class="fa-solid fa-arrow-down"></i>Herunterladen</button>
     </div>
   </div>
 </div>
 <!-- Schüler/innen Liste -->
 <div class="table-container">
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort id="student-table">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -65,15 +65,22 @@
       <th mat-header-cell *matHeaderCellDef>
         <div>
           <mat-form-field appearance="fill" class="example-filter-field">
-            <mat-select placeholder="Status">
-              <mat-option *ngFor="let option of options" [value]="option.value"
+            <mat-select placeholder="Status" *ngIf="selected==='bewerber'" (selectionChange)="filterByStatus($event.value)">
+              <mat-option *ngFor="let option of boptions" [value]="option.value"
               style="background-color: white;">
                 {{ option.viewValue }}
               </mat-option>
             </mat-select>
+            
+            <mat-select placeholder="Status" *ngIf="selected==='praktikant'" (selectionChange)="filterByStatus($event.value)">
+              <mat-option *ngFor="let option of poptions" [value]="option.value"
+              style="background-color: white;">
+                {{ option.viewValue }}
+              </mat-option>
+            </mat-select>
+            
           </mat-form-field>
         </div>
-    
       </th>
       <td mat-cell *matCellDef="let element"> {{element.status}} </td>
     </ng-container>

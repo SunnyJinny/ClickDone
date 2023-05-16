@@ -16,14 +16,15 @@ import { count, firstValueFrom, map, Observable } from 'rxjs';
 
 export class ChartComponent implements OnInit  {
   
+  button: string = 'default';
   originData!: StudentChart[];
   filteredByWeek: StudentChart[] = [];
   filteredByMonth: StudentChart[] = [];
   filteredByYear: StudentChart[] = [];
   countOngoing: number = 0;
   countComing: number = 0;
-  countProcess!: number;
-  countFree!: number;
+  countProcess: number = 0;
+  countFree: number = 0;
   editCountProcess!: number;
   editCountFree!: number;
   
@@ -367,6 +368,11 @@ export class ChartComponent implements OnInit  {
   updateChart() {
     // TODO: 이걸 받으면 어디 저장해야하지?
     // 처음에는 edit 버튼으로 edit 상태가 되면 update 버튼으로
+    if (this.button === 'default') {
+      this.button = 'edit';
+    } else if (this.button === 'edit') {
+      this.button = 'default';
+    }
   }
   
 }
