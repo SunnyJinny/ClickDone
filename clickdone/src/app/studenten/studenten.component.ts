@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Student  } from '../models/student';
 import { StudentService } from '../services/student.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-studenten',
@@ -27,23 +27,50 @@ export class StudentenComponent implements OnInit{
   ]
   status!: string[];
   selected: string = 'bewerber';
+  filterItem!: string | null;
   
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor( private router: Router, private _studentservice: StudentService ) {
+  constructor( 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private _studentservice: StudentService ) {
   }
 
   ngOnInit(): void {
-    this.filterByStatus('bewerber');
+    this.route.queryParamMap.subscribe(params => {
+      this.filterItem = params.get('status') || null;
+    });
+    switch (this.filterItem) {
+      case 'Zusage':
+        this.filterByStatus('Zusage');
+        break;
+      case 'Absage':
+        this.filterByStatus('Absage');
+        break;
+      case 'Im Bewerbungsprozess':
+        this.filterByStatus('Im Bewertungsprozess');
+        break;
+      case 'Fehlende Unterlagen':
+        this.filterByStatus('Fehlende Unterlagen');
+        break;
+      case 'Im Praktikum':
+        this.filterByStatus('Im Praktikum');
+        break;
+      case 'Platz angenommen':
+        this.filterByStatus('Platz angenommen');
+        break;
+      default:        
+        this.filterByStatus('bewerber');
+        break;
+    }
   }
   
   goAddPage() {
     this.router.navigate(['student-add']);
   } 
   goEditPage(id: string) {
-    console.log(id);
     this.router.navigate(['/student', id]);
-    // this.router.navigate(['/student', id], { skipLocationChange: true });
   }
   getStudentAll() {
     this._studentservice.getStudentAll().subscribe({
@@ -57,16 +84,22 @@ export class StudentenComponent implements OnInit{
     })
   }
   filterByStatus(filter: string) {
-    if(filter === 'bewerber') {
-      this.selected = 'bewerber';
-      this.status = ['Fehlende Unterlagen', 'Zusage', 'Absage', 'Im Bewertungsprozess'];
-    } else if(filter === 'praktikant') {
-      this.selected = 'praktikant';
-      this.status = ['Im Praktikum', 'Platz angenommen', 'Frei', 'Abgeschlossen'];
-    } 
+    console.log(filter);
+    switch (filter) {
+      case 'bewerber':
+        this.selected = 'bewerber';
+        this.status = ['Fehlende Unterlagen', 'Zusage', 'Absage', 'Im Bewertungsprozess'];
+        break;
+      case 'praktikant':
+        this.selected = 'praktikant';
+        this.status = ['Im Praktikum', 'Platz angenommen', 'Frei', 'Abgeschlossen'];
+        break;
+      default:
+        this.status = [filter];
+        break;
+    }
     this._studentservice.filterByState(this.status).subscribe({
       next: (data) => {
-        console.log(data);
         this.dataSource = new MatTableDataSource(data);
       }
     })

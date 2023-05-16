@@ -24,23 +24,23 @@
       "dom"
     ],
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
-    // "paths": {
-    //   "core-js/modules/es.array.index-of.js": ["node_modules/core-js/es/array/index-of"],
-    //   "core-js/modules/es.array.iterator.js": ["node_modules/core-js/es/array/iterator"],
-    //   "core-js/modules/es.array.reduce.js": ["node_modules/core-js/es/array/reduce"],
-    //   "core-js/modules/es.array.reverse.js": ["node_modules/core-js/es/array/reverse"],
-    //   "core-js/modules/es.promise.js": ["node_modules/core-js/es/promise"],
-    //   "core-js/modules/es.regexp.to-string.js": ["node_modules/core-js/es/regexp/to-string"],
-    //   "core-js/modules/es.string.ends-with.js": ["node_modules/core-js/es/string/ends-with"],
-    //   "core-js/modules/es.string.includes.js": ["node_modules/core-js/es/string/includes"],
-    //   "core-js/modules/es.string.match.js": ["node_modules/core-js/es/string/match"],
-    //   "core-js/modules/es.string.replace.js": ["node_modules/core-js/es/string/replace"],
-    //   "core-js/modules/es.string.split.js": ["node_modules/core-js/es/string/split"],
-    //   "core-js/modules/es.string.starts-with.js": ["node_modules/core-js/es/string/starts-with"],
-    //   "core-js/modules/es.string.trim.js": ["node_modules/core-js/es/string/trim"],
-    //   "core-js/modules/web.dom-collections.iterator.js": ["node_modules/core-js/web/dom-collections/iterator"]
-    // }
+    // "allowSyntheticDefaultImports": true
+    "paths": {
+      "core-js/modules/es.array.index-of.js": ["node_modules/core-js/es/array/index-of"],
+      "core-js/modules/es.array.iterator.js": ["node_modules/core-js/es/array/iterator"],
+      "core-js/modules/es.array.reduce.js": ["node_modules/core-js/es/array/reduce"],
+      "core-js/modules/es.array.reverse.js": ["node_modules/core-js/es/array/reverse"],
+      "core-js/modules/es.promise.js": ["node_modules/core-js/es/promise"],
+      "core-js/modules/es.regexp.to-string.js": ["node_modules/core-js/es/regexp/to-string"],
+      "core-js/modules/es.string.ends-with.js": ["node_modules/core-js/es/string/ends-with"],
+      "core-js/modules/es.string.includes.js": ["node_modules/core-js/es/string/includes"],
+      "core-js/modules/es.string.match.js": ["node_modules/core-js/es/string/match"],
+      "core-js/modules/es.string.replace.js": ["node_modules/core-js/es/string/replace"],
+      "core-js/modules/es.string.split.js": ["node_modules/core-js/es/string/split"],
+      "core-js/modules/es.string.starts-with.js": ["node_modules/core-js/es/string/starts-with"],
+      "core-js/modules/es.string.trim.js": ["node_modules/core-js/es/string/trim"],
+      "core-js/modules/web.dom-collections.iterator.js": ["node_modules/core-js/web/dom-collections/iterator"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

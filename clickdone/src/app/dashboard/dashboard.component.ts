@@ -13,8 +13,9 @@ export class DashboardComponent {
   constructor( private router: Router ){
     
   }
-  getState(state: string) {
-    console.log(state);
+  getState(filterItem: string) {
+    console.log(filterItem);
+    this.router.navigate(['/students'], { queryParams : { status : filterItem }});
   }
   goForm() {
     this.router.navigate(['list-add']);

@@ -1,5 +1,5 @@
 <div class="chart-wrapper">
-  <div class="gantt-chart">
+  <div class="gantt-chart"> <!-- chartBox -->
     <canvas id="schedule" baseChart
     (click)="scheduleClick($event)">{{ barChart }}</canvas>
     <br>
@@ -12,5 +12,10 @@
   <div class="doughnut-chart">
     <canvas id="state" baseChart
     (click)="stateClick($event)">{{ barChart }}</canvas>
+    <div class="input-wrapper">
+      <input type="number" id="value1" [(ngModel)]="editCountProcess">
+      <input type="number" id="value2" [(ngModel)]="editCountFree">
+      <button id="updateChart">Update</button>
+    </div>
   </div>
 </div>

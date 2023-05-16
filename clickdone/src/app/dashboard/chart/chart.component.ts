@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData, registerables } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { Context } from 'chartjs-plugin-datalabels';
@@ -7,7 +7,6 @@ import { Route, Router } from '@angular/router';
 import { Student, StudentChart } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
 import { count, firstValueFrom, map, Observable } from 'rxjs';
-import { FaStackItemSizeDirective } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-chart',
@@ -23,6 +22,10 @@ export class ChartComponent implements OnInit  {
   filteredByYear: StudentChart[] = [];
   countOngoing: number = 0;
   countComing: number = 0;
+  countProcess!: number;
+  countFree!: number;
+  editCountProcess!: number;
+  editCountFree!: number;
   
   //data = data2;
   barChart: any = [];
@@ -72,10 +75,9 @@ export class ChartComponent implements OnInit  {
   SliceThickness = {
     id: 'SliceThickness',
     beforeDraw(chart: any, _doughnutChartPlugins: any) {
-      let sliceThicknessPixel = [240, 240, 280, 320];
+      let sliceThicknessPixel = [260, 260, 290, 320];
       sliceThicknessPixel.forEach((thickness, index) => {
         chart.getDatasetMeta(0).data[index].outerRadius = chart.chartArea.width / thickness * 100;
-        
       })
     }  
   }
@@ -94,7 +96,6 @@ export class ChartComponent implements OnInit  {
       borderSkipped: false,
     }],
   };
-
   today = new Date(new Date().setHours(0,0,0,0));
   afterOneWeek = new Date(new Date(new Date().setHours(0,0,0,0)).setDate(new Date(new Date().setHours(0,0,0,0)).getDate() + 7));
   afterOneMonth = new Date(new Date(new Date().setHours(0,0,0,0)).setMonth(new Date(new Date().setHours(0,0,0,0)).getMonth() + 1));
@@ -194,22 +195,23 @@ export class ChartComponent implements OnInit  {
       }
     },
   };
+  
   public barChartLegend = false;
+  
   public barChartPlugins = [
     DataLabelsPlugin,
     this.TodayLine,
   ];
   
-  
   // DOUGHNUTCHART
   public doughnutChartData: ChartData<'doughnut', number[]> = {
     labels: ['Aktuelle Praktika', 'Kommende Praktika', 'Im Prozess', 'Freie Praktika'],
     datasets: [{
-      data: [4, 4, 4, 4],
+      data: [this.countOngoing, this.countComing, this.countProcess, this.countFree],
       backgroundColor: ['#1CC09A', '#C7F0E6', '#FABE2A', '#ECDCC4'],
       borderWidth: 1,
     }]
-  }
+  };
   
   public doughnutChartPlugins = [
     DataLabelsPlugin,
@@ -217,21 +219,23 @@ export class ChartComponent implements OnInit  {
   ];
   
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-    cutout: 80,
+    cutout: 82,
     rotation: 315,
     plugins: {
       legend: {
+        fullSize: false,
         position: 'bottom',
         labels: {
           font: {
-            size: 16
+            size: 18
           },
+          padding: 20,
           usePointStyle: true,
           pointStyle: 'circle'
         }
       }
     }
-  }
+  };
   
   constructor( 
     private router: Router, 
@@ -263,26 +267,10 @@ export class ChartComponent implements OnInit  {
       return (objStartDatum >= startDatum && objStartDatum <= endDatum ) || (objEndDatum <= endDatum && objEndDatum >= startDatum);
     });
   }
-  
-  // async counterByState() {
-  //   this._studentService.filterByState(['Im Praktikum']).subscribe({
-  //     next: res => {
-  //       this.countOngoing = res.length;
-  //       console.log(this.countOngoing);
-  //     }
-  //   });
-  //   this._studentService.filterByState(['Platz angenommen']).subscribe({
-  //     next: res => {
-  //       this.countComing = res.length;
-  //       console.log(this.countComing);
-  //     }
-  //   });
-  // }
 
   async counterByState() {
     const ongoingResPromise = firstValueFrom(this._studentService.filterByState(['Im Praktikum']));
     const comingResPromise = firstValueFrom(this._studentService.filterByState(['Platz angenommen']));
-
     const ongoingRes = await ongoingResPromise;
     this.countOngoing = ongoingRes?.length ?? 0;
     const comingRes = await comingResPromise;
@@ -358,29 +346,27 @@ export class ChartComponent implements OnInit  {
     }
   }
   
+  // public chartFilter(date: any) {
+  //   console.log(date.srcElement.value);
+  //   const year = date.srcElement.value.substring(0, 4);
+  //   const month = date.srcElement.value.substring(5, 7);
+  //   console.log(year, month);
+  //   const lastDay = (y: any, m: any) => {
+  //     return new Date(y, m, 0).getDate();
+  //   }
+  //   const startDate = `${year}-${month}-01`;
+  //   const endDate = `${year}-${month}-${lastDay(year, month)}`;
+  //   console.log(startDate, endDate);
+  // }
+  
   // DOUGHNUT FUNCTION
   public stateClick(click: MouseEvent): void {
     console.log(this.doughnutChart);
   }
-  public chartFilter(date: any) {
-    console.log(date.srcElement.value);
-    const year = date.srcElement.value.substring(0, 4);
-    const month = date.srcElement.value.substring(5, 7);
-    console.log(year, month);
-    const lastDay = (y: any, m: any) => {
-      return new Date(y, m, 0).getDate();
-    }
-    const startDate = `${year}-${month}-01`;
-    const endDate = `${year}-${month}-${lastDay(year, month)}`;
-    console.log(startDate, endDate);
-    
-    // const startDate = new Date();
-    // const endDate = new Date(startDate.setDate(startDate.getDate() + 21));;
-    
-    // this.chart?.options?.scales?.['x']?.max = endDate;
-    // this.barChartOptions.scales.x.min = startDate;
-    // this.myChart.config.options.scales.x.max = endDate;
-    // myChart.update();
+  @HostListener('click', ['$event.target'])
+  updateChart() {
+    // TODO: 이걸 받으면 어디 저장해야하지?
+    // 처음에는 edit 버튼으로 edit 상태가 되면 update 버튼으로
   }
   
 }
