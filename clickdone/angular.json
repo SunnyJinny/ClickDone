@@ -32,7 +32,10 @@
             "styles": [
               "src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "canvg"
+            ]  
           },
           "configurations": {
             "production": {

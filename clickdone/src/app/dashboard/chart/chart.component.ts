@@ -64,13 +64,14 @@ export class ChartComponent implements OnInit  {
       // text backgound white
       ctx.beginPath();
       ctx.fillStyle = '#fff';
-      ctx.fillRect(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) - 20 , top - 30, 40, 20);
+      ctx.fillRect(x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) - 20 , top - 50, 50, 40);
       ctx.restore();
       // text for today
-      ctx.font = 'bold 14px sans-serif';
+      ctx.font = 'bold 16px sans-serif';
+      ctx.padding = '8px';
       ctx.fillStyle = '#000';
       ctx.textAlign = 'center';
-      ctx.fillText('heute', x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) + 4 , top - 14);
+      ctx.fillText('heute', x.getPixelForValue(new Date(new Date().setHours(0,0,0,0))) + 9 , top - 16);
       ctx.restore();
     }
   }
