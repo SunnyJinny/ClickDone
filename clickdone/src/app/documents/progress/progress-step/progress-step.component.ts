@@ -19,7 +19,7 @@ export class ProgressStepComponent implements OnInit{
   constructor() {}
   
   ngOnInit(): void {
-    
+ 
   }
   
 }

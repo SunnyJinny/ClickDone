@@ -1,10 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TextTemplate } from 'src/app/models/document';
-import { ContentChange, EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from 'ngx-quill';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
-import { TemplateService } from 'src/app/services/template.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+
 @Component({
   selector: 'app-document-template',
   templateUrl: './document-template.component.html',
@@ -14,8 +10,6 @@ export class DocumentTemplateComponent {
 
   @Input() templateInfo!: TextTemplate;
   @Output() Content = new EventEmitter<string>();
-  
-  //@ViewChild('content', { static: true }) content!: ElementRef;
       
   constructor() {}
     

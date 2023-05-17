@@ -88,7 +88,6 @@ export class StudentenComponent implements OnInit{
     })
   }
   filterByStatus(filter: string) {
-    console.log(filter);
     switch (filter) {
       case 'bewerber':
         this.selected = 'bewerber';

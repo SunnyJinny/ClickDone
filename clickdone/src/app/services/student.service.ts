@@ -31,7 +31,4 @@ export class StudentService {
       items.filter((item: { status: string }) => filterItem.includes(item.status))
     ));
   }
-  // countByState(filterItem: string): Observable<number> {
-  //   return this.filterByState([filterItem]).pipe(count());
-  // }
 }

@@ -252,7 +252,7 @@ export class ChartComponent implements OnInit  {
       next: async res => {
         this.countProcess = await res.improzess;
         this.countFree = await res.freiepraktika;
-        console.log(this.countProcess, this.countFree);
+        // console.log(this.countProcess, this.countFree);
       }
     })
   }
@@ -354,19 +354,18 @@ export class ChartComponent implements OnInit  {
     if(points.length) {
       const firstPoint = points[0];
       const value = this.barChart.data.datasets[0].data[firstPoint.index];
-      console.log(value.id);
       this.router.navigate(['/student', value.id]);
     }
   }
 
   // DOUGHNUT FUNCTION
+  // TODO: 아직 구현 안됨
   public stateClick(click: MouseEvent): void {
     const points = this.doughnutChart.getElementsAtEvent(click);
-    console.log(points);
+    // console.log(points);
     if(points.length) {
       const firstPoint = points[0];
       const value = this.doughnutChart.data;
-      console.log(value);
     }
     // this.router.navigate(['/students'], { queryParams : { status : filterItem }});
   }

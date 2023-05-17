@@ -52,7 +52,7 @@ export class DocumentsComponent {
       const recipient = curInfo.email;
       const subject = curInfo.title;
       const text = curInfo.content;
-      console.log(recipient, subject, text);
+      //console.log(recipient, subject, text);
       
       this._emailService.sendEmail(recipient, subject, text).subscribe({
         next: () => {

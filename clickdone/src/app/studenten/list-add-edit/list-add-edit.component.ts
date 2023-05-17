@@ -1,5 +1,5 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { State } from 'src/app/models/student';
@@ -99,7 +99,7 @@ export class ListAddEditComponent implements OnInit{
   }
 }
 
-// Delete 함수: button 만들어야 함
+// TODO: Delete 함수: button 만들어야 함
 // this._studentService.deleteStudent(this.listForm.value._id).subscribe({
 //   next: (data: any) => {
 //     alert('Die List wurde erfolgreich gelöscht');

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, HostListener, Input, OnInit, SimpleChange, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ContentChange, QuillEditorComponent } from 'ngx-quill';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { TextTemplate, ABSAGE_TEMPLATE, ZUSAGE_TEMPLATE, ZEITPLAN_TEMPLATE, ZEUGNIS_TEMPLATE } from 'src/app/models/document';
@@ -104,7 +104,6 @@ export class DocumentStepComponent implements OnInit{
       }
       this.form.get('template')?.patchValue(this.curInfo.content);
       this._templateService.setTemplate(this.curInfo);
-      //console.log(this._templateService.getTemplate());
     } else {
       this.curInfo.startDatum = '';
       this.curInfo.endDatum = '';

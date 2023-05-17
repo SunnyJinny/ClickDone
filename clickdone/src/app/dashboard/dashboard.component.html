@@ -17,9 +17,9 @@
 </div>
 <div class="card-wrapper flex flex-jc-sb flex-ai-e">
   <div class="card-button" id="state-card" *ngFor="let state of stateCards">
-    <a class="card" (click)="getState(state)">
-      <div class="card-count title">5</div>
-      <div class="card-title subtitle">{{ state }}</div>
+    <a class="card" (click)="getState(state.state)">
+      <div class="card-count title">{{ state.counter }}</div>
+      <div class="card-title subtitle">{{ state.state }}</div>
     </a>
   </div>
 </div>

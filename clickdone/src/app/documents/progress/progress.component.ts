@@ -11,7 +11,6 @@ import { Status, Step, UiHelper } from './uiHelper';
 export class ProgressComponent extends UiHelper implements OnInit, AfterContentInit{
   
   itemLength!: number;
-  // steps: string[] = ['Text Type', 'Studenten', 'Option', 'Fertiges Document', 'Erledigt'];
   
   @Input() public set selectedIndex(value: number) {
     this.activeIndex = value || 0;
@@ -63,7 +62,6 @@ export class ProgressComponent extends UiHelper implements OnInit, AfterContentI
   ngAfterContentInit(): void {
     const progressLength = this.progressSteps?.length ?? 0;
     this.initProgress(progressLength);
-    // this.initProgress(this.progressSteps?.length);
     this.setActiveStep(this.activeIndex);
     this.initStepIndex();
   }
