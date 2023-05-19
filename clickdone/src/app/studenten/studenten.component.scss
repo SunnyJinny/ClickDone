@@ -76,7 +76,7 @@
     width: 11%;
   }
   &-schule, &-status {
-    width: 16%;
+    max-width: 16%;
   }
   &-geburtsdatum, &-bewerbungDatum, &--rueckmeldungDatum, &-startDatum, &-endDatum {
     width: 9%;

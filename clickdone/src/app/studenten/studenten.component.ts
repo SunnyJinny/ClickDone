@@ -104,6 +104,7 @@ export class StudentenComponent implements OnInit{
     this._studentservice.filterByState(this.status).subscribe({
       next: (data) => {
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
       }
     })
   }
