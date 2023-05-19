@@ -16,10 +16,6 @@
       <button class="card-button subtitle" (click)="setTextType('Platz angenommen')" progressStepNext>Zeitplan E-Mail</button>
       <button class="card-button subtitle" (click)="setTextType('Im Praktikum')" progressStepNext>Zeugnis</button>
     </div>
-    <div class="button-wrapper flex flex-jc-sb">
-      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
-      <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
-    </div>    
   </app-progress-step>
   <!-- step 2 -->  
   <app-progress-step>
@@ -54,14 +50,14 @@
     </app-document-step>
     <div class="button-wrapper flex flex-jc-sb">
       <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
-      <button progressStepNext class="square-color-button" (click)="stepFunction()">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+      <button progressStepNext class="square-color-button" (click)="stepFunction()">SEND <i class="fa-solid fa-arrow-right"></i></button>
     </div>    
   </app-progress-step>
   <!-- step 5 -->
   <app-progress-step>
     <h4 class="subtitle">E-Mail erfolgreich gesendet.</h4>
     <div class="button-wrapper flex flex-jc-sb">
-      <button progressStepPrev class="square-basic-button" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i>ZÜRUCK AM ANFANG</button>
+      <button progressStepPrev class="square-basic-button" (click)="goFirst()"><i class="fa-solid fa-arrow-left"></i>ZÜRUCK AM ANFANG</button>
     </div>
   </app-progress-step>
 </app-progress>

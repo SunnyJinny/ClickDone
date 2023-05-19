@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { TextTemplate } from '../models/document';
 import { Student } from '../models/student';
 import { EmailService } from '../services/email.service';
@@ -66,8 +66,8 @@ export class DocumentsComponent {
       });
     }
   }
-  
-  goBack() {
-    this.router.navigate(['/students']);
+  goFirst() {
+    // this.router.navigate(['/students']);
+    location.reload();
   }
 }

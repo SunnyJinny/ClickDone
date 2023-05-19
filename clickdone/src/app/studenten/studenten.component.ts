@@ -114,7 +114,7 @@ export class StudentenComponent implements OnInit{
         all = res;
       }
     })
-    const pdf = new jsPDF("p", "mm", "a4");
+    const pdf = new jsPDF("landscape", "mm", "a4");
     autoTable(pdf, {html: '#student-table'});
     pdf.save('table.pdf');
   }

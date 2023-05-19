@@ -29,6 +29,8 @@ export class ChartComponent implements OnInit  {
   editCountProcess!: number;
   editCountFree!: number;
   countId: string = '64640107c7a36032a367336a';
+  colorOngoing!: string;
+  colorComing!: string;
   
   //data = data2;
   barChart: any = [];
@@ -91,10 +93,9 @@ export class ChartComponent implements OnInit  {
     datasets: [{
       // TODO: data 변경
       data: this.filteredByWeek,
-      backgroundColor: [
+      backgroundColor:
         'rgba(28, 192, 154, 1)',
-        // 'rgba(196, 239, 229, 1)',
-      ],
+      // 'rgba(196, 239, 229, 1)',
       barPercentage: 0.8,    // 막대 두께 (%)
       borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
@@ -253,7 +254,6 @@ export class ChartComponent implements OnInit  {
       next: async res => {
         this.countProcess = await res.improzess;
         this.countFree = await res.freiepraktika;
-        // console.log(this.countProcess, this.countFree);
       }
     })
   }
@@ -331,9 +331,12 @@ export class ChartComponent implements OnInit  {
     } else if(period === 'month') {
       if (this.barChartOptions?.scales?.['x'] !== undefined) {
         this.barChartOptions.scales['x'].max = this.maxMonth;
-        if (this.barChartOptions?.plugins?.datalabels?.display == false ) {
-          this.barChartOptions.plugins.datalabels.display = true;
+        if (this.barChartOptions?.plugins?.datalabels?.display ) {
+          this.barChartOptions.plugins.datalabels.display = false;
         }  
+        // if (this.barChartOptions?.plugins?.datalabels?.display == false ) {
+        //   this.barChartOptions.plugins.datalabels.display = true;
+        // }  
       }
       if (this.barChartData.datasets && this.barChartData.datasets.length > 0) {
         this.barChartData.datasets[0].data = this.filteredByMonth;
