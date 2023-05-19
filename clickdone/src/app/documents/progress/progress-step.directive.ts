@@ -21,8 +21,15 @@ export class ProgressStepDirective implements OnInit {
     private _element: ElementRef<HTMLButtonElement>
   ) { }
 
+  private progressStepNext() {
+    this._progressHelper.eventHelper.next(this.methods);
+  }
+  
   ngOnInit(): void {
     this.initMethods();
+    if (this.next) {
+      this.progressStepNext();
+    }
   }
   private initMethods() {
     if('next' in this) {

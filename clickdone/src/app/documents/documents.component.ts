@@ -5,7 +5,8 @@ import { EmailService } from '../services/email.service';
 import { StudentService } from '../services/student.service';
 import { TemplateService } from '../services/template.service';
 import jsPDF from 'jspdf';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProgressHelperService } from './progress/progress-helper.service';
 
 @Component({
   selector: 'app-documents',
@@ -16,22 +17,46 @@ export class DocumentsComponent {
   textType!: string;
   studentsList!: any[];
   curStudent!: Student;
+  receivedTemplate: TextTemplate;
   
   constructor( 
     private _studentService: StudentService,
     private _templateService: TemplateService,
     private _emailService: EmailService,
-    private router: Router
-  ) {}
+    private route: ActivatedRoute,
+  ) {
+    this.receivedTemplate = new TextTemplate();
+  }
+  
+  ngOnInit() {
+    if(this.route.queryParams) {
+      this.route.queryParams.subscribe(params => {
+        this.receivedTemplate.type = params['type'];
+        this.receivedTemplate.name = params['name'];
+        this.receivedTemplate.startDatum = params['startDatum'];
+        this.receivedTemplate.endDatum = params['endDatum'];
+        this.receivedTemplate.betreuer = params['betreuer'];
+      });
+      if (this.receivedTemplate.type) {
+        this.setTextType(this.receivedTemplate.type);
+      }
+    }
+  }
   
   setTextType(type: string) {
     this._studentService.filterByState([type]).subscribe({
       next: (data) => {
         this.textType = type,
-        this.studentsList = data
+        this.studentsList = data,
+        setTimeout(() => {
+          const nextButton = document.querySelector('[progressStepNext]') as HTMLButtonElement;
+          if (nextButton) {
+            nextButton.click();
+          }
+        }, 0);
       },
       error: (err) => console.log(err)
-    })
+    });
   }
   
   async stepFunction() {

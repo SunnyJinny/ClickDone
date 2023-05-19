@@ -10,6 +10,7 @@ export class TemplateService {
   
   setTemplate(templateData: TextTemplate) {
     this.template = templateData;
+    console.log('template saved: ', this.template);
   }
   
   getTemplate(): TextTemplate {

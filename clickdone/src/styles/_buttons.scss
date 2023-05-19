@@ -20,9 +20,15 @@
   }
 }
 .text-button {
-  @include button-styles(2rem, $black);
+  @include button-styles(2rem, $primary);
   padding: 0.5rem 1rem 0.5rem 0.75rem;
   height: fit-content;
+  color: $primary;
+  &:hover {
+    border-color: $accent;
+    background-color: $accent;
+    color: #fff;
+  }
 }
 .color-button {
   @include button-styles(2rem, $accent);

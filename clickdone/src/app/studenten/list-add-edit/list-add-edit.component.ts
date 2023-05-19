@@ -2,8 +2,10 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TextTemplate } from 'src/app/models/document';
 import { State } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
+import { TemplateService } from 'src/app/services/template.service';
 
 @Component({
   selector: 'app-list-add-edit',
@@ -23,6 +25,7 @@ export class ListAddEditComponent implements OnInit{
     private _ngZone: NgZone, 
     private _fb: FormBuilder,
     private _studentService: StudentService,
+    private _templateService: TemplateService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
@@ -95,7 +98,19 @@ export class ListAddEditComponent implements OnInit{
         })
       }
     } 
-    
+  }
+  onRouting() {
+    const formData = this.listForm.value;
+    const tempForm: TextTemplate = new TextTemplate();
+    tempForm.type = formData.status;
+    tempForm.name = formData.name;
+    tempForm.email = formData.email;
+    tempForm.startDatum = formData.startDatum.split('T')[0];
+    tempForm.endDatum = formData.endDatum.split('T')[0];
+    tempForm.betreuer = formData.betreuer;
+    this._templateService.setTemplate(tempForm);
+    this.router.navigate(['/documents'], { queryParams: tempForm });
+    console.log('저장하고 넘겨줌', tempForm); 
   }
 }
 

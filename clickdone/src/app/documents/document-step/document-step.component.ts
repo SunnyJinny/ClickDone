@@ -1,5 +1,6 @@
 import { Component, HostListener, Input, OnInit, SimpleChange, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ContentChange, QuillEditorComponent } from 'ngx-quill';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { TextTemplate, ABSAGE_TEMPLATE, ZUSAGE_TEMPLATE, ZEITPLAN_TEMPLATE, ZEUGNIS_TEMPLATE } from 'src/app/models/document';
@@ -26,23 +27,46 @@ export class DocumentStepComponent implements OnInit{
 
   constructor( 
     private _templateService: TemplateService,
-    private _fb: FormBuilder ) {
+    private _fb: FormBuilder,
+    private route: ActivatedRoute ) {
       this.form = this._fb.group({
         template: '',
       })
     }
   
-  ngOnInit() {
-    this.curInfo = this._templateService.getTemplate();
+  async setTemplate() {
     this.form.controls['template'].valueChanges
       .pipe(
         debounceTime(400), distinctUntilChanged()
       )
-      .subscribe((data) => {
+      .subscribe(async (data) => {
         // tslint:disable-next-line:no-console
-        this.curInfo.content = data;
+        this.curInfo.content = await data;
     })
   }
+  
+  async setContent() {
+    switch(this.curInfo.type) {
+      case 'Zusage':
+        this.curInfo.content = ZUSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
+        break;
+      case 'Absage':
+        this.curInfo.content = ABSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
+        break;        
+      case 'Platz angenommen':
+        this.curInfo.content = ZEITPLAN_TEMPLATE(this.curInfo.name, this.curInfo.betreuer);
+        break;        
+      case 'Im Praktikum':
+        this.curInfo.content = ZEUGNIS_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum);
+        break;
+    }
+  }
+
+  async ngOnInit() {
+    this.curInfo = this._templateService.getTemplate(); 
+    this.setTemplate();
+  }
+  
   ngAfterViewInit() {
     if(this.template) {
       this.template.onContentChanged
@@ -78,6 +102,9 @@ export class DocumentStepComponent implements OnInit{
           break;
       }   
       this._templateService.setTemplate(this.curInfo);
+      if(this.curInfo.name) {
+        this.setContent();
+      }
     }
   }
   onStudentChange(selected: any) {
@@ -88,20 +115,21 @@ export class DocumentStepComponent implements OnInit{
       this.curInfo.name = this.selectedStudent.name;
       this.curInfo.email = this.selectedStudent.email;
       this.curInfo.betreuer = this.selectedStudent.betreuer;
-      switch(this.curInfo.type) {
-        case 'Zusage':
-          this.curInfo.content = ZUSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
-          break;
-        case 'Absage':
-          this.curInfo.content = ABSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
-          break;        
-        case 'Platz angenommen':
-          this.curInfo.content = ZEITPLAN_TEMPLATE(this.curInfo.name, this.curInfo.betreuer);
-          break;        
-        case 'Im Praktikum':
-          this.curInfo.content = ZEUGNIS_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum);
-          break;
-      }
+      this.setContent();
+      // switch(this.curInfo.type) {
+      //   case 'Zusage':
+      //     this.curInfo.content = ZUSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
+      //     break;
+      //   case 'Absage':
+      //     this.curInfo.content = ABSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
+      //     break;        
+      //   case 'Platz angenommen':
+      //     this.curInfo.content = ZEITPLAN_TEMPLATE(this.curInfo.name, this.curInfo.betreuer);
+      //     break;        
+      //   case 'Im Praktikum':
+      //     this.curInfo.content = ZEUGNIS_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum);
+      //     break;
+      // }
       this.form.get('template')?.patchValue(this.curInfo.content);
       this._templateService.setTemplate(this.curInfo);
     } else {
