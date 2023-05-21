@@ -91,7 +91,7 @@ export class StudentenComponent implements OnInit{
     switch (filter) {
       case 'bewerber':
         this.selected = 'bewerber';
-        this.status = ['Fehlende Unterlagen', 'Zusage', 'Absage', 'Im Bewertungsprozess'];
+        this.status = ['Fehlende Unterlagen', 'Zusage', 'Absage', 'Im Bewerbungsprozess'];
         break;
       case 'praktikant':
         this.selected = 'praktikant';

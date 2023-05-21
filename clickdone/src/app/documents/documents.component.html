@@ -27,8 +27,8 @@
       (selectedStudent)="curStudent">
     </app-document-step>
     <div class="button-wrapper flex flex-jc-sb">
-      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
-      <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+      <button progressStepPrev class="square-basic-button" (click)="scrollToTop()"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+      <button progressStepNext class="square-color-button" (click)="scrollToTop()">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
     </div>    
   </app-progress-step>
   <!-- step 3 -->
@@ -38,8 +38,8 @@
       [stepIndex]="3">
     </app-document-step>
     <div class="button-wrapper flex flex-jc-sb">
-      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
-      <button progressStepNext class="square-color-button">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
+      <button progressStepPrev class="square-basic-button" (click)="scrollToTop()"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+      <button progressStepNext class="square-color-button" (click)="scrollToTop()">NÄCHSTE<i class="fa-solid fa-arrow-right"></i></button>
     </div>    
   </app-progress-step>
   <!-- step 4 -->
@@ -49,7 +49,7 @@
       [stepIndex]="4">
     </app-document-step>
     <div class="button-wrapper flex flex-jc-sb">
-      <button progressStepPrev class="square-basic-button"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
+      <button progressStepPrev class="square-basic-button" (click)="scrollToTop()"><i class="fa-solid fa-arrow-left"></i>LETZTE</button>
       <button progressStepNext class="square-color-button" (click)="stepFunction()">SEND <i class="fa-solid fa-arrow-right"></i></button>
     </div>    
   </app-progress-step>

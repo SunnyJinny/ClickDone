@@ -81,7 +81,7 @@ export class ChartComponent implements OnInit  {
   SliceThickness = {
     id: 'SliceThickness',
     beforeDraw(chart: any, _doughnutChartPlugins: any) {
-      let sliceThicknessPixel = [260, 260, 290, 320];
+      let sliceThicknessPixel = [280, 280, 320, 360];
       sliceThicknessPixel.forEach((thickness, index) => {
         chart.getDatasetMeta(0).data[index].outerRadius = chart.chartArea.width / thickness * 100;
       })
@@ -91,7 +91,6 @@ export class ChartComponent implements OnInit  {
   // BARCHART
   public barChartData: ChartData<'bar', {x: Date[], y: string}[]> = {
     datasets: [{
-      // TODO: data 변경
       data: this.filteredByWeek,
       backgroundColor:
         'rgba(28, 192, 154, 1)',
@@ -224,8 +223,11 @@ export class ChartComponent implements OnInit  {
   ];
   
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-    cutout: '50%',
+    cutout: '40%',
     rotation: 315,
+    layout: {
+      padding: 0
+    },
     plugins: {
       legend: {
         fullSize: false,
@@ -234,7 +236,7 @@ export class ChartComponent implements OnInit  {
           font: {
             size: 18
           },
-          padding: 20,
+          padding: 16,
           usePointStyle: true,
           pointStyle: 'circle'
         }
@@ -278,7 +280,7 @@ export class ChartComponent implements OnInit  {
     return originData.filter(obj => {
       const objStartDatum = obj.x[0];
       const objEndDatum = obj.x[1];
-      return (objStartDatum >= startDatum && objStartDatum <= endDatum ) || (objEndDatum <= endDatum && objEndDatum >= startDatum);
+      return (objStartDatum >= startDatum && objStartDatum < endDatum ) || (objEndDatum <= endDatum && objEndDatum > startDatum);
     });
   }
   

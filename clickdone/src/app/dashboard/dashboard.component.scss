@@ -34,4 +34,9 @@
   .chart-wrapper {
     margin-bottom: 1rem;
   }
+  .card-wrapper {
+    & .card-button {
+      height: 8rem;
+    }
+  }
 }

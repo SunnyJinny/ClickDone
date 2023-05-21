@@ -1,8 +1,7 @@
 <div class="chart-wrapper">
-  <div class="gantt-chart"> <!-- chartBox -->
+  <div class="gantt-chart" > <!-- chartBox -->
     <canvas id="schedule" baseChart
     (click)="scheduleClick($event)">{{ barChart }}</canvas>
-    <br>
     <div class="button-wrapper">
       <button class="time-button" (click)="timeFrame('week')">Week</button>
       <button class="time-button" (click)="timeFrame('month')">Month</button>

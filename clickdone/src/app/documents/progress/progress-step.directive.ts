@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { ProgressHelperService } from './progress-helper.service';
 
 @Directive({

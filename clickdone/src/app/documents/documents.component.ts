@@ -1,12 +1,12 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { TextTemplate } from '../models/document';
 import { Student } from '../models/student';
 import { EmailService } from '../services/email.service';
 import { StudentService } from '../services/student.service';
 import { TemplateService } from '../services/template.service';
 import jsPDF from 'jspdf';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProgressHelperService } from './progress/progress-helper.service';
+import { ActivatedRoute } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-documents',
@@ -24,6 +24,7 @@ export class DocumentsComponent {
     private _templateService: TemplateService,
     private _emailService: EmailService,
     private route: ActivatedRoute,
+    private scroller: ViewportScroller
   ) {
     this.receivedTemplate = new TextTemplate();
   }
@@ -63,22 +64,16 @@ export class DocumentsComponent {
     let curInfo: TextTemplate = new TextTemplate();
     curInfo = this._templateService.getTemplate();
     if(curInfo.type==='Im Praktikum') {
-      
       const tempText = curInfo.content.replace(/<\/?[^>]+(>|$)/g, "");
       let pdf = new jsPDF("p", "mm", "A4");
-      
       pdf.setLineHeightFactor(2).setFontSize(12).text(tempText, 30, 35, {
         maxWidth: 150
       })
-
       pdf.save('sample.pdf');
-     
     } else {
       const recipient = curInfo.email;
       const subject = curInfo.title;
       const text = curInfo.content;
-      //console.log(recipient, subject, text);
-      
       this._emailService.sendEmail(recipient, subject, text).subscribe({
         next: () => {
           alert('Email sent successfully!');
@@ -92,7 +87,9 @@ export class DocumentsComponent {
     }
   }
   goFirst() {
-    // this.router.navigate(['/students']);
     location.reload();
+  }
+  scrollToTop() {
+    this.scroller.scrollToPosition([0, 0]);
   }
 }

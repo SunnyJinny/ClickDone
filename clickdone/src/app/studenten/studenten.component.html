@@ -64,25 +64,18 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef>
         <div>
-          <mat-form-field appearance="fill" class="example-filter-field">
+          <mat-form-field appearance="fill">
             <mat-select placeholder="Status" *ngIf="selected==='bewerber'" (selectionChange)="filterByStatus($event.value)">
-              <mat-option *ngFor="let option of boptions" [value]="option.value"
-              style="background-color: white;">
-                {{ option.viewValue }}
-              </mat-option>
+              <mat-option *ngFor="let option of boptions" [value]="option.value" [ngClass]="{'absage': option.value === 'Absage', 'zusage': option.value === 'Zusage', 'fehlende': option.value === 'Fehlende Unterlagen', 'bewerbung': option.value === 'Im Bewerbungsprozess'}"><span class="option-text">{{ option.viewValue }}</span></mat-option>
             </mat-select>
             
             <mat-select placeholder="Status" *ngIf="selected==='praktikant'" (selectionChange)="filterByStatus($event.value)">
-              <mat-option *ngFor="let option of poptions" [value]="option.value"
-              style="background-color: white;">
-                {{ option.viewValue }}
-              </mat-option>
+              <mat-option *ngFor="let option of poptions" [value]="option.value" [ngClass]="{'praktikum': option.value === 'Im Praktikum', 'platz': option.value === 'Platz angenommen', 'frei': option.value === 'Frei', 'abgeschlossen': option.value === 'Abgeschlossen'}"><span class="option-text">{{ option.viewValue }}</span></mat-option>
             </mat-select>
-            
           </mat-form-field>
         </div>
       </th>
-      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'absage': element.status === 'Absage', 'zusage': element.status === 'Zusage', 'fehlende': element.status === 'Fehlende Unterlagen', 'bewerbung': element.status === 'Im Bewerbungsprozess', 'praktikum': element.status === 'Im Praktikum', 'platz': element.status === 'Platz angenommen', 'frei': element.status === 'Frei', 'abgeschlossen': element.status === 'Abgeschlossen'}"><span>{{element.status}}</span></td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
