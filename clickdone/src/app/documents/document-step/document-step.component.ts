@@ -45,6 +45,15 @@ export class DocumentStepComponent implements OnInit{
     })
   }
   
+  // async setGeschlecht() {
+  //   if (this.selectedStudent.geschlecht === 'männlich' ) {
+  //     this.curInfo.geschlecht = ['sein', 'seinem', 'Seine', 'er', 'Er', 'seine', 'seines', 'ihm', 'seinen'];
+  //   } else if (this.selectedStudent.geschlecht === 'weiblich' ) {
+  //     this.curInfo.geschlecht = ['ihr', 'ihrem', 'Ihre', 'sie', 'Sie', 'ihre', 'ihres', 'ihr', 'ihren'];
+  //   }
+  //   this._templateService.setTemplate(this.curInfo);
+  // }
+  
   async setContent() {
     switch(this.curInfo.type) {
       case 'Zusage':
@@ -57,7 +66,7 @@ export class DocumentStepComponent implements OnInit{
         this.curInfo.content = ZEITPLAN_TEMPLATE(this.curInfo.name, this.curInfo.betreuer);
         break;        
       case 'Im Praktikum':
-        this.curInfo.content = ZEUGNIS_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum);
+        this.curInfo.content = ZEUGNIS_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.geburtsdatum, this.curInfo.geschlecht);
         break;
     }
   }
@@ -98,7 +107,7 @@ export class DocumentStepComponent implements OnInit{
           this.curInfo.content = ZEITPLAN_TEMPLATE('Schüler/in', 'Betreuer/in');
           break;
         case 'Im Praktikum':
-          this.curInfo.content = ZEUGNIS_TEMPLATE('Schüler/in', 'Start Datum', 'End Datum');
+          this.curInfo.content = ZEUGNIS_TEMPLATE('Schüler/in', 'Start Datum', 'End Datum', 'Geburtsdatum', ['sein/ihr', 'seinem/ihrem', 'Seine/Ihre', 'er/sie', 'Er/Sie', 'seine/ihre', 'seines/ihres', 'ihm/ihr', 'seinen/ihren']);
           break;
       }   
       this._templateService.setTemplate(this.curInfo);
@@ -109,35 +118,25 @@ export class DocumentStepComponent implements OnInit{
   }
   onStudentChange(selected: any) {
     this.selectedStudent = this.students?.find(student => student.name === selected.target.value);
+    console.log(this.selectedStudent);
     if (this.selectedStudent || this.curInfo.title) {
       this.curInfo.startDatum = this.selectedStudent.startDatum.split('T')[0];
       this.curInfo.endDatum = this.selectedStudent.endDatum.split('T')[0];
       this.curInfo.name = this.selectedStudent.name;
       this.curInfo.email = this.selectedStudent.email;
       this.curInfo.betreuer = this.selectedStudent.betreuer;
+      if (this.selectedStudent.geschlecht === 'male' ) {
+        this.curInfo.geschlecht = ['sein', 'seinem', 'Seine', 'er', 'Er', 'seine', 'seines', 'ihm', 'seinen'];
+      } else if (this.selectedStudent.geschlecht === 'female' ) {
+        this.curInfo.geschlecht = ['ihr', 'ihrem', 'Ihre', 'sie', 'Sie', 'ihre', 'ihres', 'ihr', 'ihren'];
+      }
+      this._templateService.setTemplate(this.curInfo);
       this.setContent();
-      // switch(this.curInfo.type) {
-      //   case 'Zusage':
-      //     this.curInfo.content = ZUSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
-      //     break;
-      //   case 'Absage':
-      //     this.curInfo.content = ABSAGE_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum, this.curInfo.betreuer);
-      //     break;        
-      //   case 'Platz angenommen':
-      //     this.curInfo.content = ZEITPLAN_TEMPLATE(this.curInfo.name, this.curInfo.betreuer);
-      //     break;        
-      //   case 'Im Praktikum':
-      //     this.curInfo.content = ZEUGNIS_TEMPLATE(this.curInfo.name, this.curInfo.startDatum, this.curInfo.endDatum);
-      //     break;
-      // }
       this.form.get('template')?.patchValue(this.curInfo.content);
       this._templateService.setTemplate(this.curInfo);
     } else {
       this.curInfo.startDatum = '';
       this.curInfo.endDatum = '';
     }
-    // this.curInfo.content = this.form.controls['template'].value;
-    // this._templateService.setTemplate(this.curInfo);
-    // console.log(this._templateService.getTemplate().content);
   }
 }
