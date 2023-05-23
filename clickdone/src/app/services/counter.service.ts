@@ -11,7 +11,7 @@ export class CounterService {
   constructor(private _http: HttpClient) { }
   
   getCounter(_id: string): Observable<any> {
-    return this._http.get(`${this.counterUrl}/${_id}`);
+    return this._http.get(`${this.counterUrl}/${_id}`, { withCredentials: true });
   }
   
   createCounter(improzess: number, freiepraktika: number): Observable<any> {

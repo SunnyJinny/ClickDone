@@ -32,7 +32,9 @@
             "styles": [
               "src/styles/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jspdf/node_modules/canvg/lib/index.es.js"
+            ],
             "allowedCommonJsDependencies": [
               "jspdf",
               "html2canvas",

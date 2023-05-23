@@ -15,10 +15,10 @@ export class StudentService {
     return this._http.post(this.studentUrl, data);
   }
   getStudentAll(): Observable<any> {
-    return this._http.get(`${this.studentUrl}/list`);
+    return this._http.get(`${this.studentUrl}/list`, { withCredentials: true });
   }
   getStudent(_id: string): Observable<any> {
-    return this._http.get(`${this.studentUrl}/${_id}`);
+    return this._http.get(`${this.studentUrl}/${_id}`, { withCredentials: true });
   }
   updateStudent(_id: any, data: any): Observable<any> {
     return this._http.put(`${this.studentUrl}/${_id}`, data);
