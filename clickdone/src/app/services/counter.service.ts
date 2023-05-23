@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CounterService {
-  private counterUrl: string = 'http://localhost:3000/counter'
+  private counterUrl: string = `${environment.apiUrl}/counter`;
+  //private counterUrl: string = 'http://localhost:3000/counter'
 
   constructor(private _http: HttpClient) { }
   
